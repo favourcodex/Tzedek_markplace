@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tzedek Marketplace - Admin Dashboard</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/admin-dashboard.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="admin-dashboard">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar" id="adminSidebar">
+            <div class="admin-sidebar-header">
+                <h1>Admin</h1>
+                <p>Platform Control Center</p>
+            </div>
+            <nav class="admin-nav">
+                <a href="#" class="admin-nav-link active" data-view="overview"><i class="fas fa-chart-pie"></i> Overview</a>
+                <a href="#" class="admin-nav-link" data-view="users"><i class="fas fa-users"></i> Users</a>
+                <a href="#" class="admin-nav-link" data-view="shops"><i class="fas fa-store"></i> Shops</a>
+                <a href="#" class="admin-nav-link" data-view="products"><i class="fas fa-box"></i> Products</a>
+                <a href="#" class="admin-nav-link" data-view="orders"><i class="fas fa-receipt"></i> Orders</a>
+            </nav>
+        </aside>
+
+        <!-- Main -->
+        <main class="admin-main">
+            <header class="admin-header">
+                <h2 id="admin-section-title">Overview</h2>
+                <div class="admin-search">
+                    <i class="fas fa-search"></i>
+                    <input id="admin-search" type="text" placeholder="Search..." />
+                </div>
+                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle Menu"><i class="fas fa-bars"></i></button>
+            </header>
+
+            <!-- Overview -->
+            <section id="overview-section" class="admin-content-section active">
+                <div class="overview-section">
+                    <div class="overview-card">
+                        <div class="overview-card-header">
+                            <span class="overview-card-title">Total Users</span>
+                            <span class="overview-card-icon users"><i class="fas fa-users"></i></span>
+                        </div>
+                        <div class="overview-card-value" id="total-users">0</div>
+                    </div>
+                    <div class="overview-card">
+                        <div class="overview-card-header">
+                            <span class="overview-card-title">Total Shops</span>
+                            <span class="overview-card-icon shops"><i class="fas fa-store"></i></span>
+                        </div>
+                        <div class="overview-card-value" id="total-shops">0</div>
+                    </div>
+                    <div class="overview-card">
+                        <div class="overview-card-header">
+                            <span class="overview-card-title">Total Products</span>
+                            <span class="overview-card-icon products"><i class="fas fa-box"></i></span>
+                        </div>
+                        <div class="overview-card-value" id="total-products">0</div>
+                    </div>
+                    <div class="overview-card">
+                        <div class="overview-card-header">
+                            <span class="overview-card-title">Total Orders</span>
+                            <span class="overview-card-icon orders"><i class="fas fa-receipt"></i></span>
+                        </div>
+                        <div class="overview-card-value" id="total-orders">0</div>
+                    </div>
+                    <div class="overview-card">
+                        <div class="overview-card-header">
+                            <span class="overview-card-title">Revenue</span>
+                            <span class="overview-card-icon revenue"><i class="fas fa-naira-sign"></i></span>
+                        </div>
+                        <div class="overview-card-value" id="total-revenue">₦0</div>
+                    </div>
+                    <div class="overview-card">
+                        <div class="overview-card-header">
+                            <span class="overview-card-title">Sales</span>
+                            <span class="overview-card-icon sales"><i class="fas fa-chart-line"></i></span>
+                        </div>
+                        <div class="overview-card-value" id="total-sales">0</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Users -->
+            <section id="users-section" class="admin-content-section">
+                <div class="section-header">
+                    <h3 class="section-title"><i class="fas fa-users"></i> Users</h3>
+                    <div class="section-actions">
+                        <a href="#" class="btn-outline" data-action="export-users"><i class="fas fa-download"></i> Export</a>
+                    </div>
+                </div>
+                <div class="data-container">
+                    <div class="data-header">
+                        <h4 class="data-title">All Users</h4>
+                    </div>
+                    <div id="users-container"></div>
+                </div>
+            </section>
+
+            <!-- Shops -->
+            <section id="shops-section" class="admin-content-section">
+                <div class="section-header">
+                    <h3 class="section-title"><i class="fas fa-store"></i> Shops</h3>
+                    <div class="section-actions">
+                        <a href="#" class="btn-outline" data-action="export-shops"><i class="fas fa-download"></i> Export</a>
+                    </div>
+                </div>
+                <div class="data-container">
+                    <div class="data-header">
+                        <h4 class="data-title">All Shops</h4>
+                    </div>
+                    <div id="shops-container"></div>
+                </div>
+            </section>
+
+            <!-- Products -->
+            <section id="products-section" class="admin-content-section">
+                <div class="section-header">
+                    <h3 class="section-title"><i class="fas fa-box"></i> Products</h3>
+                    <div class="section-actions">
+                        <a href="#" class="btn-outline" data-action="export-products"><i class="fas fa-download"></i> Export</a>
+                    </div>
+                </div>
+                <div class="data-container">
+                    <div class="data-header">
+                        <h4 class="data-title">All Products</h4>
+                    </div>
+                    <div id="products-container"></div>
+                </div>
+            </section>
+
+            <!-- Orders -->
+            <section id="orders-section" class="admin-content-section">
+                <div class="section-header">
+                    <h3 class="section-title"><i class="fas fa-receipt"></i> Orders</h3>
+                    <div class="section-actions">
+                        <a href="#" class="btn-outline" data-action="export-orders"><i class="fas fa-download"></i> Export</a>
+                    </div>
+                </div>
+                <div class="data-container">
+                    <div class="data-header">
+                        <h4 class="data-title">All Orders</h4>
+                    </div>
+                    <div id="orders-container"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Notifications injected by JS -->
+
+    <!-- <script src="../js/admin-dashboard.js"></script> -->
+</body>
+</html>

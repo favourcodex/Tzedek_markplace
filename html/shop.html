@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shop - Tzedek Marketplace</title>
+    <meta name="description" content="Shop at Tzedek Marketplace" />
+    <meta name="author" content="Tzedek" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/shop.css
+    ">
+  </head>
+  <body>
+    <!-- Navbar -->
+    <header class="navbar">
+      <div class="container">
+        <div class="navbar-content">
+          <div class="navbar-logo">
+            <a href="index.html" class="logo">Tzedek</a>
+          </div>
+          
+          <!-- Desktop Navigation -->
+          <nav class="navbar-links">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="about.html" class="nav-link">About</a>
+            <a href="shop.html" class="nav-link active">Shops</a>
+            <a href="products.html" class="nav-link">Products</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+          </nav>
+    
+          <div class="navbar-auth">
+            <a href="register.html" class="nav-link">Sign Up</a>
+            <a href="register.html" class="btn-primary">Become a Seller</a>
+          </div>
+
+          <!-- Mobile menu button -->
+          <div class="mobile-menu-button">
+            <button id="menuToggle" aria-label="Toggle menu">
+              <i class="fas fa-bars"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Mobile Navigation -->
+        <nav id="mobileNav" class="mobile-nav">
+          <a href="index.html" class="nav-link">Home</a>
+          <a href="about.html" class="nav-link">About</a>
+          <a href="shop.html" class="nav-link active">Shops</a>
+          <a href="products.html" class="nav-link">Products</a>
+          <a href="contact.html" class="nav-link">Contact</a>
+          <a href="register.html" class="nav-link">Sign Up</a>
+          <a href="register.html" class="btn-primary">Become a Seller</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <!-- Shop Hero -->
+      <section class="shop-hero">
+        <div class="container">
+          <h1 class="section-title">Discover Ethical Shops</h1>
+          <p class="section-intro">
+            Explore our community of sellers committed to justice, equality, and sustainable practices.
+          </p>
+          <div class="shop-search-bar">
+            <i class="fas fa-search"></i>
+            <input type="text" id="shopSearchInput" placeholder="Search for shops...">
+            <button type="button" id="shopSearchBtn">Search</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Shop Section -->
+      <section class="section">
+        <div class="container">
+          <div class="shop-filters">
+            <button class="filter-button active" data-category="all">All Shops</button>
+            <button class="filter-button" data-category="fashion">Fashion</button>
+            <button class="filter-button" data-category="home">Home & Garden</button>
+            <button class="filter-button" data-category="electronics">Electronics</button>
+            <button class="filter-button" data-category="beauty">Health & Beauty</button>
+            <button class="filter-button" data-category="food">Food & Beverage</button>
+          </div>
+          
+          <div class="shop-grid" id="shopGrid">
+            <!-- Shop cards will be inserted here by JavaScript -->
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Tzedek</h3>
+                    <p>A community-driven global marketplace empowering entrepreneurs to connect and grow.</p>
+                    <div class="footer-social">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#shop">Shop Rentals</a></li>
+                        <li><a href="#packages">Packages</a></li>
+                        <li><a href="#testimonials">Success Stories</a></li>
+                        <li><a href="company-policy.html">Company Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Entrepreneur Tips</a></li>
+                        <li><a href="#">Marketing Guide</a></li>
+                        <li><a href="#">Community Forums</a></li>
+                        <li><a href="#">Help Center</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-envelope"></i> support@tzedek.com</li>
+                        <li><i class="fas fa-phone"></i> +234 (0) 123 456 7890</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Business Avenue, Lagos, Nigeria</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; <span id="currentYear"></span> Tzedek. All rights reserved. | <a href="company-policy.html">Privacy Policy</a> | <a href="company-policy.html">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to top button -->
+    <button id="scrollToTop" class="scroll-top">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="/js/shop.js"></script>
+  </body>
+</html>

@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tzedek Marketplace </title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/home.css">
+    <link rel="stylesheet" href="../css/about.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body>
+    <!-- Preloader -->
+    <!-- <div id="preloader" class="preloader">
+        <div class="preloader-logo">Tzedek</div>
+        <div class="preloader-subtitle">Justice • Equality • Community</div>
+        <div class="preloader-progress">
+            <div id="progress-bar" class="preloader-progress-bar"></div>
+        </div>
+    </div> -->
+
+    <div id="root">
+    <!-- Navbar -->
+     <header class="navbar">
+      <div class="container">
+        <div class="navbar-content">
+          <div class="navbar-logo">
+            <a href="index.html" class="logo">Tzedek</a>
+          </div>
+          
+          <!-- Desktop Navigation -->
+          <nav class="navbar-links desktop-nav">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="about.html" class="nav-link active">About</a>
+            <a href="shop.html" class="nav-link">Shops</a>
+            <a href="products.html" class="nav-link">Products</a>
+            <!-- <a href="index.html#faq" class="nav-link"></a> -->
+            <a href="contact.html" class="nav-link">Contact</a>
+          </nav>
+    
+          <div class="navbar-auth desktop-nav">
+            <a href="register.html" class="nav-link">Sign Up</a>
+            <a href="register.html" class="btn-primary">Become a Seller</a>
+          </div>
+
+          <!-- Add this mobile nav markup just before the closing </div> of .navbar-content -->
+            <nav id="mobileNav" class="mobile-nav hidden">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="about.html" class="nav-link active">About</a>
+                <a href="shop.html" class="nav-link">Shops</a>
+                <a href="products.html" class="nav-link">Products</a>
+                <!-- <a href="index.html#faq" class="nav-link">FAQ</a> -->
+                <a href="contact.html" class="nav-link">Contact</a>
+                <a href="register.html" class="nav-link">Sign Up</a>
+                <a href="register.html" class="btn-primary">Become a Seller</a>
+            </nav>
+          
+          <!-- Mobile menu button -->
+          <div class="mobile-menu-button">
+            <button id="menuToggle" aria-label="Toggle menu">
+              <i class="fas fa-bars menu-icon"></i>
+              <i class="fas fa-times close-icon hidden"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+        <!-- Hero section -->
+        <div class="hero-section">
+            <div class="hero-gradient-overlay"></div>
+            
+            <div class="hero-content">
+                <div class="logo-container">
+                    <img class="tzedek-logo" src="/img/logo.jpg" alt="">
+                    <h1 class="logo-text">TZEDEK</h1>
+                </div>
+                
+                <h2 class="hero-tagline">Commerce with <span class="justice-text">Justice</span> at its Core</h2>
+                
+                <p class="hero-description">
+                    A revolutionary marketplace platform built on principles of equality, community, 
+                    and sustainable commerce for all entrepreneurs.
+                </p>
+                
+                <div class="cta-buttons">
+                    <button class="primary-cta">Join the Movement</button>
+                    <button class="secondary-cta">How It Works →</button>
+                </div>
+            </div>
+            
+            <div class="scrolling-indicator">
+                <div class="scroll-dot"></div>
+            </div>
+        </div>
+
+        <!-- About Section -->
+        <section id="about" class="section bg-light">
+            <div class="container">
+                <div class="about-cards">
+                    <div class="card animate-fade-in">
+                        <div class="card-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>Our Mission</h3>
+                        <p>At Tzedek, we empower entrepreneurs and businesses to thrive in the digital age. Our platform provides a seamless and secure environment for individuals to rent virtual shops, showcase their products, and offer services to a global audience.</p>
+                    </div>
+
+                    <div class="card animate-fade-in delay-3">
+                        <div class="card-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <h3>Our Vision</h3>
+                        <p>We envision a world where anyone can turn their passion into a successful online business, regardless of geographical location or financial resources. Our platform is designed to foster innovation, creativity, and fair competition, enabling businesses to grow and succeed in a rapidly evolving digital landscape</p>
+                    </div>
+                    
+                    <div class="card animate-fade-in delay-2">
+                        <div class="card-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h3>Our Values</h3>
+                        <ul class="values-list">
+                            <li><b>Fairness: </b> We strive to create a level playing field for all businesses, regardless of size or background.</li>
+                            <li><b>Community:</b> We foster connections and collaborations among our members, promoting mutual support and growth.</li>
+                            <li><b>Innovation:</b> We continuously update and improve our platform to meet the evolving needs of our users.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">Platform Features</h2>
+                <p class="section-intro">Discover all the tools and resources we provide to help your business succeed in our global marketplace.</p>
+                
+                <div class="features-grid">
+                    <div class="feature-card animate-fade-in">
+                        <div class="feature-icon">
+                            <i class="fas fa-store"></i>
+                        </div>
+                        <h3>Virtual Shop Rentals</h3>
+                        <p>Rent your own virtual shop space to showcase and sell your products to a global audience.</p>
+                    </div>
+                    
+                    <div class="feature-card animate-fade-in delay-2">
+                        <div class="feature-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>Product Showcase</h3>
+                        <p>Upload and manage your products with ease, including images, descriptions, and pricing.</p>
+                    </div>
+                    
+                    <div class="feature-card animate-fade-in delay-3">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>Service Offerings</h3>
+                        <p>Offer services such as consulting, freelancing, or digital products.</p>
+                    </div>
+                    
+                    <div class="feature-card animate-fade-in delay-4">
+                        <div class="feature-icon">
+                            <i class="fas fa-credit-card"></i>
+                        </div>
+                        <h3>Secure Payment Gateway</h3>
+                        <p>Enjoy secure and reliable payment processing.</p>
+                    </div>
+                    
+                    <div class="feature-card animate-fade-in delay-5">
+                        <div class="feature-icon">
+                            <i class="fas fa-bullhorn"></i>
+                        </div>
+                        <h3>Customer Support</h3>
+                        <p>Get assistance from our dedicated support team.</p>
+                    </div>
+                    
+                    <div class="feature-card animate-fade-in delay-6">
+                        <div class="feature-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <h3>Community driven support</h3>
+                        <p>entrepreneurs and students in our community gets supports from time to time</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="section bg-light">
+            <div class="container">
+                <h2 class="section-title">Success Stories</h2>
+                <p class="section-intro">Hear from entrepreneurs who have transformed their businesses using Tzedek's platform.</p>
+                
+                <div class="testimonials-grid">
+                    <div class="testimonial-card animate-fade-in">
+                        <div class="testimonial-content">
+                            <div class="testimonial-image">
+                                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=256&q=80" alt="Sarah Johnson">
+                                <div class="testimonial-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                            <div class="testimonial-text">
+                                <p>Tzedek completely transformed my small jewelry business. The virtual shop was easy to set up, and I've reached customers all over the world. The platform's supportive community has been invaluable for my growth.</p>
+                                <div class="testimonial-author">
+                                    <h4>Sarah Johnson</h4>
+                                    <p>Handcrafted Jewelry</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card animate-fade-in delay-2">
+                        <div class="testimonial-content">
+                            <div class="testimonial-image">
+                                <img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-1.2.1&auto=format&fit=crop&w=256&q=80" alt="David Chen">
+                                <div class="testimonial-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                            <div class="testimonial-text">
+                                <p>As a digital artist, I was struggling to find the right platform to showcase my work. Tzedek provided the perfect solution with their virtual shop rentals. The secure payment system and professional display options have helped me sell my art with confidence.</p>
+                                <div class="testimonial-author">
+                                    <h4>David Chen</h4>
+                                    <p>Digital Art Studio</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card animate-fade-in">
+                        <div class="testimonial-content">
+                            <div class="testimonial-image">
+                                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=256&q=80" alt="Amina Osei">
+                                <div class="testimonial-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                            </div>
+                            <div class="testimonial-text">
+                                <p>I started my organic skincare business with just a few products, and Tzedek made it possible for me to reach a global market. The community support and business tools have helped me scale my operations beyond what I imagined possible.</p>
+                                <div class="testimonial-author">
+                                    <h4>Amina Osei</h4>
+                                    <p>Organic Skincare</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card animate-fade-in delay-2">
+                        <div class="testimonial-content">
+                            <div class="testimonial-image">
+                                <img src="https://images.unsplash.com/photo-1552058544-f2b08422138a?ixlib=rb-1.2.1&auto=format&fit=crop&w=256&q=80" alt="Miguel Rodriguez">
+                                <div class="testimonial-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                            <div class="testimonial-text">
+                                <p>Tzedek's platform allowed me to take my language tutoring services online. The flexible shop options and secure payment processing made it easy to transition from in-person to virtual classes. My client base has grown exponentially!</p>
+                                <div class="testimonial-author">
+                                    <h4>Miguel Rodriguez</h4>
+                                    <p>Language Tutoring Services</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Partner Section: Place this after the testimonials section, before the FAQ section -->
+        <section id="partners" class="section">
+            <div class="container">
+                <h2 class="section-title text-center text-white">Our Trusted Partners</h2>
+                <p class="section-intro text-center mb-10">We collaborate with leading organizations to empower entrepreneurs and grow our community.</p>
+                <div class="partners-grid flex flex-wrap justify-center items-center gap-8">
+                <div class="partner-logo">
+                    <img src="../img/gig-logistics-logo.png" alt="GIG Logistics Logo">
+                </div>
+                <div class="partner-logo">
+                    <img src="../img/Lg-logo.png" alt="LG Logo">
+                </div>
+                <div class="partner-logo">
+                    <img src="../img/klimax band.png" alt="klimax band Logo">
+                </div>
+                <div class="partner-logo">
+                    <img src="data:image/jpeg;base64,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" alt="GIG Logistics Logo">
+                </div>
+                <div class="partner-logo">
+                    <img src="../img/shop-img-3.jpg" alt="klimax band Logo">
+                </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- FAQ Section -->
+        <section id="faq" class="section">
+            <div class="container">
+                <h2 class="section-title">Frequently Asked Questions</h2>
+                <p class="section-intro">Find answers to common questions about our platform, services, and policies.</p>
+                
+                <div class="faq-container">
+                    <!-- General FAQ -->
+                    <div>
+                        <h3 class="faq-category">General</h3>
+                        <div class="accordion">
+                            <div class="accordion-item">
+                                <button class="accordion-header">
+                                    <span>What is Tzedek?</span>
+                                    <i class="fas fa-chevron-down"></i>
+                                </button>
+                                <div class="accordion-content">
+                                    <p>Tzedek is a community-driven global marketplace that empowers entrepreneurs to sell their products and services online through virtual shop rentals. Our platform provides the tools, resources, and support needed to grow your business globally.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="accordion-item">
+                                <button class="accordion-header">
+                                    <span>How do I get started?</span>
+                                    <i class="fas fa-chevron-down"></i>
+                                </button>
+                                <div class="accordion-content">
+                                    <p>Getting started is easy! Simply register for an account, choose your preferred shop package, set up your virtual shop, and start listing your products or services. Our step-by-step guide will help you through the entire process.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="accordion-item">
+                                <button class="accordion-header">
+                                    <span>What makes Tzedek different from other marketplaces?</span>
+                                    <i class="fas fa-chevron-down"></i>
+                                </button>
+                                <div class="accordion-content">
+                                    <p>Tzedek stands out with our community-driven approach. We focus on empowering entrepreneurs through education, support, and networking opportunities. Our platform is designed to help businesses thrive globally while maintaining their unique identity and brand.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Shop Rental FAQ -->
+                    <div>
+                        <h3 class="faq-category">Shop Rentals</h3>
+                        <div class="accordion">
+                            <div class="accordion-item">
+                                <button class="accordion-header">
+                                    <span>What are virtual shop rentals?</span>
+                                    <i class="fas fa-chevron-down"></i>
+                                </button>
+                                <div class="accordion-content">
+                                    <p>Virtual shop rentals provide you with a dedicated online space within our marketplace where you can showcase and sell your products or services. Each shop comes with various features depending on the package you choose.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="accordion-item">
+                                <button class="accordion-header">
+                                    <span>Can I customize my virtual shop?</span>
+                                    <i class="fas fa-chevron-down"></i>
+                                </button>
+                                <div class="accordion-content">
+                                    <p>Yes! All shop packages allow for customization to match your brand identity. Higher-tier packages offer more extensive customization options, including layout designs, color schemes, and advanced branding features.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="accordion-item">
+                                <button class="accordion-header">
+                                    <span>How long is the rental period?</span>
+                                    <i class="fas fa-chevron-down"></i>
+                                </button>
+                                <div class="accordion-content">
+                                    <p>Shop rentals are available on monthly or annual plans. Annual plans come with a significant discount. You can upgrade your package at any time as your business grows.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Selling and Services -->
+                    <div class="mt-6">
+                        <h3 class="faq-category">Selling & Services</h3>
+                        <div class="accordion">
+                            <div class="accordion-item">
+                                <button class="accordion-header">
+                                    <span>What types of products can I sell?</span>
+                                    <i class="fas fa-chevron-down"></i>
+                                </button>
+                                <div class="accordion-content">
+                                    <p>You can sell physical products, digital goods, or services on our platform. However, all items must comply with our community guidelines and legal requirements. Some restricted items include illegal goods, dangerous substances, and counterfeit products.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="accordion-item">
+                                <button class="accordion-header">
+                                    <span>How do I ship products to customers?</span>
+                                    <i class="fas fa-chevron-down"></i>
+                                </button>
+                                <div class="accordion-content">
+                                    <p>You're responsible for shipping your physical products to customers. Our platform integrates with major shipping providers to help you generate shipping labels and track deliveries. You can set your shipping rates and methods in your shop settings.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="accordion-item">
+                                <button class="accordion-header">
+                                    <span>Can I offer services instead of products?</span>
+                                    <i class="fas fa-chevron-down"></i>
+                                </button>
+                                <div class="accordion-content">
+                                    <p>Absolutely! Many entrepreneurs on our platform offer services like consulting, digital courses, tutoring, design work, and more. Our platform has special features designed for service-based businesses.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Payment and Fees -->
+                    <div class="mt-6">
+                        <h3 class="faq-category">Payments & Fees</h3>
+                        <div class="accordion">
+                            <div class="accordion-item">
+                                <button class="accordion-header">
+                                    <span>How do I receive payments?</span>
+                                    <i class="fas fa-chevron-down"></i>
+                                </button>
+                                <div class="accordion-content">
+                                    <p>When customers make purchases, payments are processed through our secure payment system. Funds are then transferred to your connected bank account or payment method according to the payment schedule you've selected (weekly, bi-weekly, or monthly).</p>
+                                </div>
+                            </div>
+                            
+                            <div class="accordion-item">
+                                <button class="accordion-header">
+                                    <span>What fees does Tzedek charge?</span>
+                                    <i class="fas fa-chevron-down"></i>
+                                </button>
+                                <div class="accordion-content">
+                                    <p>Tzedek charges a monthly shop rental fee based on your selected package. Additionally, there's a small transaction fee (3-5% depending on your package) for each sale to cover payment processing costs. There are no hidden fees or charges.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="accordion-item">
+                                <button class="accordion-header">
+                                    <span>What payment methods are accepted?</span>
+                                    <i class="fas fa-chevron-down"></i>
+                                </button>
+                                <div class="accordion-content">
+                                    <p>Customers can pay using major credit cards, debit cards, mobile payment services, and local payment methods depending on their region. Premium and Enterprise packages support additional payment options like cryptocurrency and buy-now-pay-later services.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-more">
+                    <p>Can't find what you're looking for? <a href="contact.html" class="text-tzedek-green">Contact our support team</a></p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+        
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-column">
+                        <h3>Tzedek</h3>
+                        <p>A community-driven global marketplace empowering entrepreneurs to connect and grow.</p>
+                        <div class="footer-social">
+                            <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h3>Quick Links</h3>
+                        <ul class="footer-links">
+                            <li><a href="#about">About Us</a></li>
+                            <li><a href="#shop">Shop Rentals</a></li>
+                            <li><a href="#packages">Packages</a></li>
+                            <li><a href="#testimonials">Success Stories</a></li>
+                            <li><a href="company-policy.html">Company Policy</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h3>Resources</h3>
+                        <ul class="footer-links">
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="#">Entrepreneur Tips</a></li>
+                            <li><a href="#">Marketing Guide</a></li>
+                            <li><a href="#">Community Forums</a></li>
+                            <li><a href="#">Help Center</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h3>Contact</h3>
+                        <ul class="footer-contact">
+                            <li><i class="fas fa-envelope"></i> support@tzedek.com</li>
+                            <li><i class="fas fa-phone"></i> +234 (0) 123 456 7890</li>
+                            <li><i class="fas fa-map-marker-alt"></i> 123 Business Avenue, Lagos, Nigeria</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="footer-bottom">
+                    <p>&copy; <span id="currentYear">2023</span> Tzedek. All rights reserved. | <a href="company-policy.html" class="text-tzedek-green">Privacy Policy</a> | <a href="company-policy.html" class="text-tzedek-green">Terms of Service</a></p>
+                </div>
+            </div>
+        </footer>
+        
+        <!-- Scroll to Top Button -->
+        <button id="scrollToTop" class="scroll-top">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+    </div>
+
+    
+    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
+    <script src="../js/script.js"></script>
+    <script src="../js/home.js"></script>
+</body>
+</html>

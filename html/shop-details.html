@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoStyle Fashion | Tzedek Marketplace</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --tzedek-green: #10b981;
+            --tzedek-dark-green: #059669;
+            --tzedek-light-green: #d1fae5;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --bg-light: #f9fafb;
+            --border-color: #e5e7eb;
+            --white: #ffffff;
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Navbar Styles */
+        .navbar {
+            background-color: var(--white);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .navbar-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 0;
+        }
+        
+        .navbar-logo .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--tzedek-green);
+            text-decoration: none;
+        }
+        
+        .navbar-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-link {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            color: var(--tzedek-green);
+        }
+        
+        .navbar-auth {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .btn-primary {
+            background-color: var(--tzedek-green);
+            color: var(--white);
+            padding: 8px 16px;
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--tzedek-dark-green);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            color: var(--tzedek-green);
+            padding: 8px 16px;
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-size: 14px;
+            border: 1px solid var(--tzedek-green);
+            cursor: pointer;
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--tzedek-light-green);
+        }
+        
+        /* Shop Header */
+        .shop-header {
+            margin: 30px 0;
+            position: relative;
+        }
+        
+        .shop-cover {
+            height: 300px;
+            background: linear-gradient(135deg, var(--tzedek-green) 0%, var(--tzedek-dark-green) 100%);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: 600;
+        }
+        
+        .shop-info {
+            display: flex;
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 30px;
+            margin-top: -80px;
+            position: relative;
+            z-index: 2;
+            box-shadow: var(--shadow-md);
+            gap: 30px;
+            align-items: flex-start;
+        }
+        
+        .shop-logo-container {
+            flex-shrink: 0;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4px solid var(--white);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .shop-logo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .shop-details {
+            flex: 1;
+        }
+        
+        .shop-name {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+        
+        .shop-description {
+            font-size: 16px;
+            color: var(--text-light);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .shop-meta {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-light);
+            font-size: 14px;
+        }
+        
+        .meta-item i {
+            color: var(--tzedek-green);
+        }
+        
+        .shop-actions {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .social-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: var(--bg-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-dark);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .social-icon:hover {
+            background-color: var(--tzedek-green);
+            color: var(--white);
+        }
+        
+        /* Shop Stats */
+        .shop-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+        
+        .stat-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 25px;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.3s;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--tzedek-green);
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Products Section */
+        .products-section {
+            margin: 50px 0;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        
+        .product-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .product-info {
+            padding: 20px;
+        }
+        
+        .product-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+        
+        .product-description {
+            font-size: 14px;
+            color: var(--text-light);
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        
+        .product-price {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--tzedek-green);
+            margin-bottom: 15px;
+        }
+        
+        .product-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        /* Reviews Section */
+        .reviews-section {
+            margin: 50px 0;
+        }
+        
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .review-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 25px;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .review-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .reviewer-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--tzedek-light-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--tzedek-green);
+            font-weight: 600;
+            margin-right: 15px;
+        }
+        
+        .reviewer-info {
+            flex: 1;
+        }
+        
+        .reviewer-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .review-rating {
+            color: #f59e0b;
+        }
+        
+        .review-content {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+        
+        /* Footer */
+        .footer {
+            background-color: var(--text-dark);
+            color: var(--white);
+            padding: 50px 0 25px;
+            margin-top: 50px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: var(--white);
+        }
+        
+        .footer-column p {
+            margin-bottom: 15px;
+            opacity: 0.8;
+            font-size: 14px;
+        }
+        
+        .footer-social {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .footer-social .social-icon {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+        }
+        
+        .footer-social .social-icon:hover {
+            background-color: var(--tzedek-green);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 8px;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 14px;
+        }
+        
+        .footer-links a:hover {
+            color: var(--tzedek-green);
+        }
+        
+        .footer-contact li {
+            margin-bottom: 8px;
+            opacity: 0.8;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+            font-size: 14px;
+        }
+        
+        .footer-bottom a {
+            color: var(--tzedek-green);
+            text-decoration: none;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .shop-info {
+                flex-direction: column;
+                text-align: center;
+                padding: 20px;
+                margin-top: -50px;
+            }
+            
+            .shop-logo-container {
+                align-self: center;
+                width: 100px;
+                height: 100px;
+            }
+            
+            .shop-meta {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            .shop-actions {
+                justify-content: center;
+            }
+            
+            .shop-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-header {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+            
+            .reviews-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .shop-cover {
+                height: 200px;
+            }
+            
+            .shop-name {
+                font-size: 24px;
+            }
+            
+            .shop-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .product-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="container">
+            <div class="navbar-content">
+                <div class="navbar-logo">
+                    <a href="index.html" class="logo">Tzedek</a>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <nav class="navbar-links">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="about.html" class="nav-link">About</a>
+                    <a href="shop.html" class="nav-link">Shops</a>
+                    <a href="products.html" class="nav-link">Products</a>
+                    <a href="contact.html" class="nav-link">Contact</a>
+                </nav>
+        
+                <div class="navbar-auth">
+                    <a href="register.html" class="nav-link">Sign Up</a>
+                    <a href="register.html" class="btn-primary">Become a Seller</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Shop Header -->
+        <section class="shop-header">
+            <div class="shop-cover">
+                EcoStyle Fashion - Sustainable Clothing
+            </div>
+            
+            <div class="shop-info">
+                <div class="shop-logo-container">
+                    <img src="https://images.unsplash.com/photo-1566206091558-7f218b696731?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="EcoStyle Fashion Logo" class="shop-logo">
+                </div>
+                
+                <div class="shop-details">
+                    <h1 class="shop-name">EcoStyle Fashion</h1>
+                    <p class="shop-description">
+                        Sustainable and ethically produced clothing for the conscious consumer. Our fabrics are sourced from organic farms, 
+                        and we ensure fair wages for all workers in our supply chain. Join us in making fashion more sustainable.
+                    </p>
+                    
+                    <div class="shop-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-star"></i>
+                            <span>4.8 (128 reviews)</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-box"></i>
+                            <span>42 products</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Lagos, Nigeria</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Joined 2022</span>
+                        </div>
+                    </div>
+                    
+                    <div class="shop-actions">
+                        <button class="btn-primary">
+                            <i class="fas fa-store"></i> Follow Shop
+                        </button>
+                        <button class="btn-outline">
+                            <i class="fas fa-envelope"></i> Contact
+                        </button>
+                        
+                        <div class="social-icons">
+                            <a href="#" class="social-icon">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="social-icon">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="social-icon">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Shop Stats -->
+        <section class="shop-stats">
+            <div class="stat-card">
+                <div class="stat-value">98%</div>
+                <div class="stat-label">Positive Reviews</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">1.2k</div>
+                <div class="stat-label">Items Sold</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">24h</div>
+                <div class="stat-label">Avg. Response Time</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">4.8</div>
+                <div class="stat-label">Customer Rating</div>
+            </div>
+        </section>
+        
+        <!-- Products Section -->
+        <section class="products-section">
+            <div class="section-header">
+                <h2 class="section-title">Featured Products</h2>
+                <div class="view-all">
+                    <a href="#" class="btn-outline">View All Products</a>
+                </div>
+            </div>
+            
+            <div class="products-grid">
+                <!-- Product 1 -->
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1520006403909-838d6b92c22e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Organic Cotton T-Shirt" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-title">Organic Cotton T-Shirt</h3>
+                        <p class="product-description">Soft, breathable t-shirt made from 100% organic cotton. Available in multiple colors.</p>
+                        <div class="product-price">₦8,500</div>
+                        <div class="product-actions">
+                            <a href="product-details.html" class="btn-primary">View Details</a>
+                            <button class="btn-outline">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 2 -->
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1499336315816-097655dcfbda?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Sustainable Denim Jeans" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-title">Sustainable Denim Jeans</h3>
+                        <p class="product-description">Eco-friendly jeans made with recycled materials and sustainable dyeing processes.</p>
+                        <div class="product-price">₦15,200</div>
+                        <div class="product-actions">
+                            <a href="product-details.html" class="btn-primary">View Details</a>
+                            <button class="btn-outline">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 3 -->
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1550614000-4895a10e1bfd?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Bamboo Fiber Sweater" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-title">Bamboo Fiber Sweater</h3>
+                        <p class="product-description">Warm and comfortable sweater made from sustainable bamboo fibers.</p>
+                        <div class="product-price">₦12,800</div>
+                        <div class="product-actions">
+                            <a href="product-details.html" class="btn-primary">View Details</a>
+                            <button class="btn-outline">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 4 -->
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1582418702059-97ebafb35d09?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Recycled Polyester Jacket" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-title">Recycled Polyester Jacket</h3>
+                        <p class="product-description">Lightweight jacket made from recycled plastic bottles. Water-resistant and durable.</p>
+                        <div class="product-price">₦18,500</div>
+                        <div class="product-actions">
+                            <a href="product-details.html" class="btn-primary">View Details</a>
+                            <button class="btn-outline">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Reviews Section -->
+        <section class="reviews-section">
+            <div class="section-header">
+                <h2 class="section-title">Customer Reviews</h2>
+            </div>
+            
+            <div class="reviews-grid">
+                <!-- Review 1 -->
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="reviewer-avatar">AJ</div>
+                        <div class="reviewer-info">
+                            <div class="reviewer-name">Amina Johnson</div>
+                            <div class="review-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="review-content">
+                        "I love the quality of the organic cotton t-shirt! It's so soft and comfortable. 
+                        Knowing it was made ethically makes it even better. Will definitely buy again!"
+                    </div>
+                </div>
+                
+                <!-- Review 2 -->
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="reviewer-avatar">CK</div>
+                        <div class="reviewer-info">
+                            <div class="reviewer-name">Chinedu Kingsley</div>
+                            <div class="review-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="review-content">
+                        "The sustainable denim jeans fit perfectly and are very comfortable. 
+                        Great to support a local business that cares about the environment."
+                    </div>
+                </div>
+                
+                <!-- Review 3 -->
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="reviewer-avatar">FE</div>
+                        <div class="reviewer-info">
+                            <div class="reviewer-name">Fatima Eze</div>
+                            <div class="review-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="review-content">
+                        "Excellent customer service and fast shipping. The bamboo fiber sweater is my new favorite! 
+                        So soft and warm without being bulky."
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Tzedek</h3>
+                    <p>A community-driven global marketplace empowering entrepreneurs to connect and grow.</p>
+                    <div class="footer-social">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="shop.html">Shops</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Shipping Info</a></li>
+                        <li><a href="#">Returns</a></li>
+                        <li><a href="#">Size Guide</a></li>
+                        <li><a href="#">Contact Support</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-envelope"></i> support@tzedek.com</li>
+                        <li><i class="fas fa-phone"></i> +234 (0) 123 456 7890</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Business Avenue, Lagos, Nigeria</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; <span id="currentYear"></span> Tzedek. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Set current year in footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+        
+        // Add to cart functionality
+        document.querySelectorAll('.btn-outline').forEach(button => {
+            if (button.textContent.includes('Add to Cart')) {
+                button.addEventListener('click', function() {
+                    const productTitle = this.closest('.product-card').querySelector('.product-title').textContent;
+                    const originalText = this.textContent;
+                    
+                    this.innerHTML = '<i class="fas fa-check"></i> Added';
+                    this.style.backgroundColor = '#d1fae5';
+                    this.style.color = '#059669';
+                    this.style.borderColor = '#059669';
+                    
+                    setTimeout(() => {
+                        this.innerHTML = originalText;
+                        this.style.backgroundColor = '';
+                        this.style.color = '';
+                        this.style.borderColor = '';
+                    }, 2000);
+                    
+                    // In a real app, you would add the product to cart here
+                    console.log(`Added ${productTitle} to cart`);
+                });
+            }
+        });
+        
+        // Follow shop functionality
+        document.querySelector('.btn-primary').addEventListener('click', function() {
+            if (this.textContent.includes('Follow')) {
+                this.innerHTML = '<i class="fas fa-check"></i> Following';
+                this.style.backgroundColor = '#d1fae5';
+                this.style.color = '#059669';
+            } else {
+                this.innerHTML = '<i class="fas fa-store"></i> Follow Shop';
+                this.style.backgroundColor = '';
+                this.style.color = '';
+            }
+        });
+    </script>
+</body>
+</html>

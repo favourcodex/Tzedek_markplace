@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tzedek Marketplace </title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/home.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body>
+    <!-- Preloader -->
+    <!-- <div id="preloader" class="preloader">
+        <div class="preloader-logo">Tzedek</div>
+        <div class="preloader-subtitle">Justice • Equality • Community</div>
+        <div class="preloader-progress">
+            <div id="progress-bar" class="preloader-progress-bar"></div>
+        </div>
+    </div> -->
+
+    <div id="root">
+
+    <!-- Navbar -->
+    <header class="navbar">
+      <div class="container">
+        <div class="navbar-content">
+          <div class="navbar-logo">
+            <a href="index.html" class="logo">Tzedek</a>
+          </div>
+          
+          <!-- Desktop Navigation -->
+          <nav class="navbar-links desktop-nav">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="about.html" class="nav-link">About</a>
+            <a href="shop.html" class="nav-link">Shops</a>
+            <a href="products.html" class="nav-link">Products</a>
+            <!-- <a href="index.html#faq" class="nav-link"></a> -->
+            <a href="contact.html" class="nav-link active">Contact</a>
+          </nav>
+    
+          <div class="navbar-auth desktop-nav">
+            <a href="../html/register.html" class="nav-link">Sign Up</a>
+            <a href="register.html" class="btn-primary">Become a Seller</a>
+          </div>
+
+          <!-- Add this mobile nav markup just before the closing </div> of .navbar-content -->
+            <nav id="mobileNav" class="mobile-nav hidden">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="shop.html" class="nav-link">Shops</a>
+                <a href="products.html" class="nav-link">Products</a>
+                <!-- <a href="index.html#faq" class="nav-link">FAQ</a> -->
+                <a href="contact.html" class="nav-link">Contact</a>
+                <a href="register.html" class="nav-link">Sign Up</a>
+                <a href="register.html" class="btn-primary">Become a Seller</a>
+            </nav>
+          
+          <!-- Mobile menu button -->
+          <div class="mobile-menu-button">
+            <button id="menuToggle" aria-label="Toggle menu">
+              <i class="fas fa-bars menu-icon"></i>
+              <i class="fas fa-times close-icon hidden"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section bg-light">
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+            <p class="section-intro">Have questions or need support? Reach out to our team and we'll be happy to assist you.</p>
+            
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Get in Touch</h3>
+                    
+                    <div class="contact-methods">
+                        <div class="contact-method">
+                            <div class="method-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="method-details">
+                                <h4>Email</h4>
+                                <p>Tzedekgreen@gmail.com </p>
+                                <!-- <p>support@tzedek.com</p> -->
+                            </div>
+                        </div>
+                        
+                        <div class="contact-method">
+                            <div class="method-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="method-details">
+                                <h4>Phone</h4>
+                                <p>+234 901 149 5761</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-method">
+                            <div class="method-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="method-details">
+                                <h4>Office</h4>
+                                <p>No 4 church street off Adesuwa</p>
+                                <p>Benin, Nigeria</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="community-section">
+                        <h4>Join the Tzedek Community</h4>
+                        <p>Whether you're an entrepreneur, artisan, or service provider, Tzedek offers a unique opportunity to reach new customers, showcase your products, and grow your business. Rent a virtual shop, join our community, and start selling today!</p>
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-card">
+                    <h3>Send us a Message</h3>
+                    <div id="formSuccess" class="form-success hidden">
+                        <p>Thank you! Your message has been sent successfully.</p>
+                    </div>
+                    
+                    <form id="contactForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Your Name</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" name="subject" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn-primary full-width">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Tzedek</h3>
+                    <p>A community-driven global marketplace empowering entrepreneurs to connect and grow.</p>
+                    <div class="footer-social">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#shop">Shop Rentals</a></li>
+                        <li><a href="#packages">Packages</a></li>
+                        <li><a href="#testimonials">Success Stories</a></li>
+                        <li><a href="company-policy.html">Company Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Entrepreneur Tips</a></li>
+                        <li><a href="#">Marketing Guide</a></li>
+                        <li><a href="#">Community Forums</a></li>
+                        <li><a href="#">Help Center</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-envelope"></i> support@tzedek.com</li>
+                        <li><i class="fas fa-phone"></i> +234 (0) 123 456 7890</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Business Avenue, Lagos, Nigeria</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; <span id="currentYear">2023</span> Tzedek. All rights reserved. | <a href="company-policy.html" class="text-tzedek-green">Privacy Policy</a> | <a href="company-policy.html" class="text-tzedek-green">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script>
+        // Preloader & misc
+        document.addEventListener('DOMContentLoaded', function() {
+            // Current year in footer
+            const el = document.getElementById('currentYear'); if (el) el.textContent = new Date().getFullYear();
+            // Contact submit
+            const form = document.getElementById('contactForm');
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const payload = {
+                    name: document.getElementById('name').value.trim(),
+                    email: document.getElementById('email').value.trim(),
+                    subject: document.getElementById('subject').value.trim(),
+                    message: document.getElementById('message').value.trim(),
+                };
+                try {
+                    const res = await fetch('/api/users/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+                    if (res.ok) {
+                        document.getElementById('formSuccess').classList.remove('hidden');
+                        form.reset();
+                } else {
+                        alert('Unable to send message now. Please try again later.');
+                    }
+                } catch {
+                    alert('Network error. Please try again.');
+                }
+            });
+        });
+    </script>
+
+    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
+    <script src="../js/script.js"></script>
+    <script src="../js/home.js"></script>
+</body>
+</html>

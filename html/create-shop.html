@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Your Online Shop</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/create-shop.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Left Section - Fixed Carousel -->
+        <section class="carousel-section">
+            <div class="carousel-container">
+                <div class="carousel-slide active">
+                    <img src="https://images.unsplash.com/photo-1563014959-7aaa83350992?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=900&q=80" alt="Online Store Example">
+                </div>
+                <div class="carousel-slide">
+                    <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=900&q=80" alt="E-commerce Analytics">
+                </div>
+                <div class="carousel-slide">
+                    <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=900&q=80" alt="Store Management">
+                </div>
+            </div>
+            
+            <div class="carousel-caption">
+                <h2>Start Selling Online in Minutes</h2>
+                <p>Join thousands of successful entrepreneurs who launched their online stores with us</p>
+            </div>
+            
+            <div class="carousel-indicators">
+                <div class="indicator active" data-slide="0"></div>
+                <div class="indicator" data-slide="1"></div>
+                <div class="indicator" data-slide="2"></div>
+            </div>
+        </section>
+        
+        <!-- Right Section - Scrollable Form -->
+        <section class="form-section">
+            <div class="form-container">
+                <div class="logo">
+                    <h1>Create a Shop</h1>
+                    <p>Create your online store in just a few steps</p>
+                </div>
+                
+                <form id="shopForm">
+                    <div class="form-group">
+                        <label for="shopName">Shop Name</label>
+                        <input type="text" id="shopName" class="form-control" placeholder="Enter your shop name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" class="form-control" placeholder="your@email.com" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" class="form-control" placeholder="Create a strong password" required>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">First Name</label>
+                            <input type="text" id="firstName" class="form-control" placeholder="Your first name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" id="lastName" class="form-control" placeholder="Your last name" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="address">Business Address</label>
+                        <input type="text" id="address" class="form-control" placeholder="Street address" required>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="city">City</label>
+                            <input type="text" id="city" class="form-control" placeholder="Your city" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="postalCode">Postal Code</label>
+                            <input type="text" id="postalCode" class="form-control" placeholder="ZIP code" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="country">Country</label>
+                        <select id="country" class="form-control" required>
+                            <option value="">Select your country</option>
+                            <option value="usa">United States</option>
+                            <option value="uk">United Kingdom</option>
+                            <option value="canada">Canada</option>
+                            <option value="australia">Australia</option>
+                            <option value="germany">Germany</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" class="form-control" placeholder="+234 123 456 7880" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="currency">Currency</label>
+                        <select id="currency" class="form-control" required>
+                            <option value="">Select currency</option>
+                            <option value="usd">USD ($)</option>
+                            <option value="eur">EUR (€)</option>
+                            <option value="gbp">GBP (£)</option>
+                            <option value="cad">CAD (C$)</option>
+                            <option value="aud">AUD (A$)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="industry">Industry</label>
+                        <select id="industry" class="form-control" required>
+                            <option value="">Select your industry</option>
+                            <option value="fashion">Fashion & Apparel</option>
+                            <option value="electronics">Electronics</option>
+                            <option value="home">Home & Garden</option>
+                            <option value="beauty">Beauty & Cosmetics</option>
+                            <option value="food">Food & Beverage</option>
+                        </select>
+                    </div>
+
+                    <!-- Package Selection -->
+                    <div class="form-group">
+                        <label>Select Your Package</label>
+                        <div class="package-group">
+                            <label class="package-option">
+                                <input type="radio" name="package" value="solopreneur" required>
+                                <div class="details">
+                                    <div class="price">N10,000 - Solopreneur</div>
+                                    <div class="description">Perfect for starting solo. Basic features included.</div>
+                                </div>
+                            </label>
+
+                            <label class="package-option">
+                                <input type="radio" name="package" value="pro">
+                                <div class="details">
+                                    <div class="price">N30,000 - Pro Store</div>
+                                    <div class="description">Advanced tools and marketing features.</div>
+                                </div>
+                            </label>
+
+                            <label class="package-option">
+                                <input type="radio" name="package" value="premium">
+                                <div class="details">
+                                    <div class="price">N50,000 - Premium Store</div>
+                                    <div class="description">Full suite: analytics, automation, and priority support.</div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn">Create Your Shop</button>
+                    
+                    <p class="terms">By creating a shop, you agree to our <a href="company-policy.html">Terms of Service</a> and <a href="company-policy.html">Privacy Policy</a>.</p>
+
+                </form>
+
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Carousel functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.carousel-slide');
+            const indicators = document.querySelectorAll('.indicator');
+            const slideCount = slides.length;
+            
+            // Function to show a specific slide
+            function showSlide(n) {
+                slides.forEach(slide => slide.classList.remove('active'));
+                indicators.forEach(indicator => indicator.classList.remove('active'));
+                
+                currentSlide = (n + slideCount) % slideCount;
+                
+                slides[currentSlide].classList.add('active');
+                indicators[currentSlide].classList.add('active');
+            }
+            
+            // Set up indicators
+            indicators.forEach((indicator, index) => {
+                indicator.addEventListener('click', () => {
+                    showSlide(index);
+                });
+            });
+            
+            // Auto advance slides
+            setInterval(() => {
+                showSlide(currentSlide + 1);
+            }, 5000);
+            
+            // Form validation
+            document.getElementById('shopForm').addEventListener('submit', function(e) {
+                const selectedPackage = document.querySelector('input[name="package"]:checked');
+                if (!selectedPackage) {
+                    alert('Please select a package.');
+                    e.preventDefault();
+                    return;
+                }
+                e.preventDefault();
+                alert('Shop creation submitted! Package: ' + selectedPackage.value);
+            });
+        });
+    </script>
+</body>
+</html>

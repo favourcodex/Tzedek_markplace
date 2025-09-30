@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step Two | Tzedek Marketplace</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Css link -->
+    <link rel="stylesheet" href="/css/option.css">
+</head>
+<body>
+    <section class="option">
+        <div class="option-header">
+            <h1>Welcome to Tzedek Marketplace</h1>
+            <p>Justice • Equality • Community - Choose how you'd like to experience our marketplace</p>
+        </div>
+        
+        <div class="option-container">
+            <a href="products.html" class="option-content customer">
+                <div class="option-icon">
+                    <i class="fas fa-user"></i>
+                </div>
+                <h2>Continue As a Customer</h2>
+                <p>Browse products, make purchases, and support ethical businesses in our community marketplace.</p>
+                <div class="option-badge">Shop & Support</div>
+            </a>
+            
+            <a href="create-shop.html" class="option-content owner">
+                <div class="option-icon">
+                    <i class="fas fa-store"></i>
+                </div>
+                <h2>Become a Shop Owner</h2>
+                <p>Set up your own shop, sell products, and join our community of ethical business owners.</p>
+                <div class="option-badge">Start Selling</div>
+            </a>
+        </div>
+    </section>
+
+    <script>
+        // Add hover effects with JavaScript for enhanced interaction
+        document.addEventListener('DOMContentLoaded', function() {
+            const optionCards = document.querySelectorAll('.option-content');
+            
+            optionCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

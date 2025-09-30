@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller Dashboard | Tzedek Marketplace</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="/css/seller-dashboard.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <aside class="seller-sidebar" id="sellerSidebar">
+        <div class="seller-sidebar-header">
+            <div class="shop-avatar">TJ</div>
+            <div class="shop-info">
+                <h2>Tzedek Jewelry</h2>
+                <p>Premium Handmade Jewelry</p>
+            </div>
+        </div>
+        
+        <ul class="seller-nav">
+            <li class="seller-nav-item">
+                <a href="#" class="seller-nav-link active" data-section="dashboard">
+                    <i class="fas fa-home"></i> Dashboard
+                </a>
+            </li>
+            <li class="seller-nav-item">
+                <a href="#" class="seller-nav-link" data-section="products">
+                    <i class="fas fa-box"></i> Products
+                </a>
+            </li>
+            <li class="seller-nav-item">
+                <a href="#" class="seller-nav-link" data-section="orders">
+                    <i class="fas fa-shopping-cart"></i> Orders
+                </a>
+            </li>
+            <li class="seller-nav-item">
+                <a href="#" class="seller-nav-link" data-section="analytics">
+                    <i class="fas fa-chart-line"></i> Analytics
+                </a>
+            </li>
+            <li class="seller-nav-item">
+                <a href="#" class="seller-nav-link" data-section="customers">
+                    <i class="fas fa-users"></i> Customers
+                </a>
+            </li>
+            <li class="seller-nav-item">
+                <a href="#" class="seller-nav-link" data-section="settings">
+                    <i class="fas fa-cog"></i> Settings
+                </a>
+            </li>
+        </ul>
+    </aside>
+    
+    <!-- Main Content -->
+    <main class="seller-main">
+        <header class="seller-header">
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <h1 class="section-title" id="sectionTitle">Dashboard</h1>
+            
+            <div class="header-actions">
+                <button class="btn btn-secondary">
+                    <i class="fas fa-store"></i> Manage Shop
+                </button>
+                <button class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Add Product
+                </button>
+                
+                <div class="user-menu">
+                    <div class="user-avatar">SA</div>
+                    <span>Sarah Adams</span>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Dashboard Section -->
+        <section class="content-section" id="dashboardSection">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-card-header">
+                        <span class="stat-card-title">Total Sales</span>
+                        <div class="stat-card-icon icon-green">
+                            <i class="fas fa-naira-sign"></i>
+                        </div>
+                    </div>
+                    <p class="stat-card-value">₦245,800</p>
+                    <span class="stat-card-change">+12.5% vs last month</span>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-card-header">
+                        <span class="stat-card-title">Orders</span>
+                        <div class="stat-card-icon icon-blue">
+                            <i class="fas fa-receipt"></i>
+                        </div>
+                    </div>
+                    <p class="stat-card-value">42</p>
+                    <span class="stat-card-change">+8.3% vs last month</span>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-card-header">
+                        <span class="stat-card-title">Products</span>
+                        <div class="stat-card-icon icon-purple">
+                            <i class="fas fa-box"></i>
+                        </div>
+                    </div>
+                    <p class="stat-card-value">18</p>
+                    <span class="stat-card-change">+2 new this week</span>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-card-header">
+                        <span class="stat-card-title">Conversion Rate</span>
+                        <div class="stat-card-icon icon-orange">
+                            <i class="fas fa-percent"></i>
+                        </div>
+                    </div>
+                    <p class="stat-card-value">4.2%</p>
+                    <span class="stat-card-change negative">-0.5% vs last month</span>
+                </div>
+            </div>
+            
+            <div class="table-container">
+                <div class="table-header">
+                    <h3 class="table-title"><i class="fas fa-clock"></i> Recent Orders</h3>
+                </div>
+                
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Order #</th>
+                            <th>Date</th>
+                            <th>Customer</th>
+                            <th>Status</th>
+                            <th>Total</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>#TZ-2847</td>
+                            <td>May 15, 2023</td>
+                            <td>James Wilson</td>
+                            <td><span class="status-badge status-completed">Completed</span></td>
+                            <td>₦18,500</td>
+                            <td>
+                                <button class="action-btn action-btn-view">View</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#TZ-2846</td>
+                            <td>May 14, 2023</td>
+                            <td>Maria Garcia</td>
+                            <td><span class="status-badge status-pending">Pending</span></td>
+                            <td>₦12,300</td>
+                            <td>
+                                <button class="action-btn action-btn-view">View</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#TZ-2845</td>
+                            <td>May 13, 2023</td>
+                            <td>Robert Johnson</td>
+                            <td><span class="status-badge status-active">Shipped</span></td>
+                            <td>₦24,750</td>
+                            <td>
+                                <button class="action-btn action-btn-view">View</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#TZ-2844</td>
+                            <td>May 12, 2023</td>
+                            <td>Lisa Chen</td>
+                            <td><span class="status-badge status-completed">Completed</span></td>
+                            <td>₦9,800</td>
+                            <td>
+                                <button class="action-btn action-btn-view">View</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        
+        <!-- Products Section -->
+        <section class="content-section hidden" id="productsSection">
+            <div class="table-container">
+                <div class="table-header">
+                    <h3 class="table-title"><i class="fas fa-box"></i> Product Catalog</h3>
+                </div>
+                
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Price</th>
+                            <th>Stock</th>
+                            <th>Status</th>
+                            <th>Updated</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div style="width: 40px; height: 40px; background-color: #f3f4f6; border-radius: 6px;"></div>
+                                    <div>
+                                        <div style="font-weight: 600;">Silver Pendant Necklace</div>
+                                        <div style="font-size: 12px; color: var(--text-light);">Jewelry</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>₦15,000</td>
+                            <td>24</td>
+                            <td><span class="status-badge status-active">Active</span></td>
+                            <td>May 10, 2023</td>
+                            <td>
+                                <button class="action-btn action-btn-edit">Edit</button>
+                                <button class="action-btn action-btn-delete">Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div style="width: 40px; height: 40px; background-color: #f3f4f6; border-radius: 6px;"></div>
+                                    <div>
+                                        <div style="font-weight: 600;">Handcrafted Leather Bracelet</div>
+                                        <div style="font-size: 12px; color: var(--text-light);">Accessories</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>₦8,500</td>
+                            <td>15</td>
+                            <td><span class="status-badge status-active">Active</span></td>
+                            <td>May 8, 2023</td>
+                            <td>
+                                <button class="action-btn action-btn-edit">Edit</button>
+                                <button class="action-btn action-btn-delete">Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div style="width: 40px; height: 40px; background-color: #f3f4f6; border-radius: 6px;"></div>
+                                    <div>
+                                        <div style="font-weight: 600;">Ethical Gold Earrings</div>
+                                        <div style="font-size: 12px; color: var(--text-light);">Jewelry</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>₦22,000</td>
+                            <td>8</td>
+                            <td><span class="status-badge status-active">Active</span></td>
+                            <td>May 5, 2023</td>
+                            <td>
+                                <button class="action-btn action-btn-edit">Edit</button>
+                                <button class="action-btn action-btn-delete">Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        
+        <!-- Orders Section -->
+        <section class="content-section hidden" id="ordersSection">
+            <div class="table-container">
+                <div class="table-header">
+                    <h3 class="table-title"><i class="fas fa-shopping-cart"></i> Order Management</h3>
+                </div>
+                
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Order #</th>
+                            <th>Date</th>
+                            <th>Items</th>
+                            <th>Status</th>
+                            <th>Total</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>#TZ-2847</td>
+                            <td>May 15, 2023</td>
+                            <td>3 items</td>
+                            <td><span class="status-badge status-completed">Completed</span></td>
+                            <td>₦18,500</td>
+                            <td>
+                                <button class="action-btn action-btn-view">View</button>
+                                <button class="action-btn action-btn-edit">Update</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#TZ-2846</td>
+                            <td>May 14, 2023</td>
+                            <td>2 items</td>
+                            <td><span class="status-badge status-pending">Pending</span></td>
+                            <td>₦12,300</td>
+                            <td>
+                                <button class="action-btn action-btn-view">View</button>
+                                <button class="action-btn action-btn-edit">Update</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#TZ-2845</td>
+                            <td>May 13, 2023</td>
+                            <td>1 item</td>
+                            <td><span class="status-badge status-active">Shipped</span></td>
+                            <td>₦24,750</td>
+                            <td>
+                                <button class="action-btn action-btn-view">View</button>
+                                <button class="action-btn action-btn-edit">Update</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        
+        <!-- Analytics Section -->
+        <section class="content-section hidden" id="analyticsSection">
+            <div class="analytics-grid">
+                <div>
+                    <div class="chart-container">
+                        <h3 class="chart-title">Sales Performance (Last 30 Days)</h3>
+                        <div class="chart-placeholder">
+                            <i class="fas fa-chart-bar" style="font-size: 40px; margin-right: 15px;"></i>
+                            Sales Chart Visualization
+                        </div>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <h3 class="chart-title">Traffic Sources</h3>
+                        <div class="chart-placeholder">
+                            <i class="fas fa-chart-pie" style="font-size: 40px; margin-right: 15px;"></i>
+                            Traffic Sources Pie Chart
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="chart-container">
+                        <h3 class="chart-title">Top Products</h3>
+                        <div class="chart-placeholder">
+                            <i class="fas fa-chart-line" style="font-size: 40px; margin-right: 15px;"></i>
+                            Top Products Ranking
+                        </div>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <h3 class="chart-title">Customer Demographics</h3>
+                        <div class="chart-placeholder">
+                            <i class="fas fa-users" style="font-size: 40px; margin-right: 15px;"></i>
+                            Customer Demographics Data
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Customers Section -->
+        <section class="content-section hidden" id="customersSection">
+            <div class="table-container">
+                <div class="table-header">
+                    <h3 class="table-title"><i class="fas fa-users"></i> Customer Management</h3>
+                </div>
+                
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Customer</th>
+                            <th>Email</th>
+                            <th>Orders</th>
+                            <th>Total Spent</th>
+                            <th>Last Order</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div class="user-avatar" style="width: 35px; height: 35px; font-size: 14px;">JW</div>
+                                    <div>James Wilson</div>
+                                </div>
+                            </td>
+                            <td>james.w@example.com</td>
+                            <td>5</td>
+                            <td>₦64,200</td>
+                            <td>May 15, 2023</td>
+                            <td>
+                                <button class="action-btn action-btn-view">View</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div class="user-avatar" style="width: 35px; height: 35px; font-size: 14px;">MG</div>
+                                    <div>Maria Garcia</div>
+                                </div>
+                            </td>
+                            <td>maria.g@example.com</td>
+                            <td>3</td>
+                            <td>₦32,500</td>
+                            <td>May 14, 2023</td>
+                            <td>
+                                <button class="action-btn action-btn-view">View</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div class="user-avatar" style="width: 35px; height: 35px; font-size: 14px;">RJ</div>
+                                    <div>Robert Johnson</div>
+                                </div>
+                            </td>
+                            <td>robert.j@example.com</td>
+                            <td>2</td>
+                            <td>₦41,750</td>
+                            <td>May 13, 2023</td>
+                            <td>
+                                <button class="action-btn action-btn-view">View</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        
+        <!-- Settings Section -->
+        <section class="content-section hidden" id="settingsSection">
+            <div class="settings-form">
+                <h3 style="margin-bottom: 20px; font-size: 22px;">Shop Settings</h3>
+                
+                <form>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="shopName">Shop Name</label>
+                            <input type="text" id="shopName" class="form-control" value="Tzedek Jewelry">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="shopCategory">Category</label>
+                            <select id="shopCategory" class="form-control">
+                                <option>Jewelry & Accessories</option>
+                                <option>Fashion</option>
+                                <option>Home & Living</option>
+                                <option>Arts & Crafts</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="shopDescription">Description</label>
+                        <textarea id="shopDescription" class="form-control" rows="4">Premium handmade jewelry crafted with ethically sourced materials. Each piece tells a story of craftsmanship and sustainability.</textarea>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="shopLogo">Shop Logo</label>
+                            <input type="file" id="shopLogo" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="shopCover">Cover Image</label>
+                            <input type="file" id="shopCover" class="form-control">
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; gap: 15px; margin-top: 30px;">
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                        <button type="button" class="btn btn-secondary">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Dashboard functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebar = document.getElementById('sellerSidebar');
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const navLinks = document.querySelectorAll('.seller-nav-link');
+            const contentSections = document.querySelectorAll('.content-section');
+            const sectionTitle = document.getElementById('sectionTitle');
+            
+            // Mobile menu toggle
+            mobileMenuToggle.addEventListener('click', function() {
+                sidebar.classList.toggle('open');
+            });
+            
+            // Navigation functionality
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Remove active class from all links
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    
+                    // Add active class to clicked link
+                    this.classList.add('active');
+                    
+                    // Get the target section
+                    const targetSection = this.getAttribute('data-section');
+                    
+                    // Hide all content sections
+                    contentSections.forEach(section => {
+                        section.classList.add('hidden');
+                    });
+                    
+                    // Show the target section
+                    document.getElementById(targetSection + 'Section').classList.remove('hidden');
+                    
+                    // Update the section title
+                    const sectionNames = {
+                        'dashboard': 'Dashboard',
+                        'products': 'Products',
+                        'orders': 'Orders',
+                        'analytics': 'Analytics',
+                        'customers': 'Customers',
+                        'settings': 'Settings'
+                    };
+                    
+                    sectionTitle.textContent = sectionNames[targetSection];
+                    
+                    // Close mobile menu after navigation
+                    if (window.innerWidth <= 1024) {
+                        sidebar.classList.remove('open');
+                    }
+                });
+            });
+            
+            // Close sidebar when clicking outside on mobile
+            document.addEventListener('click', function(e) {
+                if (window.innerWidth <= 1024 && 
+                    !sidebar.contains(e.target) && 
+                    e.target !== mobileMenuToggle) {
+                    sidebar.classList.remove('open');
+                }
+            });
+            
+            // Add demo functionality to buttons
+            const actionButtons = document.querySelectorAll('.action-btn, .btn');
+            actionButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const buttonText = this.textContent.trim();
+                    alert(`"${buttonText}" action would be performed in a live application.`);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

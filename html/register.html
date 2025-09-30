@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | Tzedek Marketplace</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+	<link rel="stylesheet" href="/css/register.css">
+</head>
+<body>
+    <!-- Left Section - Form -->
+    <section class="form-section">
+        <div class="form-container">
+            <div class="logo">
+                <h1>Tzedek</h1>
+            </div>
+            
+            <div class="toggle-tabs">
+                <button id="signup-toggle" class="active">Sign Up</button>
+                <button id="signin-toggle">Sign In</button>
+            </div>
+            
+            <form id="signup-form" class="form">
+                <div class="form-row">
+                    <div class="form-field">
+                        <label for="firstName">First Name</label>
+                        <input type="text" id="firstName" class="form-control" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" id="lastName" class="form-control" required>
+                    </div>
+                </div>
+                
+                <div class="form-field">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" class="form-control" required>
+                </div>
+                
+                <div class="form-field">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" class="form-control" required>
+                </div>
+                
+                <div class="form-field">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword" class="form-control" required>
+                </div>
+                
+                <button type="submit" class="btn-primary">Create Account</button>
+                
+                <div class="divider">
+                    <span>Or continue with</span>
+                </div>
+                
+                <div class="social-login">
+                    <button type="button" class="social-btn google-btn">
+                        <i class="fab fa-google"></i> Google
+                    </button>
+                    <button type="button" class="social-btn facebook-btn">
+                        <i class="fab fa-facebook-f"></i> Facebook
+                    </button>
+                </div>
+            </form>
+            
+            <form id="signin-form" class="hidden-form">
+                <div class="form-field">
+                    <label for="login-email">Email Address</label>
+                    <input type="email" id="login-email" class="form-control" required>
+                </div>
+                
+                <div class="form-field">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" class="form-control" required>
+                </div>
+                
+                <button type="submit" class="btn-primary">Sign In</button>
+                
+                <div class="divider">
+                    <span>Or continue with</span>
+                </div>
+                
+                <div class="social-login">
+                    <button type="button" class="social-btn google-btn">
+                        <i class="fab fa-google"></i> Google
+                    </button>
+                    <button type="button" class="social-btn facebook-btn">
+                        <i class="fab fa-facebook-f"></i> Facebook
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+    
+    <!-- Right Section - Features -->
+    <section class="features-section">
+        <div class="features-container">
+            <h2 class="features-title">Why Join Tzedek Marketplace?</h2>
+            
+            <ul class="features-list">
+                <li class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-hand-holding-heart"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Ethical Commerce</h3>
+                        <p>Join a marketplace built on principles of justice, equality, and community support. Your purchases directly benefit ethical businesses.</p>
+                    </div>
+                </li>
+                
+                <li class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-store"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Easy Shop Setup</h3>
+                        <p>Launch your own store in minutes with our intuitive tools. No technical expertise needed to start selling your products.</p>
+                    </div>
+                </li>
+                
+                <li class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Supportive Community</h3>
+                        <p>Connect with like-minded buyers and sellers who value fair trade, sustainability, and community empowerment.</p>
+                    </div>
+                </li>
+                
+                <li class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Secure Transactions</h3>
+                        <p>Shop with confidence knowing your payments and personal information are protected with bank-level security.</p>
+                    </div>
+                </li>
+            </ul>
+            
+            <div class="testimonial">
+                <p>"Tzedek Marketplace transformed my small business. I've connected with customers who truly value ethical products, and my sales have increased by 200% in just three months!"</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">SJ</div>
+                    <div class="author-info">
+                        <h4>Sarah Johnson</h4>
+                        <p>Owner, Earthly Delights</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Form toggle functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const signupToggle = document.getElementById('signup-toggle');
+            const signinToggle = document.getElementById('signin-toggle');
+            const signupForm = document.getElementById('signup-form');
+            const signinForm = document.getElementById('signin-form');
+            
+            signupToggle.addEventListener('click', function() {
+                signupToggle.classList.add('active');
+                signinToggle.classList.remove('active');
+                signupForm.classList.remove('hidden-form');
+                signinForm.classList.add('hidden-form');
+            });
+            
+            signinToggle.addEventListener('click', function() {
+                signinToggle.classList.add('active');
+                signupToggle.classList.remove('active');
+                signinForm.classList.remove('hidden-form');
+                signupForm.classList.add('hidden-form');
+            });
+            
+            // Form submission
+            signupForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                // Add your registration logic here
+                alert('Registration submitted! In a real application, this would be processed.');
+            });
+            
+            signinForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                // Add your login logic here
+                alert('Login submitted! In a real application, this would be processed.');
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product-detail | Tzedek Marketplace </title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/home.css">
+    <link rel="stylesheet" href="../css/product-details.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <header class="navbar">
+      <div class="container">
+        <div class="navbar-content">
+          <div class="navbar-logo">
+            <a href="index.html" class="logo">Tzedek</a>
+          </div>
+          
+          <!-- Desktop Navigation -->
+          <nav class="navbar-links desktop-nav">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="about.html" class="nav-link">About</a>
+            <a href="shop.html" class="nav-link">Shops</a>
+            <a href="products.html" class="nav-link">Products</a>
+            <!-- <a href="index.html#faq" class="nav-link"></a> -->
+            <a href="contact.html" class="nav-link">Contact</a>
+          </nav>
+    
+          <div class="navbar-auth desktop-nav">
+            <a href="register.html" class="nav-link">Sign Up</a>
+            <a href="register.html" class="btn-primary">Become a Seller</a>
+          </div>
+
+          <!-- Add this mobile nav markup just before the closing </div> of .navbar-content -->
+            <nav id="mobileNav" class="mobile-nav hidden">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="shop.html" class="nav-link">Shops</a>
+                <a href="products.html" class="nav-link">Products</a>
+                <!-- <a href="index.html#faq" class="nav-link">FAQ</a> -->
+                <a href="contact.html" class="nav-link">Contact</a>
+                <a href="register.html" class="nav-link">Sign Up</a>
+                <a href="register.html" class="btn-primary">Become a Seller</a>
+            </nav>
+          
+          <!-- Mobile menu button -->
+          <div class="mobile-menu-button">
+            <button id="menuToggle" aria-label="Toggle menu">
+              <i class="fas fa-bars menu-icon"></i>
+              <i class="fas fa-times close-icon hidden"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="breadcrumb">
+        <a href="index.html">Home</a>
+        <i class="fas fa-chevron-right"></i>
+        <a href="products.html">Products</a>
+        <i class="fas fa-chevron-right"></i>
+        <span id="breadcrumbProduct">Product</span>
+    </div>
+    <main>
+        <!-- Product Details -->
+        <section class="product-details" data-product-id="" id="productDetails">
+            <div class="container">
+                <div class="product-container">
+                    <!-- Image Gallery -->
+                    <div class="image-gallery">
+                        <div class="main-image-container">
+                            <img id="mainImage" src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?auto=format&fit=crop&w=800&q=80" alt="Product" class="main-image">
+                            <div class="image-badge" id="imageBadge">NEW</div>
+                        </div>
+                        <div class="thumbnail-grid" id="thumbnails">
+                            <!-- Thumbnails will be rendered dynamically -->
+                        </div>
+                    </div>
+
+                    <!-- Product Info -->
+                    <div class="product-info">
+                        <div class="product-category" id="productCategory">Category</div>
+                        <h1 class="product-title" id="productTitle">Product Title</h1>
+                        
+                        <div class="product-rating" id="productRating" style="display:none;"></div>
+
+                        <div class="product-price">
+                            <span class="current-price" id="currentPrice">₦0</span>
+                            <span class="original-price" id="originalPrice" style="display:none;"></span>
+                            <span class="discount-badge" id="discountBadge" style="display:none;">SALE</span>
+                        </div>
+
+                        <p class="product-description" id="productDescription">Description</p>
+
+                        <div class="specifications" id="productSpecs" style="display:none;"></div>
+
+                        <div class="action-buttons">
+                            <div class="quantity-selector">
+                                <button class="quantity-btn" id="qtyDec">-</button>
+                                <input type="number" id="quantity" class="quantity-input" value="1" min="1" max="10">
+                                <button class="quantity-btn" id="qtyInc">+</button>
+                            </div>
+                            <button class="btn-primary" id="addToCartBtn">
+                                <i class="fas fa-shopping-cart"></i>
+                                Add to Cart
+                            </button>
+                            <button class="btn-outline" id="wishlistBtn">
+                                <i class="far fa-heart"></i>
+                                Wishlist
+                            </button>
+                        </div>
+
+                        <div class="seller-info" id="sellerInfo" style="display:none;"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Related Products -->
+        <section class="related-products">
+            <div class="container">
+                <h2 class="section-title">Related Products</h2>
+                <div class="products-grid" id="relatedProducts"></div>
+            </div>
+        </section>
+    </main>
+
+    <script src="../js/home.js"></script>
+    <script src="../js/script.js"></script>
+    <script src="../js/ecommerce.js"></script>
+    <script>
+      // Basic loader to fetch a product by id param and wire buttons
+      document.addEventListener('DOMContentLoaded', () => {
+        const params = new URLSearchParams(window.location.search);
+        const productId = params.get('id');
+        const qtyInput = document.getElementById('quantity');
+        document.getElementById('qtyInc').addEventListener('click', () => { qtyInput.value = Math.min(10, parseInt(qtyInput.value||'1') + 1); });
+        document.getElementById('qtyDec').addEventListener('click', () => { qtyInput.value = Math.max(1, parseInt(qtyInput.value||'1') - 1); });
+        if (!productId || !window.tzedek) return;
+        // Load product
+        fetch(`/api/products/${productId}`).then(r=>r.json()).then(p => {
+          document.getElementById('productDetails').dataset.productId = p._id;
+          document.getElementById('breadcrumbProduct').textContent = p.name;
+          document.getElementById('productCategory').textContent = p.category || '';
+          document.getElementById('productTitle').textContent = p.name;
+          document.getElementById('currentPrice').textContent = `₦${(p.price||0).toLocaleString()}`;
+          if (p.compareAtPrice && p.compareAtPrice > p.price) {
+            const op = document.getElementById('originalPrice'); op.style.display='inline-block'; op.textContent = `₦${p.compareAtPrice.toLocaleString()}`;
+            const db = document.getElementById('discountBadge'); db.style.display='inline-block';
+          }
+          document.getElementById('productDescription').textContent = p.description || '';
+          const images = (p.images && p.images.length ? p.images.map(i=>i.url) : [document.getElementById('mainImage').src]);
+          document.getElementById('mainImage').src = images[0];
+          const thumbs = document.getElementById('thumbnails');
+          thumbs.innerHTML = images.map((src,idx)=>`<div class="thumbnail ${idx===0?'active':''}" data-idx="${idx}"><img src="${src}" alt="thumb"></div>`).join('');
+          thumbs.addEventListener('click', e => { const t = e.target.closest('.thumbnail'); if(!t) return; const i = parseInt(t.dataset.idx); document.getElementById('mainImage').src = images[i]; document.querySelectorAll('.thumbnail').forEach(n=>n.classList.remove('active')); t.classList.add('active'); });
+        }).catch(()=>{});
+        // Wire actions
+        document.getElementById('addToCartBtn').addEventListener('click', () => {
+          const id = document.getElementById('productDetails').dataset.productId;
+          const qty = parseInt(document.getElementById('quantity').value||'1');
+          window.tzedek.addToCart({ productId: id, quantity: qty });
+        });
+        document.getElementById('wishlistBtn').addEventListener('click', () => {
+          const id = document.getElementById('productDetails').dataset.productId;
+          window.tzedek.toggleWishlist(id);
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products | Tzedek Marketplace </title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/home.css">
+    <link rel="stylesheet" href="../css/product.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+</head>
+<body>
+    <!-- Preloader -->
+    <!-- <div id="preloader" class="preloader">
+        <div class="preloader-logo">Tzedek</div>
+        <div class="preloader-subtitle">Justice • Equality • Community</div>
+        <div class="preloader-progress">
+            <div id="progress-bar" class="preloader-progress-bar"></div>
+        </div>
+    </div> -->
+
+    <!-- Navbar -->
+     <header class="navbar">
+      <div class="container">
+        <div class="navbar-content">
+          <div class="navbar-logo">
+            <a href="index.html" class="logo">Tzedek</a>
+          </div>
+          
+          <!-- Desktop Navigation -->
+          <nav class="navbar-links desktop-nav">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="about.html" class="nav-link">About</a>
+            <a href="shop.html" class="nav-link">Shops</a>
+            <a href="products.html" class="nav-link active">Products</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+          </nav>
+    
+          <div class="navbar-auth desktop-nav">
+            <a href="register.html" class="nav-link">Sign Up</a>
+            <a href="register.html" class="btn-primary">Become a Seller</a>
+          </div>
+
+          <!-- Add this mobile nav markup just before the closing </div> of .navbar-content -->
+            <nav id="mobileNav" class="mobile-nav hidden">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="shop.html" class="nav-link">Shops</a>
+                <a href="products.html" class="nav-link">Products</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+                <a href="register.html" class="nav-link">Sign Up</a>
+                <a href="register.html" class="btn-primary">Become a Seller</a>
+            </nav>
+          
+          <!-- Mobile menu button -->
+          <div class="mobile-menu-button">
+            <button id="menuToggle" aria-label="Toggle menu">
+              <i class="fas fa-bars menu-icon"></i>
+              <i class="fas fa-times close-icon hidden"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Products Page (Normally on a separate page) -->
+    <section id="products-page">
+        <div class="container products-page">
+            <div class="section-header">
+                <h2 class="section-title">All Products</h2>
+                <div class="search-container">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Search products...">
+                </div>
+            </div>
+            
+            <div class="products-container">
+                <div class="filters" id="productsFilters">
+                    <h3>Filters</h3>
+                    
+                    <div class="filter-section">
+                        <h3>Categories</h3>
+                        <ul class="filter-options" id="categoryFilters">
+                            <li>
+                                <label>
+                                    <input type="checkbox" name="category" value="electronics"> Electronics
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox" name="category" value="phones"> Phones
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox" name="category" value="laptops"> Laptops
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox" name="category" value="accessories"> Accessories
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox" name="category" value="gadgets"> Gadgets
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="filter-section">
+                        <h3>Price Range</h3>
+                        <div>
+                            <input type="range" min="0" max="500000" value="500000" id="priceRange">
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-top: 0.5rem;">
+                            <span>₦0</span>
+                            <span id="maxPrice">₦500,000</span>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-section">
+                        <h3>Brand</h3>
+                        <ul class="filter-options" id="brandFilters">
+                            <li>
+                                <label>
+                                    <input type="checkbox" name="brand" value="apple"> Apple
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox" name="brand" value="samsung"> Samsung
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox" name="brand" value="google"> Google
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox" name="brand" value="sony"> Sony
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox" name="brand" value="xiaomi"> Xiaomi
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="filter-section">
+                        <h3>Rating</h3>
+                        <ul class="filter-options" id="ratingFilters">
+                            <li>
+                                <label>
+                                    <input type="radio" name="rating" value="5"> ★★★★★ (5)
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="radio" name="rating" value="4"> ★★★★☆ (4+)
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="radio" name="rating" value="3"> ★★★☆☆ (3+)
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="radio" name="rating" value="2"> ★★☆☆☆ (2+)
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="radio" name="rating" value="1"> ★☆☆☆☆ (1+)
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <button class="btn-outline" id="resetFilters">Reset Filters</button>
+                </div>
+                
+                <div class="products-listing" id="productsListing">
+                    <!-- Products will be dynamically loaded here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3 class="footer-title">Tzedek</h3>
+                    <p>A community-driven global marketplace empowering entrepreneurs to connect and grow.</p>
+                    <div class="footer-social">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#shop">Shop Rentals</a></li>
+                        <li><a href="#packages">Packages</a></li>
+                        <li><a href="#testimonials">Success Stories</a></li>
+                        <li><a href="company-policy.html">Company Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Entrepreneur Tips</a></li>
+                        <li><a href="#">Marketing Guide</a></li>
+                        <li><a href="#">Community Forums</a></li>
+                        <li><a href="#">Help Center</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-envelope"></i> support@tzedek.com</li>
+                        <li><i class="fas fa-phone"></i> +234 (0) 123 456 7890</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Business Avenue, Lagos, Nigeria</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; <span id="currentYear">2025</span> Tzedek. All rights reserved. | <a href="company-policy.html" class="text-tzedek-green">Privacy Policy</a> | <a href="company-policy.html" class="text-tzedek-green">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/script.js"></script>
+    <script src="/js/products.js"></script>
+    <script src="/js/home.js"></script>
+</body>
+</html>

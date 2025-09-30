@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tzedek Marketplace </title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/home.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body>
+    <!-- Preloader -->
+    <!-- <div id="preloader" class="preloader">
+        <div class="preloader-logo">Tzedek</div>
+        <div class="preloader-subtitle">Justice • Equality • Community</div>
+        <div class="preloader-progress">
+            <div id="progress-bar" class="preloader-progress-bar"></div>
+        </div>
+    </div> -->
+
+    <div id="root">
+        
+        <!-- Navbar -->
+        <header class="navbar">
+        <div class="container">
+            <div class="navbar-content">
+            <div class="navbar-logo">
+                <a href="index.html" class="logo">Tzedek</a>
+            </div>
+            
+            <!-- Desktop Navigation -->
+            <nav class="navbar-links desktop-nav">
+                <a href="index.html" class="nav-link active">Home</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="shop.html" class="nav-link">Shops</a>
+                <a href="products.html" class="nav-link">Products</a>
+                <!-- <a href="index.html#faq" class="nav-link"></a> -->
+                <a href="contact.html" class="nav-link">Contact</a>
+            </nav>
+        
+            <div class="navbar-auth desktop-nav">
+                <a href="register.html" class="nav-link">Sign Up</a>
+                <a href="register.html" class="btn-primary">Become a Seller</a>
+            </div>
+
+            <!-- Add this mobile nav markup just before the closing </div> of .navbar-content -->
+                <nav id="mobileNav" class="mobile-nav hidden">
+                    <a href="index.html" class="nav-link active">Home</a>
+                    <a href="about.html" class="nav-link">About</a>
+                    <a href="shop.html" class="nav-link">Shops</a>
+                    <a href="products.html" class="nav-link">Products</a>
+                    <!-- <a href="index.html#faq" class="nav-link">FAQ</a> -->
+                    <a href="contact.html" class="nav-link">Contact</a>
+                    <a href="register.html" class="nav-link">Sign Up</a>
+                    <a href="register.html" class="btn-primary">Become a Seller</a>
+                </nav>
+            
+            <!-- Mobile menu button -->
+            <div class="mobile-menu-button">
+                <button id="menuToggle" aria-label="Toggle menu">
+                <i class="fas fa-bars menu-icon"></i>
+                <i class="fas fa-times close-icon hidden"></i>
+                </button>
+            </div>
+            </div>
+        </div>
+        </header>
+
+        <main>
+            <!-- Hero Section -->
+            <section class="hero">
+                <div class="container hero-content">
+                    <div class="hero-text">
+                        <h1>Your Global <span class="text-tzedek-green" >Marketplace</span> for Entrepreneurs</h1>
+                        <p>Join our community-driven platform that connects entrepreneurs, provides virtual shop rentals, and empowers businesses to grow globally.</p>
+                        <div class="hero-buttons">
+                            <a href="./shop.html" class="btn-primary">Rent a Shop</a>
+                            <a href="#about" class="btn-outline">Shop with Us</a>
+                        </div>
+                    </div>
+                    
+                    <div class="hero-image">
+                        <div class="image-container">
+                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1000&q=80" alt="Entrepreneurs working together">
+                            <div class="image-overlay">
+                                <div class="overlay-text">
+                                    <h3>Your Virtual Shop Awaits</h3>
+                                    <p>Join thousands of entrepreneurs building global businesses</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="promo-badge">
+                            <p>30% OFF First Month</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Marketplace Section -->
+            <section class="marketplace">
+                <div class="container">
+                    <div class="section-top">
+                        <h2 class="section-title">Marketplace</h2>
+                    </div>
+                    <div class="section-header">
+                        <div class="search-container">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="marketplaceSearch" placeholder="Search for products by name or description...">
+                        </div>
+                        <a href="products.html" class="btn-outline">View All Products</a>
+                    </div>
+                    
+                    <div class="products-grid" id="productsContainer">
+                        <!-- Product 1 -->
+                        <div class="product-card" data-name="Premium Smartphone X1" data-description="Flagship smartphone with 6.7-inch OLED display, 128GB storage, and triple camera system">
+                            <div class="product-image">
+                                <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?auto=format&fit=crop&w=400&q=80" alt="Smartphone">
+                            </div>
+                            <div class="product-info">
+                                <div class="product-category">Electronics</div>
+                                <h3 class="product-title">Premium Smartphone X1</h3>
+                                <p class="product-description">Flagship smartphone with 6.7-inch OLED display, 128GB storage, and triple camera system</p>
+                                <div class="product-price">₦75,000</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Product 2 -->
+                        <div class="product-card" data-name="Ultra Slim Laptop Pro" data-description="Lightweight laptop with Intel Core i7 processor, 16GB RAM, and 512GB SSD storage">
+                            <div class="product-image">
+                                <img src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?auto=format&fit=crop&w=400&q=80" alt="Laptop">
+                            </div>
+                            <div class="product-info">
+                                <div class="product-category">Electronics</div>
+                                <h3 class="product-title">Ultra Slim Laptop Pro</h3>
+                                <p class="product-description">Lightweight laptop with Intel Core i7 processor, 16GB RAM, and 512GB SSD storage</p>
+                                <div class="product-price">₦210,000</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Product 3 -->
+                        <div class="product-card" data-name="Wireless Noise-Cancelling Headphones" data-description="Premium headphones with active noise cancellation and 30-hour battery life">
+                            <div class="product-image">
+                                <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=400&q=80" alt="Headphones">
+                            </div>
+                            <div class="product-info">
+                                <div class="product-category">Accessories</div>
+                                <h3 class="product-title">Wireless Noise-Cancelling Headphones</h3>
+                                <p class="product-description">Premium headphones with active noise cancellation and 30-hour battery life</p>
+                                <div class="product-price">₦32,500</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Product 4 -->
+                        <div class="product-card" data-name="Smart Fitness Tracker" data-description="Advanced health tracker with heart rate monitoring, sleep analysis, and waterproof design">
+                            <div class="product-image">
+                                <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=400&q=80" alt="Smart Watch">
+                            </div>
+                            <div class="product-info">
+                                <div class="product-category">Gadgets</div>
+                                <h3 class="product-title">Smart Fitness Tracker</h3>
+                                <p class="product-description">Advanced health tracker with heart rate monitoring, sleep analysis, and waterproof design</p>
+                                <div class="product-price">₦18,900</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Product 5 -->
+                        <div class="product-card" data-name="Bluetooth Portable Speaker" data-description="Compact wireless speaker with 360° sound and 12-hour battery life">
+                            <div class="product-image">
+                                <img src="https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&fit=crop&w=400&q=80" alt="Portable Speaker">
+                            </div>
+                            <div class="product-info">
+                                <div class="product-category">Audio</div>
+                                <h3 class="product-title">Bluetooth Portable Speaker</h3>
+                                <p class="product-description">Compact wireless speaker with 360° sound and 12-hour battery life</p>
+                                <div class="product-price">₦15,750</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Product 6 -->
+                        <div class="product-card" data-name="4K Action Camera" data-description="Waterproof action camera with image stabilization and voice control">
+                            <div class="product-image">
+                                <img src="https://images.unsplash.com/photo-1502920917128-1aa500764cbd?auto=format&fit=crop&w=400&q=80" alt="Action Camera">
+                            </div>
+                            <div class="product-info">
+                                <div class="product-category">Cameras</div>
+                                <h3 class="product-title">4K Action Camera</h3>
+                                <p class="product-description">Waterproof action camera with image stabilization and voice control</p>
+                                <div class="product-price">₦45,000</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Product 7 -->
+                        <div class="product-card" data-name="Gaming Mouse Pro" data-description="High-precision gaming mouse with customizable RGB lighting and programmable buttons">
+                            <div class="product-image">
+                                <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?auto=format&fit=crop&w=400&q=80" alt="Gaming Mouse">
+                            </div>
+                            <div class="product-info">
+                                <div class="product-category">Accessories</div>
+                                <h3 class="product-title">Gaming Mouse Pro</h3>
+                                <p class="product-description">High-precision gaming mouse with customizable RGB lighting and programmable buttons</p>
+                                <div class="product-price">₦12,800</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Product 8 -->
+                        <div class="product-card" data-name="External SSD Drive" data-description="1TB portable SSD with USB-C connectivity and 550MB/s transfer speeds">
+                            <div class="product-image">
+                                <img src="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?auto=format&fit=crop&w=400&q=80" alt="SSD Drive">
+                            </div>
+                            <div class="product-info">
+                                <div class="product-category">Storage</div>
+                                <h3 class="product-title">External SSD Drive</h3>
+                                <p class="product-description">1TB portable SSD with USB-C connectivity and 550MB/s transfer speeds</p>
+                                <div class="product-price">₦32,000</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Top Shops Section -->
+            <section class="top-shops">
+                <div class="container">
+                    <h2 class="section-title">Top Shops</h2>
+                    <p class="section-intro">Discover the most popular shops on our platform</p>
+                    
+                    <div class="shops-grid">
+                        <!-- Shop 1 -->
+                        <div class="shop-card">
+                            <div class="shop-header">
+                                <div class="shop-avatar">
+                                    <i class="fas fa-store"></i>
+                                </div>
+                                <div class="shop-info">
+                                    <h3>Tech Haven</h3>
+                                    <div class="shop-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half-alt"></i>
+                                        <span>(128 reviews)</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="shop-products">
+                                <div class="shop-product">
+                                    <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?auto=format&fit=crop&w=150&q=80" alt="Product">
+                                </div>
+                                <div class="shop-product">
+                                    <img src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?auto=format&fit=crop&w=150&q=80" alt="Product">
+                                </div>
+                                <div class="shop-product">
+                                    <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=150&q=80" alt="Product">
+                                </div>
+                            </div>
+                            <div class="shop-stats">
+                                <div class="stat-item">
+                                    <div class="stat-value">245</div>
+                                    <div class="stat-label">Products</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-value">4.7</div>
+                                    <div class="stat-label">Rating</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Shop 2 -->
+                        <div class="shop-card">
+                            <div class="shop-header">
+                                <div class="shop-avatar">
+                                    <i class="fas fa-gem"></i>
+                                </div>
+                                <div class="shop-info">
+                                    <h3>Luxury Style</h3>
+                                    <div class="shop-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <span>(89 reviews)</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="shop-products">
+                                <div class="shop-product">
+                                    <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=150&q=80" alt="Product">
+                                </div>
+                                <div class="shop-product">
+                                    <img src="https://images.unsplash.com/photo-1491637639811-60e2756cc1c7?auto=format&fit=crop&w=150&q=80" alt="Product">
+                                </div>
+                                <div class="shop-product">
+                                    <img src="https://images.unsplash.com/photo-1585155770447-2f66e2a397b5?auto=format&fit=crop&w=150&q=80" alt="Product">
+                                </div>
+                            </div>
+                            <div class="shop-stats">
+                                <div class="stat-item">
+                                    <div class="stat-value">178</div>
+                                    <div class="stat-label">Products</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-value">4.9</div>
+                                    <div class="stat-label">Rating</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Shop 3 -->
+                        <div class="shop-card">
+                            <div class="shop-header">
+                                <div class="shop-avatar">
+                                    <i class="fas fa-tshirt"></i>
+                                </div>
+                                <div class="shop-info">
+                                    <h3>Urban Wear</h3>
+                                    <div class="shop-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <span>(216 reviews)</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="shop-products">
+                                <div class="shop-product">
+                                    <img src="https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?auto=format&fit=crop&w=150&q=80" alt="Product">
+                                </div>
+                                <div class="shop-product">
+                                    <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=150&q=80" alt="Product">
+                                </div>
+                                <div class="shop-product">
+                                    <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=150&q=80" alt="Product">
+                                </div>
+                            </div>
+                            <div class="shop-stats">
+                                <div class="stat-item">
+                                    <div class="stat-value">312</div>
+                                    <div class="stat-label">Products</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-value">4.3</div>
+                                    <div class="stat-label">Rating</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Testimonials Section -->
+            <section id="testimonials" class="section bg-light">
+                <div class="container">
+                    <h2 class="section-title">Success Stories</h2>
+                    <p class="section-intro">Hear from entrepreneurs who have transformed their businesses using Tzedek's platform.</p>
+                    
+                    <div class="testimonials-grid">
+                        <div class="testimonial-card animate-fade-in">
+                            <div class="testimonial-content">
+                                <div class="testimonial-image">
+                                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=256&q=80" alt="Sarah Johnson">
+                                    <div class="testimonial-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                </div>
+                                <div class="testimonial-text">
+                                    <p>Tzedek completely transformed my small jewelry business. The virtual shop was easy to set up, and I've reached customers all over the world. The platform's supportive community has been invaluable for my growth.</p>
+                                    <div class="testimonial-author">
+                                        <h4>Kouture </h4>
+                                        <p>Handcrafted Jewelry</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="testimonial-card animate-fade-in delay-2">
+                            <div class="testimonial-content">
+                                <div class="testimonial-image">
+                                    <img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-1.2.1&auto=format&fit=crop&w=256&q=80" alt="David Chen">
+                                    <div class="testimonial-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                </div>
+                                <div class="testimonial-text">
+                                    <p>As a digital artist, I was struggling to find the right platform to showcase my work. Tzedek provided the perfect solution with their virtual shop rentals. The secure payment system and professional display options have helped me sell my art with confidence.</p>
+                                    <div class="testimonial-author">
+                                        <h4>Monica</h4>
+                                        <p>Digital Art Studio</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="testimonial-card animate-fade-in">
+                            <div class="testimonial-content">
+                                <div class="testimonial-image">
+                                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=256&q=80" alt="Amina Osei">
+                                    <div class="testimonial-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                    </div>
+                                </div>
+                                <div class="testimonial-text">
+                                    <p>I started my organic skincare business with just a few products, and Tzedek made it possible for me to reach a global market. The community support and business tools have helped me scale my operations beyond what I imagined possible.</p>
+                                    <div class="testimonial-author">
+                                        <h4>Goodluck</h4>
+                                        <p>Organic Skincare</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="testimonial-card animate-fade-in delay-2">
+                            <div class="testimonial-content">
+                                <div class="testimonial-image">
+                                    <img src="https://images.unsplash.com/photo-1552058544-f2b08422138a?ixlib=rb-1.2.1&auto=format&fit=crop&w=256&q=80" alt="Miguel Rodriguez">
+                                    <div class="testimonial-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                </div>
+                                <div class="testimonial-text">
+                                    <p>Tzedek is a versatile online marketplace that has made buying and selling incredibly easy and affordable. Its user-friendly interface, efficient order processing system, and responsive customer support make it a standout platform. I highly recommend Tzedek for all your online marketplace needs!</p>
+                                    <div class="testimonial-author">
+                                        <h4>Gloria Destiny</h4>
+                                        <p>GGV GLOBAL ENTERPRISES</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </secti on>
+        </main>
+        
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-column">
+                        <h3>Tzedek</h3>
+                        <p>A community-driven global marketplace empowering entrepreneurs to connect and grow.</p>
+                        <div class="footer-social">
+                            <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h3>Quick Links</h3>
+                        <ul class="footer-links">
+                            <li><a href="#about">About Us</a></li>
+                            <li><a href="#shop">Shop Rentals</a></li>
+                            <li><a href="#packages">Packages</a></li>
+                            <li><a href="#testimonials">Success Stories</a></li>
+                            <li><a href="company-policy.html">Company Policy</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h3>Resources</h3>
+                        <ul class="footer-links">
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="#">Entrepreneur Tips</a></li>
+                            <li><a href="#">Marketing Guide</a></li>
+                            <li><a href="#">Community Forums</a></li>
+                            <li><a href="#">Help Center</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h3>Contact</h3>
+                        <ul class="footer-contact">
+                            <li><i class="fas fa-envelope"></i> support@tzedek.com</li>
+                            <li><i class="fas fa-phone"></i> +234 (0) 123 456 7890</li>
+                            <li><i class="fas fa-map-marker-alt"></i> 123 Business Avenue, Lagos, Nigeria</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="footer-bottom">
+                    <p>&copy; <span id="currentYear"></span> Tzedek. All rights reserved. | <a href="company-policy.html" class="text-tzedek-green">Privacy Policy</a> | <a href="company-policy.html" class="text-tzedek-green">Terms of Service</a></p>
+                </div>
+            </div>
+        </footer>
+        
+        <!-- Scroll to Top Button -->
+        <button id="scrollToTop" class="scroll-top">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+    </div>
+
+    <script>
+        // Preloader
+        document.addEventListener('DOMContentLoaded', function() {
+            // Current year in footer
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+            
+            
+            // Mobile menu toggle
+            const menuToggle = document.getElementById('menuToggle');
+            if (menuToggle) {
+                menuToggle.addEventListener('click', function() {
+                    const menuIcon = this.querySelector('.menu-icon');
+                    const closeIcon = this.querySelector('.close-icon');
+                    const mobileNav = document.getElementById('mobileNav');
+                    
+                    menuIcon.classList.toggle('hidden');
+                    closeIcon.classList.toggle('hidden');
+                    
+                    if (mobileNav) {
+                        mobileNav.classList.toggle('hidden');
+                    }
+                });
+            }
+            
+            // Product search functionality
+            const searchInput = document.getElementById('marketplaceSearch');
+            const productsContainer = document.getElementById('productsContainer');
+            const productCards = Array.from(document.querySelectorAll('.product-card'));
+            
+            // Store original products HTML for resetting
+            const originalProductsHTML = productsContainer.innerHTML;
+            
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.trim().toLowerCase();
+                
+                if (searchTerm === '') {
+                    productsContainer.innerHTML = originalProductsHTML;
+                    return;
+                }
+                
+                // Filter products
+                const filteredProducts = productCards.filter(card => {
+                    const name = card.dataset.name.toLowerCase();
+                    const description = card.dataset.description.toLowerCase();
+                    return name.includes(searchTerm) || description.includes(searchTerm);
+                });
+                
+                // Update the products grid
+                if (filteredProducts.length > 0) {
+                    productsContainer.innerHTML = '';
+                    filteredProducts.forEach(product => {
+                        productsContainer.appendChild(product);
+                    });
+                } else {
+                    // Show no results message
+                    productsContainer.innerHTML = `
+                        <div class="no-results">
+                            <i class="fas fa-search"></i>
+                            <h3>No products found</h3>
+                            <p>We couldn't find any products matching "${searchTerm}"</p>
+                            <button class="btn-outline" id="resetSearch">Clear search</button>
+                        </div>
+                    `;
+                    
+                    // Add event listener to reset button
+                    document.getElementById('resetSearch').addEventListener('click', function() {
+                        searchInput.value = '';
+                        productsContainer.innerHTML = originalProductsHTML;
+                    });
+                }
+            });
+        });
+    </script>
+
+    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
+    <script src="../js/script.js"></script>
+    <script src="../js/home.js"></script>
+</body>
+</html>
