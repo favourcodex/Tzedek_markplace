@@ -4,322 +4,980 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkout | Tzedek Marketplace</title>
-    <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="../css/home.css">
-    <link rel="stylesheet" href="../css/checkout.css">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --tzedek-green: rgb(34, 197, 94);
+            --tzedek-dark-green: rgb(22, 163, 74);
+            --tzedek-light-green: rgb(187, 247, 208);
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --bg-light: #f9fafb;
+            --border-color: #e5e7eb;
+            --white: #ffffff;
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Navbar Styles */
+        .navbar {
+            background-color: var(--white);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .navbar-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 0;
+        }
+        
+        .navbar-logo .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--tzedek-green);
+            text-decoration: none;
+        }
+        
+        .navbar-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-link {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            color: var(--tzedek-green);
+        }
+        
+        .navbar-auth {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .cart-icon {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .cart-icon:hover {
+            background-color: var(--tzedek-light-green);
+            color: var(--tzedek-green);
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #ef4444;
+            color: var(--white);
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .btn-primary {
+            background-color: var(--tzedek-green);
+            color: var(--white);
+            padding: 12px 24px;
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 16px;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--tzedek-dark-green);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            color: var(--tzedek-green);
+            padding: 12px 24px;
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: 1px solid var(--tzedek-green);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 16px;
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--tzedek-light-green);
+        }
+        
+        .btn-secondary {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            padding: 10px 20px;
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--border-color);
+        }
+        
+        /* Breadcrumb */
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 20px 0;
+            font-size: 14px;
+            color: var(--text-light);
+        }
+        
+        .breadcrumb a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .breadcrumb a:hover {
+            color: var(--tzedek-green);
+        }
+        
+        .breadcrumb i {
+            font-size: 12px;
+        }
+        
+        /* Checkout Section */
+        .checkout-section {
+            padding: 20px 0 40px;
+        }
+        
+        .checkout-container {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 40px;
+        }
+        
+        .checkout-header {
+            margin-bottom: 30px;
+        }
+        
+        .checkout-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+        
+        /* Checkout Form */
+        .checkout-form {
+            background-color: var(--white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            padding: 30px;
+        }
+        
+        .form-section {
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-title i {
+            color: var(--tzedek-green);
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--tzedek-green);
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .checkbox-input {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--tzedek-green);
+        }
+        
+        .checkbox-label {
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+        
+        /* Payment Methods */
+        .payment-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .payment-method {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .payment-method.selected {
+            border-color: var(--tzedek-green);
+            background-color: var(--tzedek-light-green);
+        }
+        
+        .payment-method:hover:not(.selected) {
+            border-color: var(--tzedek-green);
+        }
+        
+        .payment-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-sm);
+            background-color: var(--bg-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: var(--text-light);
+        }
+        
+        .payment-details {
+            flex: 1;
+        }
+        
+        .payment-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .payment-description {
+            font-size: 14px;
+            color: var(--text-light);
+        }
+        
+        /* Order Summary */
+        .order-summary {
+            background-color: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 25px;
+            box-shadow: var(--shadow-sm);
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+        
+        .summary-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+        }
+        
+        .order-items {
+            margin-bottom: 20px;
+        }
+        
+        .order-item {
+            display: flex;
+            gap: 15px;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .order-item:last-child {
+            border-bottom: none;
+        }
+        
+        .order-item-image {
+            width: 70px;
+            height: 70px;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        
+        .order-item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .order-item-details {
+            flex: 1;
+        }
+        
+        .order-item-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--text-dark);
+        }
+        
+        .order-item-options {
+            font-size: 14px;
+            color: var(--text-light);
+            margin-bottom: 5px;
+        }
+        
+        .order-item-price {
+            font-weight: 600;
+            color: var(--tzedek-green);
+        }
+        
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .summary-label {
+            color: var(--text-light);
+        }
+        
+        .summary-value {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+        
+        .summary-total {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+            padding-top: 15px;
+            border-top: 2px solid var(--border-color);
+            font-size: 18px;
+            font-weight: 700;
+        }
+        
+        .total-label {
+            color: var(--text-dark);
+        }
+        
+        .total-value {
+            color: var(--tzedek-green);
+        }
+        
+        .place-order-btn {
+            width: 100%;
+            margin-bottom: 15px;
+        }
+        
+        .security-notice {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-light);
+            font-size: 14px;
+        }
+        
+        .security-notice i {
+            color: var(--tzedek-green);
+        }
+        
+        /* Promo Code */
+        .promo-code {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .promo-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+        
+        .promo-input-group {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .promo-input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            font-size: 14px;
+        }
+        
+        .promo-btn {
+            background-color: var(--tzedek-green);
+            color: var(--white);
+            border: none;
+            border-radius: var(--radius-md);
+            padding: 0 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .promo-btn:hover {
+            background-color: var(--tzedek-dark-green);
+        }
+        
+        /* Footer */
+        .footer {
+            background-color: var(--text-dark);
+            color: var(--white);
+            padding: 50px 0 25px;
+            margin-top: 50px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: var(--white);
+        }
+        
+        .footer-column p {
+            margin-bottom: 15px;
+            opacity: 0.8;
+            font-size: 14px;
+        }
+        
+        .footer-social {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--white);
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        
+        .social-icon:hover {
+            background-color: var(--tzedek-green);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 8px;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 14px;
+        }
+        
+        .footer-links a:hover {
+            color: var(--tzedek-green);
+        }
+        
+        .footer-contact li {
+            margin-bottom: 8px;
+            opacity: 0.8;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+            font-size: 14px;
+        }
+        
+        .footer-bottom a {
+            color: var(--tzedek-green);
+            text-decoration: none;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .checkout-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .order-summary {
+                position: static;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .checkout-form {
+                padding: 20px;
+            }
+            
+            .order-summary {
+                padding: 20px;
+            }
+            
+            .promo-input-group {
+                flex-direction: column;
+            }
+        }
+    </style>
 </head>
-<body class="bg-gray-50 min-h-screen">
+<body>
     <!-- Navbar -->
-     <header class="navbar bg-white shadow-sm">
-      <div class="container">
-        <div class="navbar-content">
-          <div class="navbar-logo">
-            <a href="index.html" class="logo">Tzedek</a>
-          </div>
-          
-          <!-- Desktop Navigation -->
-          <nav class="navbar-links desktop-nav">
-            <a href="index.html" class="nav-link">Home</a>
-            <a href="about.html" class="nav-link">About</a>
-            <a href="shop.html" class="nav-link">Shops</a>
-            <a href="products.html" class="nav-link">Products</a>
-            <a href="contact.html" class="nav-link">Contact</a>
-          </nav>
-    
-          <div class="navbar-auth desktop-nav">
-            <a href="register.html" class="nav-link">Sign Up</a>
-            <a href="register.html" class="btn-primary">Become a Seller</a>
-          </div>
-
-          <!-- Add this mobile nav markup just before the closing </div> of .navbar-content -->
-            <nav id="mobileNav" class="mobile-nav hidden">
-                <a href="index.html" class="nav-link">Home</a>
-                <a href="about.html" class="nav-link">About</a>
-                <a href="shop.html" class="nav-link">Shops</a>
-                <a href="products.html" class="nav-link">Products</a>
-                <a href="contact.html" class="nav-link">Contact</a>
-                <a href="register.html" class="nav-link">Sign Up</a>
-                <a href="register.html" class="btn-primary">Become a Seller</a>
-            </nav>
-          
-          <!-- Mobile menu button -->
-          <div class="mobile-menu-button">
-            <button id="menuToggle" aria-label="Toggle menu">
-              <i class="fas fa-bars menu-icon"></i>
-              <i class="fas fa-times close-icon hidden"></i>
-            </button>
-          </div>
+    <header class="navbar">
+        <div class="container">
+            <div class="navbar-content">
+                <div class="navbar-logo">
+                    <a href="index.html" class="logo">Tzedek</a>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <nav class="navbar-links">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="about.html" class="nav-link">About</a>
+                    <a href="shop.html" class="nav-link">Shops</a>
+                    <a href="products.html" class="nav-link">Products</a>
+                    <a href="contact.html" class="nav-link">Contact</a>
+                </nav>
+        
+                <div class="navbar-auth">
+                    <a href="register.html" class="nav-link">Sign Up</a>
+                    <a href="register.html" class="btn-primary">Become a Seller</a>
+                    <a href="cart.html" class="cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </a>
+                </div>
+            </div>
         </div>
-      </div>
     </header>
 
-    <!-- Checkout Page -->
-    <section class="py-8">
-        <div class="container mx-auto px-4">
-            <div class="max-w-7xl mx-auto">
-                <div class="flex flex-col md:flex-row gap-8">
-                    <!-- Left Column - Form -->
-                    <div class="md:w-2/3 space-y-6">
-                        <div class="bg-white rounded-lg shadow-md p-6">
-                            <h2 class="text-xl font-semibold mb-6 text-gray-800">Contact Information</h2>
-                            <div class="mb-6">
-                                <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email address</label>
-                                <input type="email" id="email" class="w-full border border-gray-300 rounded-md px-4 py-3 focus:ring-2 focus:ring-tzedek-green focus:border-transparent transition duration-200" placeholder="you@example.com">
+    <!-- Breadcrumb -->
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="index.html">Home</a>
+            <i class="fas fa-chevron-right"></i>
+            <a href="products.html">Products</a>
+            <i class="fas fa-chevron-right"></i>
+            <a href="cart.html">Cart</a>
+            <i class="fas fa-chevron-right"></i>
+            <span>Checkout</span>
+        </div>
+    </div>
+
+    <!-- Checkout Section -->
+    <main class="container">
+        <section class="checkout-section">
+            <div class="checkout-header">
+                <h1 class="checkout-title">Checkout</h1>
+            </div>
+            
+            <div class="checkout-container">
+                <!-- Checkout Form -->
+                <div class="checkout-form">
+                    <!-- Shipping Information -->
+                    <div class="form-section">
+                        <h2 class="section-title">
+                            <i class="fas fa-truck"></i>
+                            Shipping Information
+                        </h2>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">First Name</label>
+                                <input type="text" class="form-input" placeholder="Enter your first name">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Last Name</label>
+                                <input type="text" class="form-input" placeholder="Enter your last name">
                             </div>
                         </div>
-
-                        <div class="bg-white rounded-lg shadow-md p-6">
-                            <h2 class="text-xl font-semibold mb-6 text-gray-800">Shipping Information</h2>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Email Address</label>
+                            <input type="email" class="form-input" placeholder="Enter your email">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Phone Number</label>
+                            <input type="tel" class="form-input" placeholder="Enter your phone number">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Address</label>
+                            <input type="text" class="form-input" placeholder="Enter your street address">
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">City</label>
+                                <input type="text" class="form-input" placeholder="Enter your city">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">State</label>
+                                <input type="text" class="form-input" placeholder="Enter your state">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Postal Code</label>
+                                <input type="text" class="form-input" placeholder="Enter postal code">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Country</label>
+                                <select class="form-input">
+                                    <option value="">Select Country</option>
+                                    <option value="nigeria" selected>Nigeria</option>
+                                    <option value="ghana">Ghana</option>
+                                    <option value="kenya">Kenya</option>
+                                    <option value="south-africa">South Africa</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Billing Information -->
+                    <div class="form-section">
+                        <h2 class="section-title">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                            Billing Information
+                        </h2>
+                        
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="sameAsShipping" class="checkbox-input" checked>
+                            <label for="sameAsShipping" class="checkbox-label">Same as shipping information</label>
+                        </div>
+                        
+                        <div id="billingForm" style="display: none;">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">First Name</label>
+                                    <input type="text" class="form-input" placeholder="Enter your first name">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Last Name</label>
+                                    <input type="text" class="form-input" placeholder="Enter your last name">
+                                </div>
+                            </div>
                             
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                                <div>
-                                    <label for="firstName" class="block text-sm font-medium text-gray-700 mb-2">First name</label>
-                                    <input type="text" id="firstName" class="w-full border border-gray-300 rounded-md px-4 py-3 focus:ring-2 focus:ring-tzedek-green focus:border-transparent transition duration-200" placeholder="John">
+                            <div class="form-group">
+                                <label class="form-label">Address</label>
+                                <input type="text" class="form-input" placeholder="Enter your street address">
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">City</label>
+                                    <input type="text" class="form-input" placeholder="Enter your city">
                                 </div>
-                                <div>
-                                    <label for="lastName" class="block text-sm font-medium text-gray-700 mb-2">Last name</label>
-                                    <input type="text" id="lastName" class="w-full border border-gray-300 rounded-md px-4 py-3 focus:ring-2 focus:ring-tzedek-green focus:border-transparent transition duration-200" placeholder="Doe">
+                                <div class="form-group">
+                                    <label class="form-label">State</label>
+                                    <input type="text" class="form-input" placeholder="Enter your state">
                                 </div>
                             </div>
-
-                            <div class="mb-6">
-                                <label for="company" class="block text-sm font-medium text-gray-700 mb-2">Company</label>
-                                <input type="text" id="company" class="w-full border border-gray-300 rounded-md px-4 py-3 focus:ring-2 focus:ring-tzedek-green focus:border-transparent transition duration-200" placeholder="Your Company">
-                            </div>
-
-                            <div class="mb-6">
-                                <label for="address" class="block text-sm font-medium text-gray-700 mb-2">Address</label>
-                                <input type="text" id="address" class="w-full border border-gray-300 rounded-md px-4 py-3 focus:ring-2 focus:ring-tzedek-green focus:border-transparent transition duration-200" placeholder="123 Main Street">
-                            </div>
-
-                            <div class="mb-6">
-                                <label for="apartment" class="block text-sm font-medium text-gray-700 mb-2">Apartment, suite, etc.</label>
-                                <input type="text" id="apartment" class="w-full border border-gray-300 rounded-md px-4 py-3 focus:ring-2 focus:ring-tzedek-green focus:border-transparent transition duration-200" placeholder="Apt 4B">
-                            </div>
-
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                                <div>
-                                    <label for="city" class="block text-sm font-medium text-gray-700 mb-2">City</label>
-                                    <input type="text" id="city" class="w-full border border-gray-300 rounded-md px-4 py-3 focus:ring-2 focus:ring-tzedek-green focus:border-transparent transition duration-200" placeholder="Lagos">
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Postal Code</label>
+                                    <input type="text" class="form-input" placeholder="Enter postal code">
                                 </div>
-                                <div>
-                                    <label for="country" class="block text-sm font-medium text-gray-700 mb-2">Country</label>
-                                    <select id="country" class="w-full border border-gray-300 rounded-md px-4 py-3 focus:ring-2 focus:ring-tzedek-green focus:border-transparent transition duration-200">
-                                        <option>Nigeria</option>
-                                        <option>United States</option>
-                                        <option>United Kingdom</option>
-                                        <option>Canada</option>
-                                        <option>Australia</option>
+                                <div class="form-group">
+                                    <label class="form-label">Country</label>
+                                    <select class="form-input">
+                                        <option value="">Select Country</option>
+                                        <option value="nigeria" selected>Nigeria</option>
+                                        <option value="ghana">Ghana</option>
+                                        <option value="kenya">Kenya</option>
+                                        <option value="south-africa">South Africa</option>
                                     </select>
-                                </div>
-                            </div>
-
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                                <div>
-                                    <label for="state" class="block text-sm font-medium text-gray-700 mb-2">State / Province</label>
-                                    <input type="text" id="state" class="w-full border border-gray-300 rounded-md px-4 py-3 focus:ring-2 focus:ring-tzedek-green focus:border-transparent transition duration-200" placeholder="Lagos State">
-                                </div>
-                                <div>
-                                    <label for="postalCode" class="block text-sm font-medium text-gray-700 mb-2">Postal code</label>
-                                    <input type="text" id="postalCode" class="w-full border border-gray-300 rounded-md px-4 py-3 focus:ring-2 focus:ring-tzedek-green focus:border-transparent transition duration-200" placeholder="100001">
-                                </div>
-                            </div>
-
-                            <div class="mb-6">
-                                <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">Phone</label>
-                                <input type="tel" id="phone" class="w-full border border-gray-300 rounded-md px-4 py-3 focus:ring-2 focus:ring-tzedek-green focus:border-transparent transition duration-200" placeholder="+234 123 456 7890">
-                            </div>
-                        </div>
-
-                        <div class="bg-white rounded-lg shadow-md p-6">
-                            <h2 class="text-xl font-semibold mb-6 text-gray-800">Delivery Method</h2>
-                            
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div class="delivery-option selected" data-delivery="standard">
-                                    <div class="delivery-option-header">
-                                        <div>
-                                            <p class="delivery-option-title">Standard</p>
-                                            <p class="delivery-option-subtitle">4-10 business days</p>
-                                        </div>
-                                        <div class="flex items-center">
-                                            <input type="radio" name="delivery" value="standard" checked class="form-radio h-4 w-4 text-blue-600">
-                                        </div>
-                                    </div>
-                                    <div class="mt-2 delivery-option-price">$5.00</div>
-                                </div>
-                                
-                                <div class="delivery-option" data-delivery="express">
-                                    <div class="delivery-option-header">
-                                        <div>
-                                            <p class="delivery-option-title">Express</p>
-                                            <p class="delivery-option-subtitle">2-5 business days</p>
-                                        </div>
-                                        <div class="flex items-center">
-                                            <input type="radio" name="delivery" value="express" class="form-radio h-4 w-4 text-blue-600">
-                                        </div>
-                                    </div>
-                                    <div class="mt-2 delivery-option-price">$16.00</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="bg-white rounded-lg shadow-md p-6">
-                            <h2 class="text-xl font-semibold mb-6 text-gray-800">Payment</h2>
-                            
-                            <div class="payment-methods">
-                                <div class="payment-method active" data-payment="credit">
-                                    <input type="radio" name="payment" value="credit" checked class="form-radio h-4 w-4 text-tzedek-green">
-                                    <span>Credit card</span>
-                                </div>
-                                
-                                <div class="payment-method" data-payment="paypal">
-                                    <input type="radio" name="payment" value="paypal" class="form-radio h-4 w-4 text-tzedek-green">
-                                    <span>PayPal</span>
-                                </div>
-                                
-                                <div class="payment-method" data-payment="etransfer">
-                                    <input type="radio" name="payment" value="etransfer" class="form-radio h-4 w-4 text-tzedek-green">
-                                    <span>eTransfer</span>
-                                </div>
-                            </div>
-
-                            <!-- Credit Card Form -->
-                            <div class="payment-form active" id="creditForm">
-                                <div class="mb-6">
-                                    <label for="cardNumber" class="block text-sm font-medium text-gray-700 mb-2">Card number</label>
-                                    <input type="text" id="cardNumber" class="w-full border border-gray-300 rounded-md px-4 py-3 focus:ring-2 focus:ring-tzedek-green focus:border-transparent transition duration-200" placeholder="1234 5678 9012 3456">
-                                </div>
-
-                                <div class="mb-6">
-                                    <label for="cardName" class="block text-sm font-medium text-gray-700 mb-2">Name on card</label>
-                                    <input type="text" id="cardName" class="w-full border border-gray-300 rounded-md px-4 py-3 focus:ring-2 focus:ring-tzedek-green focus:border-transparent transition duration-200" placeholder="John Doe">
-                                </div>
-
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    <div>
-                                        <label for="expirationDate" class="block text-sm font-medium text-gray-700 mb-2">Expiration date (MM/YY)</label>
-                                        <input type="text" id="expirationDate" class="w-full border border-gray-300 rounded-md px-4 py-3 focus:ring-2 focus:ring-tzedek-green focus:border-transparent transition duration-200" placeholder="MM/YY">
-                                    </div>
-                                    <div>
-                                        <label for="cvc" class="block text-sm font-medium text-gray-700 mb-2">CVC</label>
-                                        <input type="text" id="cvc" class="w-full border border-gray-300 rounded-md px-4 py-3 focus:ring-2 focus:ring-tzedek-green focus:border-transparent transition duration-200" placeholder="123">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- PayPal Form -->
-                            <div class="payment-form" id="paypalForm">
-                                <div class="paypal-form">
-                                    <div class="mb-6">
-                                        <label for="paypalEmail" class="block text-sm font-medium text-gray-700 mb-2">PayPal Email</label>
-                                        <input type="email" id="paypalEmail" class="w-full border border-gray-300 rounded-md px-4 py-3 focus:ring-2 focus:ring-tzedek-green focus:border-transparent transition duration-200" placeholder="your@email.com">
-                                    </div>
-
-                                    <div class="mb-6">
-                                        <label for="paypalPassword" class="block text-sm font-medium text-gray-700 mb-2">PayPal Password</label>
-                                        <input type="password" id="paypalPassword" class="w-full border border-gray-300 rounded-md px-4 py-3 focus:ring-2 focus:ring-tzedek-green focus:border-transparent transition duration-200" placeholder="••••••••">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- eTransfer Form -->
-                            <div class="payment-form" id="etransferForm">
-                                <div class="etransfer-form">
-                                    <div class="mb-6">
-                                        <label for="etransferEmail" class="block text-sm font-medium text-gray-700 mb-2">Recipient Email</label>
-                                        <input type="email" id="etransferEmail" class="w-full border border-gray-300 rounded-md px-4 py-3 focus:ring-2 focus:ring-tzedek-green focus:border-transparent transition duration-200" placeholder="recipient@email.com">
-                                    </div>
-
-                                    <div class="mb-6">
-                                        <label for="etransferMessage" class="block text-sm font-medium text-gray-700 mb-2">Message</label>
-                                        <textarea id="etransferMessage" rows="3" class="w-full border border-gray-300 rounded-md px-4 py-3 focus:ring-2 focus:ring-tzedek-green focus:border-transparent transition duration-200" placeholder="Add a message for the recipient..."></textarea>
-                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <!-- Right Column - Order Summary -->
-                    <div class="md:w-1/3">
-                        <div class="bg-white rounded-lg shadow-md p-6 sticky top-24">
-                            <h2 class="text-xl font-semibold mb-6 text-gray-800">Order summary</h2>
+                    
+                    <!-- Payment Method -->
+                    <div class="form-section">
+                        <h2 class="section-title">
+                            <i class="fas fa-credit-card"></i>
+                            Payment Method
+                        </h2>
+                        
+                        <div class="payment-methods">
+                            <div class="payment-method selected" data-method="card">
+                                <div class="payment-icon">
+                                    <i class="fas fa-credit-card"></i>
+                                </div>
+                                <div class="payment-details">
+                                    <div class="payment-name">Credit/Debit Card</div>
+                                    <div class="payment-description">Pay securely with your card</div>
+                                </div>
+                                <div class="payment-radio">
+                                    <input type="radio" name="paymentMethod" checked>
+                                </div>
+                            </div>
                             
-                            <div class="space-y-4 mb-6">
-                                <!-- Product 1 -->
-                                <div class="flex items-center p-4 border-b border-gray-200">
-                                    <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?auto=format&fit=crop&w=400&q=80" alt="Product 1" class="w-16 h-16 object-cover rounded-md">
-                                    <div class="ml-4 flex-1">
-                                        <h3 class="font-medium text-gray-800">Premium Smartphone X1</h3>
-                                        <p class="text-sm text-gray-600">Black</p>
-                                        <p class="text-sm text-gray-600">Large</p>
-                                    </div>
-                                    <div class="flex items-center">
-                                        <span class="text-lg font-bold text-gray-800">₦75,000</span>
-                                        <button class="ml-4 text-gray-400 hover:text-red-500 transition duration-200" onclick="removeProduct(this)">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                                <path fill-rule="evenodd" d="M9 2a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0111 5a3.01 3.01 0 01-2.867-2.5 1 1 0 00-.133.027 1 1 0 00-.867.5 1 1 0 11-1.731-1A5.002 5.002 0 0011 11a5.002 5.002 0 004.867-4.5 1 1 0 00-.133-.027 1 1 0 00-.867.5 1 1 0 11-1.731-1A3.01 3.01 0 0111 5a3.01 3.01 0 01-2.867-2.5 1 1 0 00-.133.027z" clip-rule="evenodd" />
-                                            </svg>
-                                        </button>
-                                    </div>
+                            <div class="payment-method" data-method="paypal">
+                                <div class="payment-icon">
+                                    <i class="fab fa-paypal"></i>
                                 </div>
-                                
-                                <!-- Product 2 -->
-                                <div class="flex items-center p-4 border-b border-gray-200">
-                                    <img src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?auto=format&fit=crop&w=400&q=80" alt="Product 2" class="w-16 h-16 object-cover rounded-md">
-                                    <div class="ml-4 flex-1">
-                                        <h3 class="font-medium text-gray-800">Ultra Slim Laptop Pro</h3>
-                                        <p class="text-sm text-gray-600">Silver</p>
-                                        <p class="text-sm text-gray-600">Large</p>
-                                    </div>
-                                    <div class="flex items-center">
-                                        <span class="text-lg font-bold text-gray-800">₦210,000</span>
-                                        <button class="ml-4 text-gray-400 hover:text-red-500 transition duration-200" onclick="removeProduct(this)">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                                <path fill-rule="evenodd" d="M9 2a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0111 5a3.01 3.01 0 01-2.867-2.5 1 1 0 00-.133.027 1 1 0 00-.867.5 1 1 0 11-1.731-1A5.002 5.002 0 0011 11a5.002 5.002 0 004.867-4.5 1 1 0 00-.133-.027 1 1 0 00-.867.5 1 1 0 11-1.731-1A3.01 3.01 0 0111 5a3.01 3.01 0 01-2.867-2.5 1 1 0 00-.133.027z" clip-rule="evenodd" />
-                                            </svg>
-                                        </button>
-                                    </div>
+                                <div class="payment-details">
+                                    <div class="payment-name">PayPal</div>
+                                    <div class="payment-description">Pay with your PayPal account</div>
+                                </div>
+                                <div class="payment-radio">
+                                    <input type="radio" name="paymentMethod">
                                 </div>
                             </div>
-
-                            <div class="space-y-3 mb-6">
-                                <div class="flex justify-between text-sm">
-                                    <span class="text-gray-600">Subtotal</span>
-                                    <span class="font-medium">₦285,000</span>
+                            
+                            <div class="payment-method" data-method="bank">
+                                <div class="payment-icon">
+                                    <i class="fas fa-university"></i>
                                 </div>
-                                <div class="flex justify-between text-sm">
-                                    <span class="text-gray-600">Shipping</span>
-                                    <span class="font-medium">₦5,000</span>
+                                <div class="payment-details">
+                                    <div class="payment-name">Bank Transfer</div>
+                                    <div class="payment-description">Direct bank transfer</div>
                                 </div>
-                                <div class="flex justify-between text-sm">
-                                    <span class="text-gray-600">Taxes</span>
-                                    <span class="font-medium">₦5,520</span>
+                                <div class="payment-radio">
+                                    <input type="radio" name="paymentMethod">
                                 </div>
                             </div>
-
-                            <div class="border-t border-gray-200 pt-4 mb-6">
-                                <div class="flex justify-between text-lg font-bold">
-                                    <span>Total</span>
-                                    <span>₦295,520</span>
+                        </div>
+                        
+                        <!-- Card Payment Form -->
+                        <div id="cardPaymentForm" class="payment-form">
+                            <div class="form-group">
+                                <label class="form-label">Card Number</label>
+                                <input type="text" class="form-input" placeholder="1234 5678 9012 3456">
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Expiry Date</label>
+                                    <input type="text" class="form-input" placeholder="MM/YY">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">CVV</label>
+                                    <input type="text" class="form-input" placeholder="123">
                                 </div>
                             </div>
-
-                            <button class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 px-4 rounded-md transition duration-200">
-                                Confirm order
+                            
+                            <div class="form-group">
+                                <label class="form-label">Cardholder Name</label>
+                                <input type="text" class="form-input" placeholder="Enter name as on card">
+                            </div>
+                        </div>
+                        
+                        <!-- PayPal Payment Form -->
+                        <div id="paypalPaymentForm" class="payment-form" style="display: none;">
+                            <div class="form-group">
+                                <p>You will be redirected to PayPal to complete your payment securely.</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Bank Transfer Form -->
+                        <div id="bankPaymentForm" class="payment-form" style="display: none;">
+                            <div class="form-group">
+                                <p>Please use the following bank details to complete your payment:</p>
+                                <div style="background-color: var(--bg-light); padding: 15px; border-radius: var(--radius-md); margin-top: 15px;">
+                                    <p><strong>Bank:</strong> Tzedek Commercial Bank</p>
+                                    <p><strong>Account Name:</strong> Tzedek Marketplace Ltd</p>
+                                    <p><strong>Account Number:</strong> 0123456789</p>
+                                    <p><strong>Reference:</strong> Your order number</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Action Buttons -->
+                    <div class="form-section">
+                        <div style="display: flex; gap: 15px;">
+                            <a href="cart.html" class="btn-secondary">
+                                <i class="fas fa-arrow-left"></i>
+                                Back to Cart
+                            </a>
+                            <button class="btn-primary" id="placeOrderBtn">
+                                <i class="fas fa-lock"></i>
+                                Place Order
                             </button>
                         </div>
                     </div>
                 </div>
+                
+                <!-- Order Summary -->
+                <div class="order-summary">
+                    <h2 class="summary-title">Order Summary</h2>
+                    
+                    <div class="order-items" id="orderItems">
+                        <!-- Order items will be dynamically inserted here -->
+                    </div>
+                    
+                    <div class="promo-code">
+                        <div class="promo-title">Promo Code</div>
+                        <div class="promo-input-group">
+                            <input type="text" class="promo-input" placeholder="Enter promo code">
+                            <button class="promo-btn">Apply</button>
+                        </div>
+                    </div>
+                    
+                    <div class="summary-row">
+                        <span class="summary-label">Subtotal</span>
+                        <span class="summary-value" id="subtotal">₦0</span>
+                    </div>
+                    
+                    <div class="summary-row">
+                        <span class="summary-label">Shipping</span>
+                        <span class="summary-value" id="shipping">₦0</span>
+                    </div>
+                    
+                    <div class="summary-row">
+                        <span class="summary-label">Tax</span>
+                        <span class="summary-value" id="tax">₦0</span>
+                    </div>
+                    
+                    <div class="summary-row">
+                        <span class="summary-label">Discount</span>
+                        <span class="summary-value" id="discount">-₦0</span>
+                    </div>
+                    
+                    <div class="summary-total">
+                        <span class="total-label">Total</span>
+                        <span class="total-value" id="total">₦0</span>
+                    </div>
+                    
+                    <div class="security-notice">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Your payment information is secure and encrypted</span>
+                    </div>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
     <!-- Footer -->
-    <footer class="footer bg-gray-800 text-white">
+    <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-column">
@@ -336,22 +994,22 @@
                 <div class="footer-column">
                     <h3>Quick Links</h3>
                     <ul class="footer-links">
-                        <li><a href="#about">About Us</a></li>
-                        <li><a href="#shop">Shop Rentals</a></li>
-                        <li><a href="#packages">Packages</a></li>
-                        <li><a href="#testimonials">Success Stories</a></li>
-                        <li><a href="company-policy.html">Company Policy</a></li>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="shop.html">Shops</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-column">
-                    <h3>Resources</h3>
+                    <h3>Support</h3>
                     <ul class="footer-links">
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Entrepreneur Tips</a></li>
-                        <li><a href="#">Marketing Guide</a></li>
-                        <li><a href="#">Community Forums</a></li>
-                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Shipping Info</a></li>
+                        <li><a href="#">Returns</a></li>
+                        <li><a href="#">Size Guide</a></li>
+                        <li><a href="#">Contact Support</a></li>
                     </ul>
                 </div>
                 
@@ -366,111 +1024,192 @@
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; <span id="currentYear">2023</span> Tzedek. All rights reserved. | <a href="company-policy.html" class="text-tzedek-green">Privacy Policy</a> | <a href="company-policy.html" class="text-tzedek-green">Terms of Service</a></p>
+                <p>&copy; <span id="currentYear"></span> Tzedek. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
             </div>
         </div>
     </footer>
 
     <script>
-        // Current year in footer
+        // Cart Management System
+        class CartManager {
+            constructor() {
+                this.cart = this.getCartFromStorage();
+                this.updateCartCount();
+                this.renderOrderItems();
+                this.updateOrderSummary();
+            }
+            
+            getCartFromStorage() {
+                const cart = localStorage.getItem('tzedekCart');
+                return cart ? JSON.parse(cart) : [];
+            }
+            
+            updateCartCount() {
+                const cartCount = document.getElementById('cartCount');
+                if (cartCount) {
+                    const totalItems = this.cart.reduce((total, item) => total + item.quantity, 0);
+                    cartCount.textContent = totalItems;
+                }
+            }
+            
+            renderOrderItems() {
+                const orderItemsContainer = document.getElementById('orderItems');
+                
+                if (this.cart.length === 0) {
+                    orderItemsContainer.innerHTML = `
+                        <p>Your cart is empty. Please add items to your cart before checkout.</p>
+                    `;
+                    return;
+                }
+                
+                orderItemsContainer.innerHTML = this.cart.map(item => `
+                    <div class="order-item">
+                        <div class="order-item-image">
+                            <img src="${item.image}" alt="${item.name}">
+                        </div>
+                        <div class="order-item-details">
+                            <div class="order-item-name">${item.name}</div>
+                            <div class="order-item-options">
+                                <span>Size: ${item.size}</span> | 
+                                <span>Color: ${item.color}</span> | 
+                                <span>Qty: ${item.quantity}</span>
+                            </div>
+                            <div class="order-item-price">₦${(item.price * item.quantity).toLocaleString()}</div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+            
+            updateOrderSummary() {
+                const subtotal = this.cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+                const shipping = subtotal > 5000 ? 0 : 500;
+                const tax = subtotal * 0.075; // 7.5% tax
+                const discount = 0; // Could be calculated based on promo codes
+                const total = subtotal + shipping + tax - discount;
+                
+                document.getElementById('subtotal').textContent = `₦${subtotal.toLocaleString()}`;
+                document.getElementById('shipping').textContent = `₦${shipping.toLocaleString()}`;
+                document.getElementById('tax').textContent = `₦${tax.toLocaleString()}`;
+                document.getElementById('discount').textContent = `-₦${discount.toLocaleString()}`;
+                document.getElementById('total').textContent = `₦${total.toLocaleString()}`;
+            }
+        }
+        
+        // Initialize cart manager
+        const cartManager = new CartManager();
+        
+        // Set current year in footer
         document.getElementById('currentYear').textContent = new Date().getFullYear();
         
-        // Scroll to top button
-        const scrollToTopBtn = document.getElementById('scrollToTop');
-        window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 300) {
-                scrollToTopBtn.style.opacity = '1';
-                scrollToTopBtn.style.visibility = 'visible';
-            } else {
-                scrollToTopBtn.style.opacity = '0';
-                scrollToTopBtn.style.visibility = 'hidden';
-            }
-        });
-        
-        scrollToTopBtn.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-
-        // Add validation for form fields
-        document.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"], select').forEach(input => {
-            input.addEventListener('blur', function() {
-                if (this.value.trim() === '') {
-                    this.classList.add('border-red-500');
-                } else {
-                    this.classList.remove('border-red-500');
-                }
-            });
-        });
-
-        // Delivery method selection
-        document.querySelectorAll('.delivery-option').forEach(option => {
-            option.addEventListener('click', function() {
-                // Remove selected class from all options
-                document.querySelectorAll('.delivery-option').forEach(opt => {
-                    opt.classList.remove('selected');
-                });
-                
-                // Add selected class to clicked option
-                this.classList.add('selected');
-                
-                // Update radio button
-                const radioButton = this.querySelector('input[type="radio"]');
-                radioButton.checked = true;
-            });
-        });
-
-        // Payment method selection
-        document.querySelectorAll('.payment-method').forEach(method => {
-            method.addEventListener('click', function() {
-                // Remove active class from all methods
-                document.querySelectorAll('.payment-method').forEach(m => {
-                    m.classList.remove('active');
-                });
-                
-                // Add active class to clicked method
-                this.classList.add('active');
-                
-                // Update radio button
-                const radioButton = this.querySelector('input[type="radio"]');
-                radioButton.checked = true;
-                
-                // Show corresponding form
-                const paymentType = this.getAttribute('data-payment');
-                document.querySelectorAll('.payment-form').forEach(form => {
-                    form.classList.remove('active');
-                });
-                
-                const targetForm = document.getElementById(paymentType + 'Form');
-                if (targetForm) {
-                    targetForm.classList.add('active');
-                }
-            });
-        });
-
-        // Function to remove product from order summary
-        function removeProduct(button) {
-            const productRow = button.closest('.order-item');
-            if (productRow) {
-                productRow.remove();
-                
-                // Recalculate totals
-                recalculateTotals();
-            }
-        }
-
-        // Function to recalculate totals
-        function recalculateTotals() {
-            const subtotal = 285000; // This would come from actual product calculations
-            const shipping = 5000;
-            const taxes = 5520;
-            const total = subtotal + shipping + taxes;
+        // Checkout Form Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Same as shipping checkbox
+            const sameAsShippingCheckbox = document.getElementById('sameAsShipping');
+            const billingForm = document.getElementById('billingForm');
             
-            // Update the total display
-            document.querySelector('.order-total span:last-child').textContent = `₦${total.toLocaleString()}`;
-        }
+            sameAsShippingCheckbox.addEventListener('change', function() {
+                if (this.checked) {
+                    billingForm.style.display = 'none';
+                } else {
+                    billingForm.style.display = 'block';
+                }
+            });
+            
+            // Payment method selection
+            const paymentMethods = document.querySelectorAll('.payment-method');
+            const paymentForms = {
+                card: document.getElementById('cardPaymentForm'),
+                paypal: document.getElementById('paypalPaymentForm'),
+                bank: document.getElementById('bankPaymentForm')
+            };
+            
+            paymentMethods.forEach(method => {
+                method.addEventListener('click', function() {
+                    // Update selected payment method
+                    paymentMethods.forEach(m => m.classList.remove('selected'));
+                    this.classList.add('selected');
+                    
+                    // Update radio button
+                    const radio = this.querySelector('input[type="radio"]');
+                    radio.checked = true;
+                    
+                    // Show corresponding payment form
+                    const methodType = this.getAttribute('data-method');
+                    Object.values(paymentForms).forEach(form => form.style.display = 'none');
+                    if (paymentForms[methodType]) {
+                        paymentForms[methodType].style.display = 'block';
+                    }
+                });
+            });
+            
+            // Place order button
+            const placeOrderBtn = document.getElementById('placeOrderBtn');
+            
+            placeOrderBtn.addEventListener('click', function() {
+                if (cartManager.cart.length === 0) {
+                    alert('Your cart is empty. Please add items to your cart before placing an order.');
+                    return;
+                }
+                
+                // In a real app, this would submit the form and process payment
+                alert('Your order has been placed successfully! You will receive a confirmation email shortly.');
+                
+                // Clear cart after successful order
+                cartManager.cart = [];
+                localStorage.setItem('tzedekCart', JSON.stringify(cartManager.cart));
+                cartManager.updateCartCount();
+                
+                // Redirect to order confirmation page
+                setTimeout(() => {
+                    window.location.href = 'order-confirmation.html';
+                }, 1000);
+            });
+            
+            // Promo code functionality
+            const promoBtn = document.querySelector('.promo-btn');
+            
+            promoBtn.addEventListener('click', function() {
+                const promoInput = document.querySelector('.promo-input');
+                const promoCode = promoInput.value.trim();
+                
+                if (promoCode === '') {
+                    alert('Please enter a promo code');
+                    return;
+                }
+                
+                // In a real app, this would validate the promo code with the server
+                if (promoCode.toUpperCase() === 'TZEDEK10') {
+                    alert('Promo code applied! You get 10% off your order.');
+                    
+                    // Apply discount
+                    const subtotal = cartManager.cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+                    const discount = subtotal * 0.1;
+                    const shipping = subtotal > 5000 ? 0 : 500;
+                    const tax = subtotal * 0.075;
+                    const total = subtotal + shipping + tax - discount;
+                    
+                    document.getElementById('discount').textContent = `-₦${discount.toLocaleString()}`;
+                    document.getElementById('total').textContent = `₦${total.toLocaleString()}`;
+                    
+                    // Disable further promo code applications
+                    promoInput.disabled = true;
+                    promoBtn.disabled = true;
+                    promoBtn.textContent = 'Applied';
+                } else {
+                    alert('Invalid promo code. Please try again.');
+                }
+            });
+        });
+        // Checkout button - MODIFIED TO REDIRECT TO CHECKOUT PAGE
+        document.getElementById('checkoutBtn').addEventListener('click', function() {
+            if (cartManager.cart.length === 0) {
+                alert('Your cart is empty. Add some items before checkout.');
+                return;
+            }
+            
+            // Redirect to checkout page
+            window.location.href = 'checkout.html';
+        });
     </script>
 </body>
 </html>

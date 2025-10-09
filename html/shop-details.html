@@ -7,9 +7,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --tzedek-green: #10b981;
-            --tzedek-dark-green: #059669;
-            --tzedek-light-green: #d1fae5;
+            --tzedek-green: rgb(34, 197, 94);
+            --tzedek-green-dark: rgb(22, 163, 74);
+            --tzedek-green-light: rgb(187, 247, 208);
             --text-dark: #1f2937;
             --text-light: #6b7280;
             --bg-light: #f9fafb;
@@ -22,76 +22,190 @@
             --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
             --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
         }
-        
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
+
         body {
             background-color: var(--bg-light);
             color: var(--text-dark);
             line-height: 1.6;
         }
-        
+
         .container {
             width: 100%;
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
-        
+
         /* Navbar Styles */
         .navbar {
-            background-color: var(--white);
-            box-shadow: var(--shadow-sm);
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 50;
+            background-color: var(--white);
+            box-shadow: var(--shadow-sm);
+            padding: 10px 0;
         }
-        
+
         .navbar-content {
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            padding: 15px 0;
+            align-items: center;
         }
-        
+
         .navbar-logo .logo {
-            font-size: 28px;
+            font-size: 1.5rem;
             font-weight: 700;
             color: var(--tzedek-green);
             text-decoration: none;
         }
-        
+
         .navbar-links {
             display: flex;
-            gap: 30px;
+            gap: 2rem;
         }
-        
+
         .nav-link {
             color: var(--text-dark);
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.3s;
+            position: relative;
+            padding: 8px 0;
+            transition: color 0.3s ease;
         }
-        
-        .nav-link:hover, .nav-link.active {
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--tzedek-green);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover {
             color: var(--tzedek-green);
         }
-        
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link.active {
+            color: var(--tzedek-green);
+        }
+
+        .nav-link.active::after {
+            width: 100%;
+        }
+
         .navbar-auth {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 1rem;
         }
-        
+
+        .cart-icon {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .cart-icon:hover {
+            background-color: var(--tzedek-green-light);
+            color: var(--tzedek-green);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #ef4444;
+            color: var(--white);
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .mobile-menu-button {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .mobile-nav {
+            display: none;
+            background-color: var(--white);
+            border-top: 1px solid var(--border-color);
+            padding: 1rem 0;
+        }
+
+        .mobile-nav .nav-link {
+            display: block;
+            padding: 0.5rem 0;
+        }
+
+        .mobile-nav .nav-link:not(:last-child) {
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .mobile-auth {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            padding-top: 1rem;
+            margin-top: 0.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        @media (max-width: 768px) {
+            .desktop-nav {
+                display: none;
+            }
+            
+            .mobile-menu-button {
+                display: block;
+            }
+            
+            .mobile-nav.show {
+                display: block;
+            }
+
+            .nav-link::after {
+                display: none;
+            }
+        }
+
         .btn-primary {
             background-color: var(--tzedek-green);
             color: var(--white);
-            padding: 8px 16px;
+            padding: 12px 18px;
             border-radius: var(--radius-md);
             text-decoration: none;
             font-weight: 600;
@@ -99,12 +213,15 @@
             font-size: 14px;
             border: none;
             cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
-        
+
         .btn-primary:hover {
-            background-color: var(--tzedek-dark-green);
+            background-color: var(--tzedek-green-dark);
         }
-        
+
         .btn-outline {
             background-color: transparent;
             color: var(--tzedek-green);
@@ -116,21 +233,52 @@
             font-size: 14px;
             border: 1px solid var(--tzedek-green);
             cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
-        
+
         .btn-outline:hover {
-            background-color: var(--tzedek-light-green);
+            background-color: var(--tzedek-green-light);
         }
-        
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--tzedek-green);
+            color: var(--white);
+            padding: 15px 20px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1000;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .toast i {
+            font-size: 20px;
+        }
+
         /* Shop Header */
         .shop-header {
             margin: 30px 0;
             position: relative;
         }
-        
+
         .shop-cover {
             height: 300px;
-            background: linear-gradient(135deg, var(--tzedek-green) 0%, var(--tzedek-dark-green) 100%);
+            background: linear-gradient(135deg, var(--tzedek-green) 0%, var(--tzedek-green-dark) 100%);
             border-radius: var(--radius-lg);
             overflow: hidden;
             position: relative;
@@ -141,7 +289,7 @@
             font-size: 24px;
             font-weight: 600;
         }
-        
+
         .shop-info {
             display: flex;
             background: var(--white);
@@ -154,7 +302,7 @@
             gap: 30px;
             align-items: flex-start;
         }
-        
+
         .shop-logo-container {
             flex-shrink: 0;
             width: 120px;
@@ -164,37 +312,37 @@
             border: 4px solid var(--white);
             box-shadow: var(--shadow-md);
         }
-        
+
         .shop-logo {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-        
+
         .shop-details {
             flex: 1;
         }
-        
+
         .shop-name {
             font-size: 32px;
             font-weight: 700;
             margin-bottom: 10px;
             color: var(--text-dark);
         }
-        
+
         .shop-description {
             font-size: 16px;
             color: var(--text-light);
             margin-bottom: 20px;
             line-height: 1.6;
         }
-        
+
         .shop-meta {
             display: flex;
             gap: 20px;
             margin-bottom: 20px;
         }
-        
+
         .meta-item {
             display: flex;
             align-items: center;
@@ -202,21 +350,23 @@
             color: var(--text-light);
             font-size: 14px;
         }
-        
+
         .meta-item i {
             color: var(--tzedek-green);
         }
-        
+
         .shop-actions {
             display: flex;
             gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
         }
-        
+
         .social-icons {
             display: flex;
             gap: 10px;
         }
-        
+
         .social-icon {
             width: 36px;
             height: 36px;
@@ -229,12 +379,12 @@
             text-decoration: none;
             transition: all 0.3s;
         }
-        
+
         .social-icon:hover {
             background-color: var(--tzedek-green);
             color: var(--white);
         }
-        
+
         /* Shop Stats */
         .shop-stats {
             display: grid;
@@ -242,7 +392,7 @@
             gap: 20px;
             margin: 40px 0;
         }
-        
+
         .stat-card {
             background: var(--white);
             border-radius: var(--radius-lg);
@@ -251,49 +401,49 @@
             box-shadow: var(--shadow-sm);
             transition: transform 0.3s;
         }
-        
+
         .stat-card:hover {
             transform: translateY(-5px);
         }
-        
+
         .stat-value {
             font-size: 32px;
             font-weight: 700;
             color: var(--tzedek-green);
             margin-bottom: 5px;
         }
-        
+
         .stat-label {
             font-size: 14px;
             color: var(--text-light);
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
-        
+
         /* Products Section */
         .products-section {
             margin: 50px 0;
         }
-        
+
         .section-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 30px;
         }
-        
+
         .section-title {
             font-size: 24px;
             font-weight: 700;
             color: var(--text-dark);
         }
-        
+
         .products-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 25px;
         }
-        
+
         .product-card {
             background: var(--white);
             border-radius: var(--radius-lg);
@@ -301,77 +451,77 @@
             box-shadow: var(--shadow-sm);
             transition: all 0.3s;
         }
-        
+
         .product-card:hover {
             transform: translateY(-5px);
             box-shadow: var(--shadow-lg);
         }
-        
+
         .product-image {
             width: 100%;
             height: 200px;
             object-fit: cover;
         }
-        
+
         .product-info {
             padding: 20px;
         }
-        
+
         .product-title {
             font-size: 18px;
             font-weight: 600;
             margin-bottom: 10px;
             color: var(--text-dark);
         }
-        
+
         .product-description {
             font-size: 14px;
             color: var(--text-light);
             margin-bottom: 15px;
             line-height: 1.5;
         }
-        
+
         .product-price {
             font-size: 20px;
             font-weight: 700;
             color: var(--tzedek-green);
             margin-bottom: 15px;
         }
-        
+
         .product-actions {
             display: flex;
             gap: 10px;
         }
-        
+
         /* Reviews Section */
         .reviews-section {
             margin: 50px 0;
         }
-        
+
         .reviews-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 25px;
         }
-        
+
         .review-card {
             background: var(--white);
             border-radius: var(--radius-lg);
             padding: 25px;
             box-shadow: var(--shadow-sm);
         }
-        
+
         .review-header {
             display: flex;
             align-items: center;
             margin-bottom: 15px;
         }
-        
+
         .reviewer-avatar {
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            background: var(--tzedek-light-green);
+            background: var(--tzedek-green-light);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -379,25 +529,25 @@
             font-weight: 600;
             margin-right: 15px;
         }
-        
+
         .reviewer-info {
             flex: 1;
         }
-        
+
         .reviewer-name {
             font-weight: 600;
             margin-bottom: 5px;
         }
-        
+
         .review-rating {
             color: #f59e0b;
         }
-        
+
         .review-content {
             color: var(--text-light);
             line-height: 1.6;
         }
-        
+
         /* Footer */
         .footer {
             background-color: var(--text-dark);
@@ -405,59 +555,59 @@
             padding: 50px 0 25px;
             margin-top: 50px;
         }
-        
+
         .footer-content {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 30px;
             margin-bottom: 30px;
         }
-        
+
         .footer-column h3 {
             font-size: 18px;
             margin-bottom: 15px;
             color: var(--white);
         }
-        
+
         .footer-column p {
             margin-bottom: 15px;
             opacity: 0.8;
             font-size: 14px;
         }
-        
+
         .footer-social {
             display: flex;
             gap: 10px;
         }
-        
+
         .footer-social .social-icon {
             background-color: rgba(255, 255, 255, 0.1);
             color: var(--white);
         }
-        
+
         .footer-social .social-icon:hover {
             background-color: var(--tzedek-green);
         }
-        
+
         .footer-links {
             list-style: none;
         }
-        
+
         .footer-links li {
             margin-bottom: 8px;
         }
-        
+
         .footer-links a {
             color: rgba(255, 255, 255, 0.8);
             text-decoration: none;
             transition: color 0.3s;
             font-size: 14px;
         }
-        
+
         .footer-links a:hover {
             color: var(--tzedek-green);
         }
-        
+
         .footer-contact li {
             margin-bottom: 8px;
             opacity: 0.8;
@@ -466,7 +616,7 @@
             align-items: center;
             gap: 8px;
         }
-        
+
         .footer-bottom {
             text-align: center;
             padding-top: 20px;
@@ -474,12 +624,12 @@
             opacity: 0.7;
             font-size: 14px;
         }
-        
+
         .footer-bottom a {
             color: var(--tzedek-green);
             text-decoration: none;
         }
-        
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .shop-info {
@@ -521,8 +671,12 @@
             .reviews-grid {
                 grid-template-columns: 1fr;
             }
+
+            .product-actions {
+                flex-direction: column;
+            }
         }
-        
+
         @media (max-width: 480px) {
             .shop-cover {
                 height: 200px;
@@ -534,10 +688,6 @@
             
             .shop-stats {
                 grid-template-columns: 1fr;
-            }
-            
-            .product-actions {
-                flex-direction: column;
             }
         }
     </style>
@@ -552,17 +702,44 @@
                 </div>
                 
                 <!-- Desktop Navigation -->
-                <nav class="navbar-links">
+                <nav class="navbar-links desktop-nav">
                     <a href="index.html" class="nav-link">Home</a>
                     <a href="about.html" class="nav-link">About</a>
                     <a href="shop.html" class="nav-link">Shops</a>
                     <a href="products.html" class="nav-link">Products</a>
                     <a href="contact.html" class="nav-link">Contact</a>
                 </nav>
-        
-                <div class="navbar-auth">
+            
+                <div class="navbar-auth desktop-nav">
                     <a href="register.html" class="nav-link">Sign Up</a>
                     <a href="register.html" class="btn-primary">Become a Seller</a>
+                    <a href="cart.html" class="cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </a>
+                </div>
+
+                <!-- Mobile nav -->
+                <nav id="mobileNav" class="mobile-nav hidden">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="about.html" class="nav-link">About</a>
+                    <a href="shop.html" class="nav-link">Shops</a>
+                    <a href="products.html" class="nav-link">Products</a>
+                    <a href="contact.html" class="nav-link">Contact</a>
+                    <a href="register.html" class="nav-link">Sign Up</a>
+                    <a href="register.html" class="btn-primary">Become a Seller</a>
+                    <a href="cart.html" class="nav-link">
+                        <i class="fas fa-shopping-cart"></i>
+                        Shopping Cart (<span id="mobileCartCount">0</span>)
+                    </a>
+                </nav>
+                
+                <!-- Mobile menu button -->
+                <div class="mobile-menu-button">
+                    <button id="menuToggle" aria-label="Toggle menu">
+                        <i class="fas fa-bars menu-icon"></i>
+                        <i class="fas fa-times close-icon hidden"></i>
+                    </button>
                 </div>
             </div>
         </div>
@@ -607,7 +784,7 @@
                     </div>
                     
                     <div class="shop-actions">
-                        <button class="btn-primary">
+                        <button class="btn-primary" id="followShopBtn">
                             <i class="fas fa-store"></i> Follow Shop
                         </button>
                         <button class="btn-outline">
@@ -661,7 +838,7 @@
             
             <div class="products-grid">
                 <!-- Product 1 -->
-                <div class="product-card">
+                <div class="product-card" data-id="prod_001" data-name="Organic Cotton T-Shirt" data-price="8500" data-image="https://images.unsplash.com/photo-1520006403909-838d6b92c22e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80">
                     <img src="https://images.unsplash.com/photo-1520006403909-838d6b92c22e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Organic Cotton T-Shirt" class="product-image">
                     <div class="product-info">
                         <h3 class="product-title">Organic Cotton T-Shirt</h3>
@@ -669,13 +846,15 @@
                         <div class="product-price">₦8,500</div>
                         <div class="product-actions">
                             <a href="product-details.html" class="btn-primary">View Details</a>
-                            <button class="btn-outline">Add to Cart</button>
+                            <button class="btn-outline add-to-cart-btn">
+                                <i class="fas fa-shopping-cart"></i> Add to Cart
+                            </button>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Product 2 -->
-                <div class="product-card">
+                <div class="product-card" data-id="prod_002" data-name="Sustainable Denim Jeans" data-price="15200" data-image="https://images.unsplash.com/photo-1499336315816-097655dcfbda?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80">
                     <img src="https://images.unsplash.com/photo-1499336315816-097655dcfbda?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Sustainable Denim Jeans" class="product-image">
                     <div class="product-info">
                         <h3 class="product-title">Sustainable Denim Jeans</h3>
@@ -683,13 +862,15 @@
                         <div class="product-price">₦15,200</div>
                         <div class="product-actions">
                             <a href="product-details.html" class="btn-primary">View Details</a>
-                            <button class="btn-outline">Add to Cart</button>
+                            <button class="btn-outline add-to-cart-btn">
+                                <i class="fas fa-shopping-cart"></i> Add to Cart
+                            </button>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Product 3 -->
-                <div class="product-card">
+                <div class="product-card" data-id="prod_003" data-name="Bamboo Fiber Sweater" data-price="12800" data-image="https://images.unsplash.com/photo-1550614000-4895a10e1bfd?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80">
                     <img src="https://images.unsplash.com/photo-1550614000-4895a10e1bfd?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Bamboo Fiber Sweater" class="product-image">
                     <div class="product-info">
                         <h3 class="product-title">Bamboo Fiber Sweater</h3>
@@ -697,13 +878,15 @@
                         <div class="product-price">₦12,800</div>
                         <div class="product-actions">
                             <a href="product-details.html" class="btn-primary">View Details</a>
-                            <button class="btn-outline">Add to Cart</button>
+                            <button class="btn-outline add-to-cart-btn">
+                                <i class="fas fa-shopping-cart"></i> Add to Cart
+                            </button>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Product 4 -->
-                <div class="product-card">
+                <div class="product-card" data-id="prod_004" data-name="Recycled Polyester Jacket" data-price="18500" data-image="https://images.unsplash.com/photo-1582418702059-97ebafb35d09?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80">
                     <img src="https://images.unsplash.com/photo-1582418702059-97ebafb35d09?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Recycled Polyester Jacket" class="product-image">
                     <div class="product-info">
                         <h3 class="product-title">Recycled Polyester Jacket</h3>
@@ -711,7 +894,9 @@
                         <div class="product-price">₦18,500</div>
                         <div class="product-actions">
                             <a href="product-details.html" class="btn-primary">View Details</a>
-                            <button class="btn-outline">Add to Cart</button>
+                            <button class="btn-outline add-to-cart-btn">
+                                <i class="fas fa-shopping-cart"></i> Add to Cart
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -791,6 +976,12 @@
         </section>
     </main>
 
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage">Product added to cart!</span>
+    </div>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
@@ -845,36 +1036,114 @@
     </footer>
 
     <script>
+        // Cart Management System
+        class CartManager {
+            constructor() {
+                this.cart = this.getCartFromStorage();
+                this.updateCartCount();
+            }
+            
+            getCartFromStorage() {
+                const cart = localStorage.getItem('tzedekCart');
+                return cart ? JSON.parse(cart) : [];
+            }
+            
+            saveCartToStorage() {
+                localStorage.setItem('tzedekCart', JSON.stringify(this.cart));
+                this.updateCartCount();
+            }
+            
+            updateCartCount() {
+                const cartCount = document.getElementById('cartCount');
+                const mobileCartCount = document.getElementById('mobileCartCount');
+                if (cartCount && mobileCartCount) {
+                    const totalItems = this.cart.reduce((total, item) => total + item.quantity, 0);
+                    cartCount.textContent = totalItems;
+                    mobileCartCount.textContent = totalItems;
+                }
+            }
+            
+            addToCart(product) {
+                const existingItemIndex = this.cart.findIndex(item => 
+                    item.id === product.id && 
+                    item.size === product.size && 
+                    item.color === product.color
+                );
+                
+                if (existingItemIndex > -1) {
+                    // Update quantity if item already exists
+                    this.cart[existingItemIndex].quantity += product.quantity;
+                } else {
+                    // Add new item to cart
+                    this.cart.push(product);
+                }
+                
+                this.saveCartToStorage();
+                this.showToast(`${product.name} added to cart!`);
+            }
+            
+            removeFromCart(productId, size, color) {
+                this.cart = this.cart.filter(item => 
+                    !(item.id === productId && item.size === size && item.color === color)
+                );
+                this.saveCartToStorage();
+            }
+            
+            updateQuantity(productId, size, color, newQuantity) {
+                const item = this.cart.find(item => 
+                    item.id === productId && item.size === size && item.color === color
+                );
+                
+                if (item) {
+                    item.quantity = newQuantity;
+                    this.saveCartToStorage();
+                }
+            }
+            
+            getCartTotal() {
+                return this.cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+            }
+            
+            clearCart() {
+                this.cart = [];
+                this.saveCartToStorage();
+            }
+            
+            showToast(message) {
+                const toast = document.getElementById('toast');
+                const toastMessage = document.getElementById('toastMessage');
+                
+                toastMessage.textContent = message;
+                toast.classList.add('show');
+                
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 3000);
+            }
+        }
+        
+        // Initialize cart manager
+        const cartManager = new CartManager();
+        
         // Set current year in footer
         document.getElementById('currentYear').textContent = new Date().getFullYear();
         
-        // Add to cart functionality
-        document.querySelectorAll('.btn-outline').forEach(button => {
-            if (button.textContent.includes('Add to Cart')) {
-                button.addEventListener('click', function() {
-                    const productTitle = this.closest('.product-card').querySelector('.product-title').textContent;
-                    const originalText = this.textContent;
-                    
-                    this.innerHTML = '<i class="fas fa-check"></i> Added';
-                    this.style.backgroundColor = '#d1fae5';
-                    this.style.color = '#059669';
-                    this.style.borderColor = '#059669';
-                    
-                    setTimeout(() => {
-                        this.innerHTML = originalText;
-                        this.style.backgroundColor = '';
-                        this.style.color = '';
-                        this.style.borderColor = '';
-                    }, 2000);
-                    
-                    // In a real app, you would add the product to cart here
-                    console.log(`Added ${productTitle} to cart`);
-                });
-            }
+        // Mobile menu functionality
+        const menuToggle = document.getElementById('menuToggle');
+        const mobileNav = document.getElementById('mobileNav');
+        const menuIcon = document.querySelector('.menu-icon');
+        const closeIcon = document.querySelector('.close-icon');
+        
+        menuToggle.addEventListener('click', function() {
+            mobileNav.classList.toggle('show');
+            menuIcon.classList.toggle('hidden');
+            closeIcon.classList.toggle('hidden');
         });
         
         // Follow shop functionality
-        document.querySelector('.btn-primary').addEventListener('click', function() {
+        const followShopBtn = document.getElementById('followShopBtn');
+        
+        followShopBtn.addEventListener('click', function() {
             if (this.textContent.includes('Follow')) {
                 this.innerHTML = '<i class="fas fa-check"></i> Following';
                 this.style.backgroundColor = '#d1fae5';
@@ -884,6 +1153,38 @@
                 this.style.backgroundColor = '';
                 this.style.color = '';
             }
+        });
+        
+        // Add to cart functionality
+        document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const productCard = this.closest('.product-card');
+                const product = {
+                    id: productCard.getAttribute('data-id'),
+                    name: productCard.getAttribute('data-name'),
+                    price: parseInt(productCard.getAttribute('data-price')),
+                    quantity: 1,
+                    size: 'M', // Default size
+                    color: 'White', // Default color
+                    image: productCard.getAttribute('data-image')
+                };
+                
+                cartManager.addToCart(product);
+                
+                // Visual feedback on button
+                const originalText = this.innerHTML;
+                this.innerHTML = '<i class="fas fa-check"></i> Added';
+                this.style.backgroundColor = '#d1fae5';
+                this.style.color = '#059669';
+                this.style.borderColor = '#059669';
+                
+                setTimeout(() => {
+                    this.innerHTML = originalText;
+                    this.style.backgroundColor = '';
+                    this.style.color = '';
+                    this.style.borderColor = '';
+                }, 2000);
+            });
         });
     </script>
 </body>

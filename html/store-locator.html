@@ -1,0 +1,1423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Stores Near You | Tzedek Marketplace</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places&callback=initMap" async defer></script>
+    <style>
+        :root {
+            --tzedek-green: rgb(34, 197, 94);
+            --tzedek-green-dark: rgb(22, 163, 74);
+            --tzedek-green-light: rgb(187, 247, 208);
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --bg-light: #f9fafb;
+            --border-color: #e5e7eb;
+            --white: #ffffff;
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background-color: var(--white);
+            box-shadow: var(--shadow-sm);
+            padding: 10px 0;
+        }
+
+        .navbar-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar-logo .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--tzedek-green);
+            text-decoration: none;
+        }
+
+        .navbar-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            padding: 8px 0;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--tzedek-green);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--tzedek-green);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link.active {
+            color: var(--tzedek-green);
+        }
+
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .navbar-auth {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .cart-icon {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .cart-icon:hover {
+            background-color: var(--tzedek-green-light);
+            color: var(--tzedek-green);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #ef4444;
+            color: var(--white);
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .mobile-menu-button {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .mobile-nav {
+            display: none;
+            background-color: var(--white);
+            border-top: 1px solid var(--border-color);
+            padding: 1rem 0;
+        }
+
+        .mobile-nav .nav-link {
+            display: block;
+            padding: 0.5rem 0;
+        }
+
+        .mobile-nav .nav-link:not(:last-child) {
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .mobile-auth {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            padding-top: 1rem;
+            margin-top: 0.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        @media (max-width: 768px) {
+            .desktop-nav {
+                display: none;
+            }
+            
+            .mobile-menu-button {
+                display: block;
+            }
+            
+            .mobile-nav.show {
+                display: block;
+            }
+
+            .nav-link::after {
+                display: none;
+            }
+        }
+
+        .btn-primary {
+            background-color: var(--tzedek-green);
+            color: var(--white);
+            padding: 12px 18px;
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--tzedek-green-dark);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--tzedek-green);
+            padding: 8px 16px;
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-size: 14px;
+            border: 1px solid var(--tzedek-green);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-outline:hover {
+            background-color: var(--tzedek-green-light);
+        }
+
+        /* Store Locator Header */
+        .store-locator-header {
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .store-locator-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .store-locator-header p {
+            font-size: 1.125rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Search Section */
+        .search-section {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .search-container {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .search-input {
+            flex: 1;
+            position: relative;
+        }
+
+        .search-input input {
+            width: 100%;
+            padding: 1rem 1rem 1rem 3rem;
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-md);
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .search-input input:focus {
+            border-color: var(--tzedek-green);
+            outline: none;
+        }
+
+        .search-input i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+        }
+
+        .search-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .filter-select {
+            padding: 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-md);
+            font-size: 1rem;
+            background-color: var(--white);
+            min-width: 150px;
+        }
+
+        /* Map Section */
+        .map-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .map-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .map-card-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .map-card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .map-container {
+            height: 400px;
+        }
+
+        #store-map, #user-location-map {
+            height: 100%;
+            width: 100%;
+        }
+
+        /* Stores Grid */
+        .stores-section {
+            margin: 2rem 0;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .stores-count {
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        .stores-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .store-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s;
+        }
+
+        .store-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .store-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .store-info {
+            padding: 1.5rem;
+        }
+
+        .store-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .store-name {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .store-distance {
+            background: var(--tzedek-green-light);
+            color: var(--tzedek-green-dark);
+            padding: 0.25rem 0.75rem;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+
+        .store-description {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .store-meta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-light);
+            font-size: 0.875rem;
+        }
+
+        .meta-item i {
+            color: var(--tzedek-green);
+        }
+
+        .store-actions {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .store-actions .btn-primary,
+        .store-actions .btn-outline {
+            flex: 1;
+            justify-content: center;
+            padding: 0.75rem;
+            font-size: 0.875rem;
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--tzedek-green);
+            color: var(--white);
+            padding: 15px 20px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1000;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .toast i {
+            font-size: 20px;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--text-dark);
+            color: var(--white);
+            padding: 50px 0 25px;
+            margin-top: 50px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-column h3 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: var(--white);
+        }
+
+        .footer-column p {
+            margin-bottom: 15px;
+            opacity: 0.8;
+            font-size: 14px;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 10px;
+        }
+
+        .footer-social .social-icon {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+        }
+
+        .footer-social .social-icon:hover {
+            background-color: var(--tzedek-green);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 8px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 14px;
+        }
+
+        .footer-links a:hover {
+            color: var(--tzedek-green);
+        }
+
+        .footer-contact li {
+            margin-bottom: 8px;
+            opacity: 0.8;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+            font-size: 14px;
+        }
+
+        .footer-bottom a {
+            color: var(--tzedek-green);
+            text-decoration: none;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .map-section {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .search-container {
+                flex-direction: column;
+            }
+            
+            .search-actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .filter-select {
+                width: 100%;
+            }
+            
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            .stores-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .store-actions {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .store-locator-header h1 {
+                font-size: 2rem;
+            }
+            
+            .map-container {
+                height: 300px;
+            }
+        }
+
+        /* Loading Spinner */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="container">
+            <div class="navbar-content">
+                <div class="navbar-logo">
+                    <a href="index.html" class="logo">Tzedek</a>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <nav class="navbar-links desktop-nav">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="about.html" class="nav-link">About</a>
+                    <a href="store-locator.html" class="nav-link active">Find Stores</a>
+                    <a href="products.html" class="nav-link">Products</a>
+                    <a href="contact.html" class="nav-link">Contact</a>
+                </nav>
+            
+                <div class="navbar-auth desktop-nav">
+                    <a href="register.html" class="nav-link">Sign Up</a>
+                    <a href="register.html" class="btn-primary">Become a Seller</a>
+                    <a href="cart.html" class="cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </a>
+                </div>
+
+                <!-- Mobile nav -->
+                <nav id="mobileNav" class="mobile-nav hidden">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="about.html" class="nav-link">About</a>
+                    <a href="store-locator.html" class="nav-link active">Find Stores</a>
+                    <a href="products.html" class="nav-link">Products</a>
+                    <a href="contact.html" class="nav-link">Contact</a>
+                    <a href="register.html" class="nav-link">Sign Up</a>
+                    <a href="register.html" class="btn-primary">Become a Seller</a>
+                    <a href="cart.html" class="nav-link">
+                        <i class="fas fa-shopping-cart"></i>
+                        Shopping Cart (<span id="mobileCartCount">0</span>)
+                    </a>
+                </nav>
+                
+                <!-- Mobile menu button -->
+                <div class="mobile-menu-button">
+                    <button id="menuToggle" aria-label="Toggle menu">
+                        <i class="fas fa-bars menu-icon"></i>
+                        <i class="fas fa-times close-icon hidden"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Store Locator Header -->
+        <section class="store-locator-header">
+            <h1>Find Stores & Products Near You</h1>
+            <p>Discover local stores and products in your area. Support small businesses and find exactly what you're looking for.</p>
+        </section>
+        
+        <!-- Search Section -->
+        <section class="search-section">
+            <div class="search-container">
+                <div class="search-input">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="store-search" placeholder="Search for stores, products, or categories...">
+                </div>
+                <div class="search-input">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <input type="text" id="location-search" placeholder="Enter your location...">
+                </div>
+            </div>
+            
+            <div class="search-actions">
+                <button class="btn-primary" id="find-stores-btn">
+                    <i class="fas fa-search"></i> Find Stores
+                </button>
+                <button class="btn-outline" id="use-location-btn">
+                    <i class="fas fa-crosshairs"></i> Use My Location
+                </button>
+                
+                <select class="filter-select" id="radius-select">
+                    <option value="5">Within 5 km</option>
+                    <option value="10" selected>Within 10 km</option>
+                    <option value="25">Within 25 km</option>
+                    <option value="50">Within 50 km</option>
+                </select>
+                
+                <select class="filter-select" id="category-select">
+                    <option value="">All Categories</option>
+                    <option value="fashion">Fashion</option>
+                    <option value="electronics">Electronics</option>
+                    <option value="home">Home & Garden</option>
+                    <option value="beauty">Beauty</option>
+                    <option value="food">Food & Groceries</option>
+                    <option value="sports">Sports</option>
+                </select>
+            </div>
+        </section>
+        
+        <!-- Map Section -->
+        <section class="map-section">
+            <div class="map-card">
+                <div class="map-card-header">
+                    <h3 class="map-card-title">Store Locations</h3>
+                    <span id="store-count">12 stores found</span>
+                </div>
+                <div class="map-container">
+                    <div id="store-map"></div>
+                </div>
+            </div>
+            
+            <div class="map-card">
+                <div class="map-card-header">
+                    <h3 class="map-card-title">Your Location</h3>
+                    <span id="user-location">Lagos, Nigeria</span>
+                </div>
+                <div class="map-container">
+                    <div id="user-location-map"></div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Stores Section -->
+        <section class="stores-section">
+            <div class="section-header">
+                <h2 class="section-title">Nearby Stores</h2>
+                <div class="stores-count" id="stores-count-text">Showing 12 stores</div>
+            </div>
+            
+            <div class="stores-grid" id="stores-container">
+                <!-- Stores will be loaded here dynamically -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage">Store found successfully!</span>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Tzedek</h3>
+                    <p>A community-driven global marketplace empowering entrepreneurs to connect and grow.</p>
+                    <div class="footer-social">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="store-locator.html">Find Stores</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Shipping Info</a></li>
+                        <li><a href="#">Returns</a></li>
+                        <li><a href="#">Size Guide</a></li>
+                        <li><a href="#">Contact Support</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-envelope"></i> support@tzedek.com</li>
+                        <li><i class="fas fa-phone"></i> +234 (0) 123 456 7890</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Business Avenue, Lagos, Nigeria</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; <span id="currentYear"></span> Tzedek. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Store Locator Functionality
+        class StoreLocator {
+            constructor() {
+                this.stores = this.generateDemoStores();
+                this.userLocation = null;
+                this.storeMap = null;
+                this.userMap = null;
+                this.init();
+            }
+
+            init() {
+                this.setupEventListeners();
+                this.loadStores();
+                this.initMaps();
+                this.updateStoresCount();
+                this.showToast('Store locator loaded successfully', 'success');
+            }
+
+            setupEventListeners() {
+                // Mobile menu functionality
+                const menuToggle = document.getElementById('menuToggle');
+                const mobileNav = document.getElementById('mobileNav');
+                const menuIcon = document.querySelector('.menu-icon');
+                const closeIcon = document.querySelector('.close-icon');
+                
+                menuToggle.addEventListener('click', function() {
+                    mobileNav.classList.toggle('show');
+                    menuIcon.classList.toggle('hidden');
+                    closeIcon.classList.toggle('hidden');
+                });
+
+                // Store search
+                const storeSearch = document.getElementById('store-search');
+                storeSearch.addEventListener('input', this.debounce(this.handleStoreSearch.bind(this), 300));
+
+                // Location search
+                const locationSearch = document.getElementById('location-search');
+                this.initAutocomplete(locationSearch);
+
+                // Find stores button
+                const findStoresBtn = document.getElementById('find-stores-btn');
+                findStoresBtn.addEventListener('click', this.findNearbyStores.bind(this));
+
+                // Use location button
+                const useLocationBtn = document.getElementById('use-location-btn');
+                useLocationBtn.addEventListener('click', this.getCurrentLocation.bind(this));
+
+                // Filter changes
+                const radiusSelect = document.getElementById('radius-select');
+                radiusSelect.addEventListener('change', this.findNearbyStores.bind(this));
+
+                const categorySelect = document.getElementById('category-select');
+                categorySelect.addEventListener('change', this.handleCategoryFilter.bind(this));
+            }
+
+            initMaps() {
+                // Initialize store map
+                this.storeMap = new google.maps.Map(document.getElementById('store-map'), {
+                    zoom: 12,
+                    center: { lat: 6.5244, lng: 3.3792 }, // Lagos coordinates
+                    styles: [
+                        {
+                            "featureType": "administrative",
+                            "elementType": "geometry",
+                            "stylers": [{ "visibility": "off" }]
+                        },
+                        {
+                            "featureType": "poi",
+                            "stylers": [{ "visibility": "off" }]
+                        },
+                        {
+                            "featureType": "road",
+                            "elementType": "labels.icon",
+                            "stylers": [{ "visibility": "off" }]
+                        },
+                        {
+                            "featureType": "transit",
+                            "stylers": [{ "visibility": "off" }]
+                        }
+                    ]
+                });
+
+                // Initialize user location map
+                this.userMap = new google.maps.Map(document.getElementById('user-location-map'), {
+                    zoom: 12,
+                    center: { lat: 6.5244, lng: 3.3792 }, // Lagos coordinates
+                    styles: [
+                        {
+                            "featureType": "administrative",
+                            "elementType": "geometry",
+                            "stylers": [{ "visibility": "off" }]
+                        },
+                        {
+                            "featureType": "poi",
+                            "stylers": [{ "visibility": "off" }]
+                        },
+                        {
+                            "featureType": "road",
+                            "elementType": "labels.icon",
+                            "stylers": [{ "visibility": "off" }]
+                        },
+                        {
+                            "featureType": "transit",
+                            "stylers": [{ "visibility": "off" }]
+                        }
+                    ]
+                });
+
+                // Add markers for stores
+                this.addStoreMarkers();
+            }
+
+            addStoreMarkers() {
+                this.stores.forEach(store => {
+                    const marker = new google.maps.Marker({
+                        position: { lat: store.lat, lng: store.lng },
+                        map: this.storeMap,
+                        title: store.name,
+                        icon: {
+                            url: 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(`
+                                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="20" cy="20" r="20" fill="${store.isOpen ? '#22c55e' : '#ef4444'}"/>
+                                    <path d="M20 10C15.58 10 12 13.58 12 18C12 24 20 30 20 30C20 30 28 24 28 18C28 13.58 24.42 10 20 10ZM20 21C18.34 21 17 19.66 17 18C17 16.34 18.34 15 20 15C21.66 15 23 16.34 23 18C23 19.66 21.66 21 20 21Z" fill="white"/>
+                                </svg>
+                            `),
+                            scaledSize: new google.maps.Size(40, 40),
+                            anchor: new google.maps.Point(20, 40)
+                        }
+                    });
+
+                    const infoWindow = new google.maps.InfoWindow({
+                        content: `
+                            <div style="padding: 10px; max-width: 200px;">
+                                <h3 style="margin: 0 0 5px; font-size: 16px;">${store.name}</h3>
+                                <p style="margin: 0 0 5px; font-size: 14px; color: #666;">${store.category}</p>
+                                <p style="margin: 0 0 5px; font-size: 14px;">${store.address}</p>
+                                <p style="margin: 0; font-size: 14px; color: ${store.isOpen ? '#22c55e' : '#ef4444'}">${store.isOpen ? 'Open Now' : 'Closed'}</p>
+                            </div>
+                        `
+                    });
+
+                    marker.addListener('click', () => {
+                        infoWindow.open(this.storeMap, marker);
+                    });
+                });
+            }
+
+            initAutocomplete(input) {
+                const autocomplete = new google.maps.places.Autocomplete(input, {
+                    types: ['geocode']
+                });
+
+                autocomplete.addListener('place_changed', () => {
+                    const place = autocomplete.getPlace();
+                    if (!place.geometry) {
+                        this.showToast('No details available for this location', 'error');
+                        return;
+                    }
+
+                    this.userLocation = {
+                        lat: place.geometry.location.lat(),
+                        lng: place.geometry.location.lng(),
+                        address: place.formatted_address
+                    };
+
+                    // Update user location map
+                    this.userMap.setCenter(this.userLocation);
+                    this.userMap.setZoom(14);
+
+                    // Add marker for user location
+                    new google.maps.Marker({
+                        position: this.userLocation,
+                        map: this.userMap,
+                        title: 'Your Location',
+                        icon: {
+                            url: 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(`
+                                <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="15" cy="15" r="15" fill="#3b82f6"/>
+                                    <circle cx="15" cy="15" r="5" fill="white"/>
+                                </svg>
+                            `),
+                            scaledSize: new google.maps.Size(30, 30),
+                            anchor: new google.maps.Point(15, 30)
+                        }
+                    });
+
+                    // Update UI
+                    document.getElementById('user-location').textContent = place.formatted_address;
+
+                    // Find nearby stores
+                    this.findNearbyStores();
+                });
+            }
+
+            getCurrentLocation() {
+                const useLocationBtn = document.getElementById('use-location-btn');
+                const originalText = useLocationBtn.innerHTML;
+                
+                useLocationBtn.innerHTML = '<div class="loading"></div> Detecting Location';
+                useLocationBtn.disabled = true;
+
+                if (!navigator.geolocation) {
+                    this.showToast('Geolocation is not supported by this browser', 'error');
+                    useLocationBtn.innerHTML = originalText;
+                    useLocationBtn.disabled = false;
+                    return;
+                }
+
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        this.userLocation = {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude
+                        };
+
+                        // Reverse geocode to get address
+                        const geocoder = new google.maps.Geocoder();
+                        geocoder.geocode({ location: this.userLocation }, (results, status) => {
+                            if (status === 'OK' && results[0]) {
+                                this.userLocation.address = results[0].formatted_address;
+                                document.getElementById('location-search').value = results[0].formatted_address;
+                                document.getElementById('user-location').textContent = results[0].formatted_address;
+                            } else {
+                                document.getElementById('user-location').textContent = 'Your Current Location';
+                            }
+
+                            // Update user location map
+                            this.userMap.setCenter(this.userLocation);
+                            this.userMap.setZoom(14);
+
+                            // Add marker for user location
+                            new google.maps.Marker({
+                                position: this.userLocation,
+                                map: this.userMap,
+                                title: 'Your Location',
+                                icon: {
+                                    url: 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(`
+                                        <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <circle cx="15" cy="15" r="15" fill="#3b82f6"/>
+                                            <circle cx="15" cy="15" r="5" fill="white"/>
+                                        </svg>
+                                    `),
+                                    scaledSize: new google.maps.Size(30, 30),
+                                    anchor: new google.maps.Point(15, 30)
+                                }
+                            });
+
+                            // Find nearby stores
+                            this.findNearbyStores();
+                            
+                            // Reset button
+                            useLocationBtn.innerHTML = originalText;
+                            useLocationBtn.disabled = false;
+                        });
+                    },
+                    (error) => {
+                        let errorMessage = 'Unable to retrieve your location';
+                        switch (error.code) {
+                            case error.PERMISSION_DENIED:
+                                errorMessage = 'Location access denied by user';
+                                break;
+                            case error.POSITION_UNAVAILABLE:
+                                errorMessage = 'Location information unavailable';
+                                break;
+                            case error.TIMEOUT:
+                                errorMessage = 'Location request timed out';
+                                break;
+                        }
+                        this.showToast(errorMessage, 'error');
+                        
+                        // Reset button
+                        useLocationBtn.innerHTML = originalText;
+                        useLocationBtn.disabled = false;
+                    }
+                );
+            }
+
+            findNearbyStores() {
+                if (!this.userLocation) {
+                    this.showToast('Please enter or select a location first', 'warning');
+                    return;
+                }
+
+                const radius = parseInt(document.getElementById('radius-select').value);
+                const stores = this.stores;
+
+                // Calculate distances and filter stores within radius
+                const nearbyStores = stores.map(store => {
+                    const distance = this.calculateDistance(
+                        this.userLocation.lat, 
+                        this.userLocation.lng, 
+                        store.lat, 
+                        store.lng
+                    );
+                    return { ...store, distance: distance.toFixed(1) };
+                }).filter(store => parseFloat(store.distance) <= radius)
+                  .sort((a, b) => parseFloat(a.distance) - parseFloat(b.distance));
+
+                // Update store data with distances
+                this.stores = nearbyStores;
+
+                // Reload stores data
+                this.loadStores();
+
+                // Update store map center
+                this.storeMap.setCenter(this.userLocation);
+                this.storeMap.setZoom(12);
+
+                this.showToast(`Found ${nearbyStores.length} stores within ${radius} km`, 'success');
+            }
+
+            calculateDistance(lat1, lon1, lat2, lon2) {
+                const R = 6371; // Earth's radius in km
+                const dLat = (lat2 - lat1) * Math.PI / 180;
+                const dLon = (lon2 - lon1) * Math.PI / 180;
+                const a = 
+                    Math.sin(dLat/2) * Math.sin(dLat/2) +
+                    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
+                    Math.sin(dLon/2) * Math.sin(dLon/2);
+                const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+                return R * c;
+            }
+
+            handleStoreSearch(e) {
+                const query = e.target.value.trim().toLowerCase();
+                if (query.length < 2) {
+                    // Reset to all stores if search query is too short
+                    this.stores = this.generateDemoStores();
+                    this.loadStores();
+                    this.updateStoresCount();
+                    return;
+                }
+
+                // Filter stores by name, category, or product
+                const filteredStores = this.stores.filter(store => 
+                    store.name.toLowerCase().includes(query) ||
+                    store.category.toLowerCase().includes(query) ||
+                    store.products.some(product => product.toLowerCase().includes(query))
+                );
+
+                this.stores = filteredStores;
+                this.loadStores();
+                this.updateStoresCount();
+            }
+
+            handleCategoryFilter() {
+                const category = document.getElementById('category-select').value;
+                if (!category) {
+                    // Reset to all stores if no category selected
+                    this.stores = this.generateDemoStores();
+                } else {
+                    // Filter stores by category
+                    this.stores = this.generateDemoStores().filter(store => 
+                        store.category.toLowerCase() === category.toLowerCase()
+                    );
+                }
+                
+                this.loadStores();
+                this.updateStoresCount();
+            }
+
+            loadStores() {
+                const storesContainer = document.getElementById('stores-container');
+                if (!storesContainer) return;
+
+                const stores = this.stores;
+                
+                if (stores.length === 0) {
+                    storesContainer.innerHTML = `
+                        <div style="grid-column: 1 / -1; text-align: center; padding: 3rem;">
+                            <i class="fas fa-store" style="font-size: 3rem; color: var(--tzedek-green-light); margin-bottom: 1rem;"></i>
+                            <h3 style="color: var(--text-dark); margin-bottom: 0.5rem;">No stores found</h3>
+                            <p style="color: var(--text-light);">Try expanding your search radius or searching in a different location</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                const storesHTML = stores.map(store => `
+                    <div class="store-card" data-store-id="${store.id}">
+                        <img src="${store.image}" alt="${store.name}" class="store-image">
+                        <div class="store-info">
+                            <div class="store-header">
+                                <div>
+                                    <h3 class="store-name">${store.name}</h3>
+                                    <div class="store-meta">
+                                        <div class="meta-item">
+                                            <i class="fas fa-star"></i>
+                                            <span>${store.rating}</span>
+                                        </div>
+                                        <div class="meta-item">
+                                            <i class="fas fa-box"></i>
+                                            <span>${store.products.length} products</span>
+                                        </div>
+                                        <div class="meta-item">
+                                            <i class="fas fa-map-marker-alt"></i>
+                                            <span>${store.address.split(',')[0]}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <span class="store-distance">${store.distance} km</span>
+                            </div>
+                            <p class="store-description">${store.description}</p>
+                            <div class="store-actions">
+                                <button class="btn-primary" onclick="storeLocator.viewStore('${store.id}')">
+                                    <i class="fas fa-eye"></i> View Store
+                                </button>
+                                <button class="btn-outline" onclick="storeLocator.getDirections('${store.id}')">
+                                    <i class="fas fa-directions"></i> Directions
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+
+                storesContainer.innerHTML = storesHTML;
+                
+                // Update store count
+                document.getElementById('store-count').textContent = `${stores.length} stores found`;
+            }
+
+            updateStoresCount() {
+                const storesCountText = document.getElementById('stores-count-text');
+                if (storesCountText) {
+                    storesCountText.textContent = `Showing ${this.stores.length} stores`;
+                }
+            }
+
+            viewStore(storeId) {
+                const store = this.stores.find(s => s.id === storeId);
+                if (store) {
+                    // In a real application, this would navigate to the store page
+                    this.showToast(`Viewing ${store.name}`, 'info');
+                    // window.location.href = `shop.html?id=${storeId}`;
+                }
+            }
+
+            getDirections(storeId) {
+                const store = this.stores.find(s => s.id === storeId);
+                if (!store || !this.userLocation) {
+                    this.showToast('Please set your location first', 'warning');
+                    return;
+                }
+
+                const directionsUrl = `https://www.google.com/maps/dir/?api=1&origin=${this.userLocation.lat},${this.userLocation.lng}&destination=${store.lat},${store.lng}&travelmode=driving`;
+                window.open(directionsUrl, '_blank');
+            }
+
+            debounce(func, wait) {
+                let timeout;
+                return function executedFunction(...args) {
+                    const later = () => {
+                        clearTimeout(timeout);
+                        func(...args);
+                    };
+                    clearTimeout(timeout);
+                    timeout = setTimeout(later, wait);
+                };
+            }
+
+            showToast(message, type = 'info') {
+                const toast = document.getElementById('toast');
+                const toastMessage = document.getElementById('toastMessage');
+                
+                // Set message and style based on type
+                toastMessage.textContent = message;
+                toast.className = `toast ${type}`;
+                
+                // Show toast
+                toast.classList.add('show');
+                
+                // Hide after 3 seconds
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 3000);
+            }
+
+            generateDemoStores() {
+                return [
+                    {
+                        id: 'store_001',
+                        name: 'EcoStyle Fashion',
+                        description: 'Sustainable and ethically produced clothing for the conscious consumer. Our fabrics are sourced from organic farms.',
+                        category: 'fashion',
+                        address: '123 Fashion Street, Victoria Island, Lagos',
+                        lat: 6.4281,
+                        lng: 3.4210,
+                        distance: '2.5',
+                        rating: '4.8',
+                        isOpen: true,
+                        image: 'https://images.unsplash.com/photo-1566206091558-7f218b696731?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
+                        products: ['organic cotton t-shirt', 'sustainable denim jeans', 'bamboo fiber sweater']
+                    },
+                    {
+                        id: 'store_002',
+                        name: 'Tech Gadgets Store',
+                        description: 'Latest electronics and gadgets at affordable prices. From smartphones to smart home devices.',
+                        category: 'electronics',
+                        address: '45 Tech Avenue, Ikeja, Lagos',
+                        lat: 6.6059,
+                        lng: 3.3491,
+                        distance: '3.2',
+                        rating: '4.5',
+                        isOpen: true,
+                        image: 'https://images.unsplash.com/photo-1498049794561-7780e7231661?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
+                        products: ['smartphones', 'laptops', 'headphones', 'tablets']
+                    },
+                    {
+                        id: 'store_003',
+                        name: 'Home Essentials',
+                        description: 'Everything for your home and kitchen. Quality products for everyday living.',
+                        category: 'home',
+                        address: '78 Home Road, Lekki, Lagos',
+                        lat: 6.4443,
+                        lng: 3.4899,
+                        distance: '5.1',
+                        rating: '4.7',
+                        isOpen: false,
+                        image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
+                        products: ['furniture', 'kitchenware', 'decor', 'appliances']
+                    },
+                    {
+                        id: 'store_004',
+                        name: 'Beauty Corner',
+                        description: 'Cosmetics and skincare products from top brands. Natural and organic options available.',
+                        category: 'beauty',
+                        address: '21 Beauty Lane, Surulere, Lagos',
+                        lat: 6.5000,
+                        lng: 3.3556,
+                        distance: '4.3',
+                        rating: '4.3',
+                        isOpen: true,
+                        image: 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
+                        products: ['makeup', 'skincare', 'fragrances', 'haircare']
+                    },
+                    {
+                        id: 'store_005',
+                        name: 'Fresh Groceries',
+                        description: 'Fresh produce and daily essentials. Locally sourced fruits and vegetables.',
+                        category: 'food',
+                        address: '34 Market Street, Yaba, Lagos',
+                        lat: 6.5095,
+                        lng: 3.3711,
+                        distance: '3.8',
+                        rating: '4.0',
+                        isOpen: true,
+                        image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
+                        products: ['fruits', 'vegetables', 'dairy', 'meat']
+                    },
+                    {
+                        id: 'store_006',
+                        name: 'Sports World',
+                        description: 'Sports equipment and activewear for all activities. From professional to recreational.',
+                        category: 'sports',
+                        address: '67 Sports Avenue, Gbagada, Lagos',
+                        lat: 6.5493,
+                        lng: 3.3751,
+                        distance: '6.2',
+                        rating: '4.6',
+                        isOpen: true,
+                        image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
+                        products: ['sneakers', 'equipment', 'activewear', 'accessories']
+                    }
+                ];
+            }
+        }
+
+        // Initialize the store locator when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            window.storeLocator = new StoreLocator();
+            
+            // Set current year in footer
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+        });
+
+        // Initialize Google Maps (this function is called by the Google Maps API)
+        function initMap() {
+            // Maps are initialized in the StoreLocator class
+        }
+    </script>
+</body>
+</html>
