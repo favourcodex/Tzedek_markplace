@@ -34,8 +34,14 @@
                     </a>
                 </div>
                 
-                <!-- Mobile menu button -->
+                <!-- Mobile actions -->
                 <div class="mobile-menu-button">
+                    <!-- Cart icon for mobile -->
+                    <a href="cart.html" class="cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count" id="mobileCartCount">3</span>
+                    </a>
+                    <!-- Menu toggle button -->
                     <button id="menuToggle" aria-label="Toggle menu">
                         <i class="fas fa-bars menu-icon"></i>
                         <i class="fas fa-times close-icon hidden"></i>
@@ -53,14 +59,11 @@
                     <a href="contact.html" class="nav-link">Contact</a>
                     <a href="register.html" class="nav-link">Sign Up</a>
                     <a href="register.html" class="btn-primary">Become a Seller</a>
-                    <a href="cart.html" class="nav-link">
-                        <i class="fas fa-shopping-cart"></i>
-                        Shopping Cart (<span id="mobileCartCount">3</span>)
-                    </a>
                 </div>
             </nav>
         </div>
     </header>
+    
 
     <!-- Products Page -->
     <section id="products-page">
@@ -575,13 +578,6 @@
             
             // Display all products initially
             displayProducts(allProducts);
-            
-            // Mobile menu functionality
-            menuToggle.addEventListener('click', function() {
-                mobileNav.classList.toggle('show');
-                menuIcon.classList.toggle('hidden');
-                closeIcon.classList.toggle('hidden');
-            });
             
             // Mobile filter toggle
             mobileFilterToggle.addEventListener('click', function() {

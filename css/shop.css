@@ -141,6 +141,32 @@ body {
     display: block;
 }
 
+/* Breadcrumb */
+.breadcrumb {
+    padding: 1.5rem 0;
+}
+
+.breadcrumb-nav {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.breadcrumb-nav a {
+    color: var(--gray-600);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.breadcrumb-nav a:hover {
+    color: var(--tzedek-green);
+}
+
+.breadcrumb-nav span {
+    color: var(--gray-400);
+}
+
 /* Hero Section */
 .shop-hero {
     background: linear-gradient(135deg, var(--tzedek-green) 0%, var(--tzedek-dark-green) 100%);
@@ -202,6 +228,7 @@ body {
 .shop-search-bar button:hover {
     background-color: var(--tzedek-green-dark);
 }
+
 
 /* Shop Section */
 .section {

@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categories - Tzedek Marketplace</title>
+    
+    <!-- SEO Meta -->
+    <meta name="description" content="Browse all product categories on Tzedek Marketplace. Find Fashion, Electronics, Home & Garden, Beauty, Sports, and more.">
+    <meta name="keywords" content="Categories, Fashion, Electronics, Home, Beauty, Online Shopping, Marketplace">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --tzedek-green: rgb(34, 197, 94);
+            --tzedek-green-dark: rgb(22, 163, 74);
+            --tzedek-green-light: rgb(187, 247, 208);
+            --tzedek-gold: rgb(234, 179, 8);
+            --white: #ffffff;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-400: #9ca3af;
+            --gray-500: #6b7280;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            --gray-800: #1f2937;
+            --gray-900: #111827;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            line-height: 1.5;
+            color: var(--gray-700);
+            background-color: var(--gray-50);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Navbar */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background-color: var(--white);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            padding: 10px 0;
+        }
+
+        .navbar-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 4rem;
+        }
+
+        .navbar-logo .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--tzedek-green);
+            text-decoration: none;
+        }
+
+        .navbar-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: var(--gray-700);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--tzedek-green);
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background-color: var(--tzedek-green);
+            color: var(--white);
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.375rem;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--tzedek-green-dark);
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            padding: 1.5rem 0;
+        }
+
+        .breadcrumb-nav {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .breadcrumb-nav a {
+            color: var(--gray-600);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .breadcrumb-nav a:hover {
+            color: var(--tzedek-green);
+        }
+
+        .breadcrumb-nav span {
+            color: var(--gray-400);
+        }
+
+        /* Page Header */
+        .page-header {
+            display: flex;
+            text-align: center;
+            color: var(--gray-900);
+            padding: 3rem 0;
+            margin-bottom: 3rem;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-header p {
+            font-size: 1.125rem;
+            opacity: 0.95;
+        }
+
+        /* Category Grid */
+        .categories-section {
+            padding: 2rem 0 4rem;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .category-card {
+            background: var(--white);
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+        }
+
+        .category-image {
+            height: 200px;
+            background: linear-gradient(135deg, var(--gray-100), var(--gray-200));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(234, 179, 8, 0.1));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .category-card:hover .category-image::before {
+            opacity: 1;
+        }
+
+        .category-icon {
+            font-size: 4rem;
+            color: var(--tzedek-green);
+            z-index: 1;
+        }
+
+        .category-info {
+            padding: 1.5rem;
+        }
+
+        .category-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 0.5rem;
+        }
+
+        .category-description {
+            color: var(--gray-600);
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+
+        .category-stats {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .category-count {
+            color: var(--tzedek-green);
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+
+        .category-arrow {
+            color: var(--gray-400);
+            transition: all 0.3s ease;
+        }
+
+        .category-card:hover .category-arrow {
+            color: var(--tzedek-green);
+            transform: translateX(5px);
+        }
+
+        /* Category Detail Page */
+        .category-detail {
+            padding: 2rem 0;
+        }
+
+        .category-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .category-header h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--gray-900);
+        }
+
+        .view-toggle {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .view-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--gray-300);
+            background: var(--white);
+            border-radius: 0.375rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .view-btn.active {
+            background: var(--tzedek-green);
+            color: var(--white);
+            border-color: var(--tzedek-green);
+        }
+
+        /* Filter Sidebar */
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .filter-sidebar {
+            background: var(--white);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+
+        .filter-section {
+            margin-bottom: 2rem;
+        }
+
+        .filter-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .filter-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--gray-900);
+            margin-bottom: 1rem;
+        }
+
+        .filter-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .filter-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .filter-option input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .filter-option label {
+            cursor: pointer;
+            color: var(--gray-700);
+            font-size: 0.875rem;
+        }
+
+        .price-range {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .price-input {
+            flex: 1;
+            padding: 0.5rem;
+            border: 1px solid var(--gray-300);
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+        }
+
+        .filter-btn {
+            width: 100%;
+            padding: 0.75rem;
+            background: var(--tzedek-green);
+            color: var(--white);
+            border: none;
+            border-radius: 0.375rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .filter-btn:hover {
+            background: var(--tzedek-green-dark);
+        }
+
+        .clear-filters {
+            width: 100%;
+            padding: 0.5rem;
+            background: transparent;
+            color: var(--gray-600);
+            border: 1px solid var(--gray-300);
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+            cursor: pointer;
+            margin-top: 0.5rem;
+        }
+
+        /* Products Grid */
+        .products-section {
+            min-height: 400px;
+        }
+
+        .products-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .results-count {
+            color: var(--gray-600);
+            font-size: 0.875rem;
+        }
+
+        .sort-select {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--gray-300);
+            border-radius: 0.375rem;
+            background: var(--white);
+            cursor: pointer;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: var(--white);
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+        }
+
+        .product-image {
+            height: 200px;
+            background: var(--gray-100);
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+
+        .product-info {
+            padding: 1.25rem;
+        }
+
+        .product-category {
+            color: var(--tzedek-green);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--gray-900);
+            font-size: 1rem;
+        }
+
+        .product-description {
+            color: var(--gray-600);
+            font-size: 0.875rem;
+            margin-bottom: 0.75rem;
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .product-price {
+            font-weight: 700;
+            color: var(--tzedek-green);
+            font-size: 1.25rem;
+        }
+
+        .product-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            margin-top: 0.5rem;
+            font-size: 0.875rem;
+        }
+
+        .product-rating i {
+            color: var(--tzedek-gold);
+            font-size: 0.75rem;
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 3rem;
+        }
+
+        .pagination-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--gray-300);
+            background: var(--white);
+            border-radius: 0.375rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: var(--gray-700);
+        }
+
+        .pagination-btn:hover {
+            border-color: var(--tzedek-green);
+            color: var(--tzedek-green);
+        }
+
+        .pagination-btn.active {
+            background: var(--tzedek-green);
+            color: var(--white);
+            border-color: var(--tzedek-green);
+        }
+
+        /* Mobile Filter Toggle */
+        .mobile-filter-toggle {
+            display: none;
+            width: 100%;
+            padding: 0.75rem;
+            background: var(--white);
+            border: 1px solid var(--gray-300);
+            border-radius: 0.375rem;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--gray-900);
+            color: var(--white);
+            padding: 3rem 0 1.5rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: var(--gray-400);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--gray-800);
+            padding-top: 1.5rem;
+            text-align: center;
+            color: var(--gray-400);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-sidebar {
+                display: none;
+            }
+
+            .filter-sidebar.active {
+                display: block;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                z-index: 100;
+                overflow-y: auto;
+                border-radius: 0;
+            }
+
+            .mobile-filter-toggle {
+                display: block;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar-links {
+                display: none;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .categories-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 1.5rem;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 1.5rem;
+            }
+
+            .category-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-header h1 {
+                font-size: 1.75rem;
+            }
+
+            .categories-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="container">
+            <div class="navbar-content">
+                <div class="navbar-logo">
+                    <a href="index.html" class="logo">Tzedek</a>
+                </div>
+                
+                <nav class="navbar-links">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="about.html" class="nav-link">About</a>
+                    <a href="shop.html" class="nav-link">Shops</a>
+                    <a href="products.html" class="nav-link">Products</a>
+                    <a href="categories.html" class="nav-link" style="color: var(--tzedek-green);">Categories</a>
+                    <a href="contact.html" class="nav-link">Contact</a>
+                </nav>
+                
+                <div class="navbar-auth">
+                    <a href="register.html" class="btn-primary">Become a Seller</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <section class="breadcrumb">
+        <div class="container">
+            <nav class="breadcrumb-nav">
+                <a href="index.html"><i class="fas fa-home"></i> Home</a>
+                <span>/</span>
+                <span id="breadcrumb-current">Categories</span>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 id="page-title">Browse Categories</h1>
+            <p id="page-description">Discover products across all categories on Tzedek Marketplace</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main>
+        <!-- All Categories View -->
+        <section id="categoriesView" class="categories-section">
+            <div class="container">
+                <div class="categories-grid" id="categoriesGrid">
+                    <!-- Fashion Category -->
+                    <a href="#" class="category-card" data-category="fashion">
+                        <div class="category-image">
+                            <i class="fas fa-tshirt category-icon"></i>
+                        </div>
+                        <div class="category-info">
+                            <h3 class="category-title">Fashion</h3>
+                            <p class="category-description">Trendy clothing, accessories, and footwear for all styles</p>
+                            <div class="category-stats">
+                                <span class="category-count">1,245 products</span>
+                                <i class="fas fa-arrow-right category-arrow"></i>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Electronics Category -->
+                    <a href="#" class="category-card" data-category="electronics">
+                        <div class="category-image">
+                            <i class="fas fa-laptop category-icon"></i>
+                        </div>
+                        <div class="category-info">
+                            <h3 class="category-title">Electronics</h3>
+                            <p class="category-description">Latest gadgets, computers, phones, and tech accessories</p>
+                            <div class="category-stats">
+                                <span class="category-count">892 products</span>
+                                <i class="fas fa-arrow-right category-arrow"></i>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Home & Garden Category -->
+                    <a href="#" class="category-card" data-category="home">
+                        <div class="category-image">
+                            <i class="fas fa-home category-icon"></i>
+                        </div>
+                        <div class="category-info">
+                            <h3 class="category-title">Home & Garden</h3>
+                            <p class="category-description">Furniture, decor, kitchenware, and garden essentials</p>
+                            <div class="category-stats">
+                                <span class="category-count">654 products</span>
+                                <i class="fas fa-arrow-right category-arrow"></i>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Beauty & Personal Care -->
+                    <a href="#" class="category-card" data-category="beauty">
+                        <div class="category-image">
+                            <i class="fas fa-spa category-icon"></i>
+                        </div>
+                        <div class="category-info">
+                            <h3 class="category-title">Beauty & Personal Care</h3>
+                            <p class="category-description">Skincare, makeup, hair care, and wellness products</p>
+                            <div class="category-stats">
+                                <span class="category-count">987 products</span>
+                                <i class="fas fa-arrow-right category-arrow"></i>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Sports & Outdoors -->
+                    <a href="#" class="category-card" data-category="sports">
+                        <div class="category-image">
+                            <i class="fas fa-football-ball category-icon"></i>
+                        </div>
+                        <div class="category-info">
+                            <h3 class="category-title">Sports & Outdoors</h3>
+                            <p class="category-description">Fitness equipment, sportswear, and outdoor gear</p>
+                            <div class="category-stats">
+                                <span class="category-count">543 products</span>
+                                <i class="fas fa-arrow-right category-arrow"></i>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Books & Media -->
+                    <a href="#" class="category-card" data-category="books">
+                        <div class="category-image">
+                            <i class="fas fa-book category-icon"></i>
+                        </div>
+                        <div class="category-info">
+                            <h3 class="category-title">Books & Media</h3>
+                            <p class="category-description">Books, magazines, music, and entertainment</p>
+                            <div class="category-stats">
+                                <span class="category-count">432 products</span>
+                                <i class="fas fa-arrow-right category-arrow"></i>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Toys & Games -->
+                    <a href="#" class="category-card" data-category="toys">
+                        <div class="category-image">
+                            <i class="fas fa-gamepad category-icon"></i>
+                        </div>
+                        <div class="category-info">
+                            <h3 class="category-title">Toys & Games</h3>
+                            <p class="category-description">Fun toys, board games, and educational items for all ages</p>
+                            <div class="category-stats">
+                                <span class="category-count">756 products</span>
+                                <i class="fas fa-arrow-right category-arrow"></i>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Automotive -->
+                    <a href="#" class="category-card" data-category="automotive">
+                        <div class="category-image">
+                            <i class="fas fa-car category-icon"></i>
+                        </div>
+                        <div class="category-info">
+                            <h3 class="category-title">Automotive</h3>
+                            <p class="category-description">Car parts, accessories, and maintenance products</p>
+                            <div class="category-stats">
+                                <span class="category-count">398 products</span>
+                                <i class="fas fa-arrow-right category-arrow"></i>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Food & Beverages -->
+                    <a href="#" class="category-card" data-category="food">
+                        <div class="category-image">
+                            <i class="fas fa-utensils category-icon"></i>
+                        </div>
+                        <div class="category-info">
+                            <h3 class="category-title">Food & Beverages</h3>
+                            <p class="category-description">Gourmet foods, snacks, drinks, and specialty items</p>
+                            <div class="category-stats">
+                                <span class="category-count">621 products</span>
+                                <i class="fas fa-arrow-right category-arrow"></i>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Pet Supplies -->
+                    <a href="#" class="category-card" data-category="pets">
+                        <div class="category-image">
+                            <i class="fas fa-paw category-icon"></i>
+                        </div>
+                        <div class="category-info">
+                            <h3 class="category-title">Pet Supplies</h3>
+                            <p class="category-description">Food, toys, and accessories for your beloved pets</p>
+                            <div class="category-stats">
+                                <span class="category-count">412 products</span>
+                                <i class="fas fa-arrow-right category-arrow"></i>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Baby & Kids -->
+                    <a href="#" class="category-card" data-category="baby">
+                        <div class="category-image">
+                            <i class="fas fa-baby-carriage category-icon"></i>
+                        </div>
+                        <div class="category-info">
+                            <h3 class="category-title">Baby & Kids</h3>
+                            <p class="category-description">Baby gear, clothing, and essentials for little ones</p>
+                            <div class="category-stats">
+                                <span class="category-count">534 products</span>
+                                <i class="fas fa-arrow-right category-arrow"></i>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Health & Wellness -->
+                    <a href="#" class="category-card" data-category="health">
+                        <div class="category-image">
+                            <i class="fas fa-heartbeat category-icon"></i>
+                        </div>
+                        <div class="category-info">
+                            <h3 class="category-title">Health & Wellness</h3>
+                            <p class="category-description">Vitamins, supplements, and health monitoring devices</p>
+                            <div class="category-stats">
+                                <span class="category-count">467 products</span>
+                                <i class="fas fa-arrow-right category-arrow"></i>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Category Detail View (Hidden by default) -->
+        <section id="categoryDetailView" class="category-detail hidden">
+            <div class="container">
+                <button class="mobile-filter-toggle" id="mobileFilterToggle">
+                    <i class="fas fa-filter"></i> Filters
+                </button>
+
+                <div class="content-wrapper">
+                    <!-- Filter Sidebar -->
+                    <aside class="filter-sidebar" id="filterSidebar">
+                        <div class="filter-section">
+                            <h3 class="filter-title">Price Range</h3>
+                            <div class="price-range">
+                                <input type="number" class="price-input" placeholder="Min" id="minPrice">
+                                <span>-</span>
+                                <input type="number" class="price-input" placeholder="Max" id="maxPrice">
+                            </div>
+                        </div>
+
+                        <div class="filter-section">
+                            <h3 class="filter-title">Rating</h3>
+                            <div class="filter-options">
+                                <div class="filter-option">
+                                    <input type="checkbox" id="rating5" value="5">
+                                    <label for="rating5">⭐⭐⭐⭐⭐ & Up</label>
+                                </div>
+                                <div class="filter-option">
+                                    <input type="checkbox" id="rating4" value="4">
+                                    <label for="rating4">⭐⭐⭐⭐ & Up</label>
+                                </div>
+                                <div class="filter-option">
+                                    <input type="checkbox" id="rating3" value="3">
+                                    <label for="rating3">⭐⭐⭐ & Up</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="filter-section">
+                            <h3 class="filter-title">Brand</h3>
+                            <div class="filter-options" id="brandFilters">
+                                <div class="filter-option">
+                                    <input type="checkbox" id="brand1" value="Premium Brand">
+                                    <label for="brand1">Premium Brand</label>
+                                </div>
+                                <div class="filter-option">
+                                    <input type="checkbox" id="brand2" value="Quality Co">
+                                    <label for="brand2">Quality Co</label>
+                                </div>
+                                <div class="filter-option">
+                                    <input type="checkbox" id="brand3" value="Top Choice">
+                                    <label for="brand3">Top Choice</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="filter-section">
+                            <h3 class="filter-title">Condition</h3>
+                            <div class="filter-options">
+                                <div class="filter-option">
+                                    <input type="checkbox" id="condNew" value="new">
+                                    <label for="condNew">New</label>
+                                </div>
+                                <div class="filter-option">
+                                    <input type="checkbox" id="condUsed" value="used">
+                                    <label for="condUsed">Used</label>
+                                </div>
+                                <div class="filter-option">
+                                    <input type="checkbox" id="condRefurb" value="refurbished">
+                                    <label for="condRefurb">Refurbished</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="filter-btn" id="applyFilters">Apply Filters</button>
+                        <button class="clear-filters" id="clearFilters">Clear All</button>
+                    </aside>
+
+                    <!-- Products Section -->
+                    <div class="products-section">
+                        <div class="category-header">
+                            <h2 id="categoryTitle">Category Products</h2>
+                            <div class="view-toggle">
+                                <button class="view-btn active" id="gridView">
+                                    <i class="fas fa-th"></i>
+                                </button>
+                                <button class="view-btn" id="listView">
+                                    <i class="fas fa-list"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="products-header">
+                            <span class="results-count" id="resultsCount">Showing 24 of 1,245 products</span>
+                            <select class="sort-select" id="sortSelect">
+                                <option value="featured">Sort by: Featured</option>
+                                <option value="price-low">Price: Low to High</option>
+                                <option value="price-high">Price: High to Low</option>
+                                <option value="newest">Newest Arrivals</option>
+                                <option value="rating">Highest Rated</option>
+                            </select>
+                        </div>
+
+                        <div class="products-grid" id="productsGrid">
+                            <!-- Products will be dynamically loaded -->
+                        </div>
+
+                        <div class="pagination" id="pagination">
+                            <button class="pagination-btn">&laquo; Previous</button>
+                            <a href="#" class="pagination-btn active">1</a>
+                            <a href="#" class="pagination-btn">2</a>
+                            <a href="#" class="pagination-btn">3</a>
+                            <a href="#" class="pagination-btn">4</a>
+                            <a href="#" class="pagination-btn">5</a>
+                            <button class="pagination-btn">Next &raquo;</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Tzedek</h3>
+                    <p style="color: var(--gray-400);">A community-driven global marketplace empowering entrepreneurs to connect and grow.</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="shop.html">Shops</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Categories</h3>
+                    <ul class="footer-links">
+                        <li><a href="#" data-category="fashion">Fashion</a></li>
+                        <li><a href="#" data-category="electronics">Electronics</a></li>
+                        <li><a href="#" data-category="home">Home & Garden</a></li>
+                        <li><a href="#" data-category="beauty">Beauty</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Shipping Info</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Tzedek. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Sample product data
+        const productsData = {
+            fashion: [
+                { id: 1, name: "Designer Denim Jacket", price: 45000, category: "Fashion", rating: 4.5, image: "https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=400&q=80", description: "Stylish denim jacket with modern fit" },
+                { id: 2, name: "Leather Handbag", price: 38000, category: "Fashion", rating: 5, image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=400&q=80", description: "Premium leather handbag" },
+                { id: 3, name: "Running Sneakers", price: 28000, category: "Fashion", rating: 4.3, image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=400&q=80", description: "Comfortable running shoes" },
+                { id: 4, name: "Summer Dress", price: 22000, category: "Fashion", rating: 4.7, image: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=400&q=80", description: "Elegant summer dress" },
+                { id: 5, name: "Formal Suit", price: 85000, category: "Fashion", rating: 4.8, image: "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?auto=format&fit=crop&w=400&q=80", description: "Professional business suit" },
+                { id: 6, name: "Sunglasses", price: 15000, category: "Fashion", rating: 4.2, image: "https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=400&q=80", description: "UV protection sunglasses" },
+            ],
+            electronics: [
+                { id: 7, name: "Wireless Headphones", price: 32000, category: "Electronics", rating: 4.6, image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=400&q=80", description: "Premium noise-cancelling headphones" },
+                { id: 8, name: "Smart Watch", price: 55000, category: "Electronics", rating: 4.4, image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=400&q=80", description: "Fitness tracking smartwatch" },
+                { id: 9, name: "Laptop", price: 210000, category: "Electronics", rating: 4.8, image: "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?auto=format&fit=crop&w=400&q=80", description: "High-performance laptop" },
+                { id: 10, name: "Smartphone", price: 175000, category: "Electronics", rating: 4.7, image: "https://images.unsplash.com/photo-1546868871-7041f2a55e12?auto=format&fit=crop&w=400&q=80", description: "Latest smartphone model" },
+                { id: 11, name: "Bluetooth Speaker", price: 18000, category: "Electronics", rating: 4.3, image: "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?auto=format&fit=crop&w=400&q=80", description: "Portable wireless speaker" },
+                { id: 12, name: "Digital Camera", price: 95000, category: "Electronics", rating: 4.9, image: "https://images.unsplash.com/photo-1502920917128-1aa500764cbd?auto=format&fit=crop&w=400&q=80", description: "Professional DSLR camera" },
+            ],
+            home: [
+                { id: 13, name: "Coffee Maker", price: 25000, category: "Home & Garden", rating: 4.5, image: "https://images.unsplash.com/photo-1517668808822-9ebb02f2a0e6?auto=format&fit=crop&w=400&q=80", description: "Automatic coffee maker" },
+                { id: 14, name: "Dining Table Set", price: 120000, category: "Home & Garden", rating: 4.6, image: "https://images.unsplash.com/photo-1617806118233-18e1de247200?auto=format&fit=crop&w=400&q=80", description: "6-seater dining set" },
+                { id: 15, name: "Garden Tools Set", price: 15000, category: "Home & Garden", rating: 4.2, image: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=400&q=80", description: "Complete gardening toolkit" },
+                { id: 16, name: "Bed Sheets Set", price: 12000, category: "Home & Garden", rating: 4.4, image: "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&w=400&q=80", description: "Luxury cotton bed sheets" },
+                { id: 17, name: "Wall Art Canvas", price: 8000, category: "Home & Garden", rating: 4.7, image: "https://images.unsplash.com/photo-1561214115-f2f134cc4912?auto=format&fit=crop&w=400&q=80", description: "Modern abstract wall art" },
+                { id: 18, name: "Kitchen Knife Set", price: 22000, category: "Home & Garden", rating: 4.8, image: "https://images.unsplash.com/photo-1593618998160-e34014e67546?auto=format&fit=crop&w=400&q=80", description: "Professional chef knives" },
+            ],
+            beauty: [
+                { id: 19, name: "Skincare Set", price: 35000, category: "Beauty", rating: 4.6, image: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=400&q=80", description: "Complete skincare routine" },
+                { id: 20, name: "Makeup Kit", price: 28000, category: "Beauty", rating: 4.5, image: "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=400&q=80", description: "Professional makeup collection" },
+                { id: 21, name: "Hair Dryer", price: 18000, category: "Beauty", rating: 4.3, image: "https://images.unsplash.com/photo-1522338140262-f46f5913618a?auto=format&fit=crop&w=400&q=80", description: "Ionic hair dryer" },
+                { id: 22, name: "Perfume", price: 42000, category: "Beauty", rating: 4.8, image: "https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=400&q=80", description: "Designer fragrance" },
+                { id: 23, name: "Face Mask Set", price: 8500, category: "Beauty", rating: 4.4, image: "https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?auto=format&fit=crop&w=400&q=80", description: "Hydrating face masks" },
+                { id: 24, name: "Nail Polish Set", price: 6000, category: "Beauty", rating: 4.2, image: "https://images.unsplash.com/photo-1519014816548-bf5fe059798b?auto=format&fit=crop&w=400&q=80", description: "12-color nail polish" },
+            ],
+            sports: [
+                { id: 25, name: "Yoga Mat", price: 8000, category: "Sports", rating: 4.5, image: "https://images.unsplash.com/photo-1601925260368-ae2f83cf8b7f?auto=format&fit=crop&w=400&q=80", description: "Non-slip yoga mat" },
+                { id: 26, name: "Dumbbells Set", price: 35000, category: "Sports", rating: 4.7, image: "https://images.unsplash.com/photo-1517963879433-6ad2b056d712?auto=format&fit=crop&w=400&q=80", description: "Adjustable dumbbells" },
+            ],
+            books: [
+                { id: 27, name: "Business Book Collection", price: 15000, category: "Books", rating: 4.6, image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=400&q=80", description: "Bestselling business books" },
+                { id: 28, name: "Fiction Novel Set", price: 12000, category: "Books", rating: 4.4, image: "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=400&q=80", description: "Popular fiction series" },
+            ],
+            toys: [
+                { id: 29, name: "Building Blocks Set", price: 22000, category: "Toys", rating: 4.8, image: "https://images.unsplash.com/photo-1587654780291-39c9404d746b?auto=format&fit=crop&w=400&q=80", description: "Educational building toys" },
+                { id: 30, name: "Board Game", price: 18000, category: "Toys", rating: 4.5, image: "https://images.unsplash.com/photo-1610890716171-6b1bb98ffd09?auto=format&fit=crop&w=400&q=80", description: "Family board game" },
+            ],
+            automotive: [
+                { id: 31, name: "Car Phone Holder", price: 5000, category: "Automotive", rating: 4.3, image: "https://images.unsplash.com/photo-1591768793355-74d04bb6608f?auto=format&fit=crop&w=400&q=80", description: "Magnetic phone mount" },
+                { id: 32, name: "Car Vacuum Cleaner", price: 12000, category: "Automotive", rating: 4.6, image: "https://images.unsplash.com/photo-1607860108855-64acf2078ed9?auto=format&fit=crop&w=400&q=80", description: "Portable car vacuum" },
+            ],
+            food: [
+                { id: 33, name: "Organic Coffee Beans", price: 8000, category: "Food", rating: 4.7, image: "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?auto=format&fit=crop&w=400&q=80", description: "Premium organic coffee" },
+                { id: 34, name: "Honey Gift Set", price: 15000, category: "Food", rating: 4.5, image: "https://images.unsplash.com/photo-1587049352846-4a222e784046?auto=format&fit=crop&w=400&q=80", description: "Pure natural honey" },
+            ],
+            pets: [
+                { id: 35, name: "Pet Bed", price: 18000, category: "Pet Supplies", rating: 4.6, image: "https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=400&q=80", description: "Comfortable pet bed" },
+                { id: 36, name: "Dog Toy Set", price: 6000, category: "Pet Supplies", rating: 4.4, image: "https://images.unsplash.com/photo-1535294435445-d7249524ef2e?auto=format&fit=crop&w=400&q=80", description: "Interactive dog toys" },
+            ],
+            baby: [
+                { id: 37, name: "Baby Stroller", price: 85000, category: "Baby & Kids", rating: 4.8, image: "https://images.unsplash.com/photo-1588507512098-cbee8040c586?auto=format&fit=crop&w=400&q=80", description: "Lightweight baby stroller" },
+                { id: 38, name: "Baby Clothes Set", price: 12000, category: "Baby & Kids", rating: 4.5, image: "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=400&q=80", description: "Organic baby clothing" },
+            ],
+            health: [
+                { id: 39, name: "Vitamin Supplements", price: 15000, category: "Health", rating: 4.6, image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=400&q=80", description: "Daily vitamin pack" },
+                { id: 40, name: "Blood Pressure Monitor", price: 28000, category: "Health", rating: 4.7, image: "https://images.unsplash.com/photo-1576671081837-49000212a370?auto=format&fit=crop&w=400&q=80", description: "Digital BP monitor" },
+            ]
+        };
+
+        // Category information
+        const categoryInfo = {
+            fashion: { title: "Fashion", description: "Trendy clothing, accessories, and footwear for all styles", count: 1245 },
+            electronics: { title: "Electronics", description: "Latest gadgets, computers, phones, and tech accessories", count: 892 },
+            home: { title: "Home & Garden", description: "Furniture, decor, kitchenware, and garden essentials", count: 654 },
+            beauty: { title: "Beauty & Personal Care", description: "Skincare, makeup, hair care, and wellness products", count: 987 },
+            sports: { title: "Sports & Outdoors", description: "Fitness equipment, sportswear, and outdoor gear", count: 543 },
+            books: { title: "Books & Media", description: "Books, magazines, music, and entertainment", count: 432 },
+            toys: { title: "Toys & Games", description: "Fun toys, board games, and educational items for all ages", count: 756 },
+            automotive: { title: "Automotive", description: "Car parts, accessories, and maintenance products", count: 398 },
+            food: { title: "Food & Beverages", description: "Gourmet foods, snacks, drinks, and specialty items", count: 621 },
+            pets: { title: "Pet Supplies", description: "Food, toys, and accessories for your beloved pets", count: 412 },
+            baby: { title: "Baby & Kids", description: "Baby gear, clothing, and essentials for little ones", count: 534 },
+            health: { title: "Health & Wellness", description: "Vitamins, supplements, and health monitoring devices", count: 467 }
+        };
+
+        let currentCategory = null;
+        let currentProducts = [];
+
+        // Load products for category
+        function loadCategoryProducts(category) {
+            currentCategory = category;
+            currentProducts = productsData[category] || [];
+            
+            const info = categoryInfo[category];
+            document.getElementById('categoryTitle').textContent = info.title;
+            document.getElementById('pageTitle').textContent = info.title;
+            document.getElementById('pageDescription').textContent = info.description;
+            document.getElementById('breadcrumb-current').textContent = info.title;
+            document.getElementById('resultsCount').textContent = `Showing ${currentProducts.length} of ${info.count} products`;
+            
+            renderProducts(currentProducts);
+            
+            // Toggle views
+            document.getElementById('categoriesView').classList.add('hidden');
+            document.getElementById('categoryDetailView').classList.remove('hidden');
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Render products
+        function renderProducts(products) {
+            const grid = document.getElementById('productsGrid');
+            grid.innerHTML = '';
+            
+            products.forEach(product => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.innerHTML = `
+                    <div class="product-image">
+                        <img src="${product.image}" alt="${product.name}">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">${product.category}</div>
+                        <h3 class="product-title">${product.name}</h3>
+                        <p class="product-description">${product.description}</p>
+                        <div class="product-price">₦${product.price.toLocaleString()}</div>
+                        <div class="product-rating">
+                            ${'<i class="fas fa-star"></i>'.repeat(Math.floor(product.rating))}
+                            ${product.rating % 1 ? '<i class="fas fa-star-half-alt"></i>' : ''}
+                            <span>(${product.rating})</span>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Event listeners
+        document.querySelectorAll('.category-card').forEach(card => {
+            card.addEventListener('click', (e) => {
+                e.preventDefault();
+                const category = card.dataset.category;
+                loadCategoryProducts(category);
+            });
+        });
+
+        // Mobile filter toggle
+        document.getElementById('mobileFilterToggle')?.addEventListener('click', () => {
+            document.getElementById('filterSidebar').classList.toggle('active');
+        });
+
+        // Clear filters
+        document.getElementById('clearFilters')?.addEventListener('click', () => {
+            document.querySelectorAll('.filter-option input[type="checkbox"]').forEach(cb => cb.checked = false);
+            document.getElementById('minPrice').value = '';
+            document.getElementById('maxPrice').value = '';
+            if (currentCategory) {
+                loadCategoryProducts(currentCategory);
+            }
+        });
+
+        // Apply filters
+        document.getElementById('applyFilters')?.addEventListener('click', () => {
+            // Filter logic here
+            const minPrice = parseInt(document.getElementById('minPrice').value) || 0;
+            const maxPrice = parseInt(document.getElementById('maxPrice').value) || Infinity;
+            
+            const filtered = currentProducts.filter(p => p.price >= minPrice && p.price <= maxPrice);
+            renderProducts(filtered);
+            document.getElementById('resultsCount').textContent = `Showing ${filtered.length} of ${categoryInfo[currentCategory].count} products`;
+            
+            // Close mobile filter
+            document.getElementById('filterSidebar').classList.remove('active');
+        });
+
+        // Sort functionality
+        document.getElementById('sortSelect')?.addEventListener('change', (e) => {
+            const sortBy = e.target.value;
+            let sorted = [...currentProducts];
+            
+            switch(sortBy) {
+                case 'price-low':
+                    sorted.sort((a, b) => a.price - b.price);
+                    break;
+                case 'price-high':
+                    sorted.sort((a, b) => b.price - a.price);
+                    break;
+                case 'rating':
+                    sorted.sort((a, b) => b.rating - a.rating);
+                    break;
+                case 'newest':
+                    sorted.reverse();
+                    break;
+            }
+            
+            renderProducts(sorted);
+        });
+
+        // View toggle
+        document.getElementById('gridView')?.addEventListener('click', () => {
+            document.getElementById('gridView').classList.add('active');
+            document.getElementById('listView').classList.remove('active');
+        });
+
+        document.getElementById('listView')?.addEventListener('click', () => {
+            document.getElementById('listView').classList.add('active');
+            document.getElementById('gridView').classList.remove('active');
+        });
+
+        // Footer category links
+        document.querySelectorAll('.footer-links a[data-category]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const category = link.dataset.category;
+                loadCategoryProducts(category);
+            });
+        });
+    </script>
+</body>
+</html>

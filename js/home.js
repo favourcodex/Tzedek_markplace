@@ -1,23 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-  const menuToggle = document.getElementById('menuToggle');
-  const mobileNav = document.getElementById('mobileNav');
-  const menuIcon = document.querySelector('.menu-icon');
-  const closeIcon = document.querySelector('.close-icon');
-
-  menuToggle.addEventListener('click', function() {
-    if (mobileNav.classList.contains('active')) {
-      mobileNav.classList.remove('active');
-      setTimeout(() => mobileNav.classList.add('hidden'), 300);
-    } else {
-      mobileNav.classList.remove('hidden');
-      setTimeout(() => mobileNav.classList.add('active'), 10);
-    }
-    menuIcon.classList.toggle('hidden');
-    closeIcon.classList.toggle('hidden');
-  });
-});
-
-document.addEventListener('DOMContentLoaded', function() {
   // Accordion functionality
   const accordionHeaders = document.querySelectorAll('.accordion-header');
   

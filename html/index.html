@@ -31,51 +31,65 @@
 
     <div id="root">
         
-        <!-- Navbar -->
-        <header class="navbar">
+<!-- Navbar -->
+    <header class="navbar">
         <div class="container">
             <div class="navbar-content">
-            <div class="navbar-logo">
-                <a href="index.html" class="logo">Tzedek</a>
-            </div>
-            
-            <!-- Desktop Navigation -->
-            <nav class="navbar-links desktop-nav">
-                <a href="index.html" class="nav-link active">Home</a>
-                <a href="about.html" class="nav-link">About</a>
-                <a href="shop.html" class="nav-link">Shops</a>
-                <a href="products.html" class="nav-link">Products</a>
-                <!-- <a href="index.html#faq" class="nav-link"></a> -->
-                <a href="contact.html" class="nav-link">Contact</a>
-            </nav>
-        
-            <div class="navbar-auth desktop-nav">
-                <a href="register.html" class="nav-link">Sign Up</a>
-                <a href="register.html" class="btn-primary">Become a Seller</a>
-            </div>
-
-            <!-- Add this mobile nav markup just before the closing </div> of .navbar-content -->
-                <nav id="mobileNav" class="mobile-nav hidden">
-                    <a href="index.html" class="nav-link active">Home</a>
+                <div class="navbar-logo">
+                    <a href="index.html" class="logo">Tzedek</a>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <nav class="navbar-links desktop-nav">
+                    <a href="index.html" class="nav-link">Home</a>
                     <a href="about.html" class="nav-link">About</a>
                     <a href="shop.html" class="nav-link">Shops</a>
-                    <a href="products.html" class="nav-link">Products</a>
-                    <!-- <a href="index.html#faq" class="nav-link">FAQ</a> -->
+                    <a href="products.html" class="nav-link active">Products</a>
                     <a href="contact.html" class="nav-link">Contact</a>
-                    <a href="register.html" class="nav-link">Sign Up</a>
-                    <a href="register.html" class="btn-primary">Become a Seller</a>
                 </nav>
             
-            <!-- Mobile menu button -->
-            <div class="mobile-menu-button">
-                <button id="menuToggle" aria-label="Toggle menu">
-                <i class="fas fa-bars menu-icon"></i>
-                <i class="fas fa-times close-icon hidden"></i>
-                </button>
+                <div class="navbar-auth desktop-nav">
+                    <a href="register.html" class="nav-link">Sign Up</a>
+                    <a href="register.html" class="btn-primary">Become a Seller</a>
+                    <a href="cart.html" class="cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count" id="cartCount">3</span>
+                    </a>
+                </div>
+                
+                <!-- Mobile actions -->
+                <div class="mobile-menu-button">
+                    <!-- Cart icon for mobile -->
+                    <a href="cart.html" class="cart-icon mobile-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count" id="mobileCartCount">3</span>
+                    </a>
+                    <!-- Menu toggle button -->
+                    <button id="menuToggle" class="menu-toggle" aria-label="Toggle menu">
+                        <span class="menu-icon">
+                            <i class="fas fa-bars"></i>
+                        </span>
+                        <span class="close-icon hidden">
+                            <i class="fas fa-times"></i>
+                        </span>
+                    </button>
+                </div>
             </div>
-            </div>
+
+            <!-- Mobile nav -->
+            <nav id="mobileNav" class="mobile-nav">
+                <div class="mobile-nav-content">
+                    <a href="index.html" class="nav-link mobile-nav-link">Home</a>
+                    <a href="about.html" class="nav-link mobile-nav-link">About</a>
+                    <a href="shop.html" class="nav-link mobile-nav-link">Shops</a>
+                    <a href="products.html" class="nav-link mobile-nav-link active">Products</a>
+                    <a href="contact.html" class="nav-link mobile-nav-link">Contact</a>
+                    <a href="register.html" class="nav-link mobile-nav-link">Sign Up</a>
+                    <a href="register.html" class="btn-primary mobile-nav-btn">Become a Seller</a>
+                </div>
+            </nav>
         </div>
-        </header>
+    </header>
 
         <main>
             <!-- Hero Section -->
@@ -361,6 +375,112 @@
                     </div>
                 </div>
             </section>
+
+            <!-- Promotion Section -->
+            <section class="promotion-section">
+                <div class="container promotion-container">
+                    <div class="section-header">
+                        <span class="section-badge">🔥 Limited Time Offers</span>
+                        <h2 class="section-title">Exclusive Promotions</h2>
+                        <p class="section-subtitle">Don't miss out on these incredible deals to grow your business on Tzedek</p>
+                    </div>
+
+                    <div class="promotion-grid">
+                        <!-- Featured Promotion -->
+                        <div class="promo-featured">
+                            <div class="promo-featured-content">
+                                <div class="promo-text">
+                                    <h3>Grand Opening Special</h3>
+                                    <div class="promo-highlight">50% OFF</div>
+                                    <p class="promo-description">Get your virtual shop up and running with half-price on all premium packages for the first 3 months!</p>
+                                    
+                                    <div class="promo-features">
+                                        <div class="promo-feature">
+                                            <i class="fas fa-check-circle"></i>
+                                            <span>Premium Features</span>
+                                        </div>
+                                        <div class="promo-feature">
+                                            <i class="fas fa-check-circle"></i>
+                                            <span>24/7 Support</span>
+                                        </div>
+                                        <div class="promo-feature">
+                                            <i class="fas fa-check-circle"></i>
+                                            <span>Free Marketing Tools</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="promo-cta">
+                                        <a href="./shop.html" class="btn-white">Claim Offer</a>
+                                        <a href="./about.html" class="btn-outline-white">Learn More</a>
+                                    </div>
+                                </div>
+
+                                <div class="promo-image">
+                                    <div class="promo-timer">
+                                        <div class="timer-label">⏰ Offer Ends In:</div>
+                                        <div class="timer-display">
+                                            <div class="timer-unit">
+                                                <span class="timer-value" id="days">05</span>
+                                                <span class="timer-text">Days</span>
+                                            </div>
+                                            <div class="timer-unit">
+                                                <span class="timer-value" id="hours">12</span>
+                                                <span class="timer-text">Hours</span>
+                                            </div>
+                                            <div class="timer-unit">
+                                                <span class="timer-value" id="minutes">45</span>
+                                                <span class="timer-text">Minutes</span>
+                                            </div>
+                                            <div class="timer-unit">
+                                                <span class="timer-value" id="seconds">30</span>
+                                                <span class="timer-text">Seconds</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Secondary Promotions -->
+                        <div class="promo-secondary-grid">
+                            <div class="promo-card">
+                                <span class="promo-badge">NEW</span>
+                                <div class="promo-icon">
+                                    <i class="fas fa-gift"></i>
+                                </div>
+                                <h4>Free Setup Service</h4>
+                                <p>New sellers get complimentary shop setup and product listing assistance worth ₦50,000</p>
+                                <a href="./register.html" class="promo-link">
+                                    Get Started <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+
+                            <div class="promo-card">
+                                <span class="promo-badge">HOT</span>
+                                <div class="promo-icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <h4>Referral Rewards</h4>
+                                <p>Earn ₦10,000 for every seller you refer. Your friends get 20% off their first month too!</p>
+                                <a href="./contact.html" class="promo-link">
+                                    Refer Now <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+
+                            <div class="promo-card">
+                                <div class="promo-icon">
+                                    <i class="fas fa-rocket"></i>
+                                </div>
+                                <h4>Launch Week Bundle</h4>
+                                <p>Premium listing + Featured placement + Marketing boost package at an unbeatable price</p>
+                                <a href="./shop.html" class="promo-link">
+                                    View Bundle <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
             
             <!-- Testimonials Section -->
             <section id="testimonials" class="section bg-light">
@@ -521,77 +641,144 @@
     </div>
 
     <script>
-        // Preloader
-        document.addEventListener('DOMContentLoaded', function() {
-            // Current year in footer
-            document.getElementById('currentYear').textContent = new Date().getFullYear();
-            
-            
-            // Mobile menu toggle
-            const menuToggle = document.getElementById('menuToggle');
-            if (menuToggle) {
-                menuToggle.addEventListener('click', function() {
-                    const menuIcon = this.querySelector('.menu-icon');
-                    const closeIcon = this.querySelector('.close-icon');
-                    const mobileNav = document.getElementById('mobileNav');
+            // Preloader
+            document.addEventListener('DOMContentLoaded', function() {
+                // Current year in footer
+                document.getElementById('currentYear').textContent = new Date().getFullYear();
+                
+                // Mobile Navbar Toggle - FIXED VERSION
+                const menuToggle = document.getElementById("menuToggle");
+                const mobileNav = document.getElementById("mobileNav");
+                const menuIcon = document.querySelector(".menu-icon");
+                const closeIcon = document.querySelector(".close-icon");
+                const body = document.body;
+
+                function toggleMobileMenu() {
+                    const isOpen = mobileNav.classList.contains("show");
                     
-                    menuIcon.classList.toggle('hidden');
-                    closeIcon.classList.toggle('hidden');
-                    
-                    if (mobileNav) {
-                        mobileNav.classList.toggle('hidden');
+                    if (isOpen) {
+                        // Close menu
+                        mobileNav.classList.remove("show");
+                        menuIcon.classList.remove("hidden");
+                        closeIcon.classList.add("hidden");
+                        body.style.overflow = "auto";
+                        menuToggle.setAttribute("aria-expanded", "false");
+                    } else {
+                        // Open menu
+                        mobileNav.classList.add("show");
+                        menuIcon.classList.add("hidden");
+                        closeIcon.classList.remove("hidden");
+                        body.style.overflow = "hidden";
+                        menuToggle.setAttribute("aria-expanded", "true");
+                    }
+                }
+
+                menuToggle.addEventListener("click", toggleMobileMenu);
+
+                // Close mobile menu when clicking on links
+                const mobileNavLinks = document.querySelectorAll('.mobile-nav-link, .mobile-nav-btn');
+                mobileNavLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        mobileNav.classList.remove("show");
+                        menuIcon.classList.remove("hidden");
+                        closeIcon.classList.add("hidden");
+                        body.style.overflow = "auto";
+                        menuToggle.setAttribute("aria-expanded", "false");
+                    });
+                });
+
+                // Close menu when clicking outside
+                document.addEventListener('click', function(event) {
+                    const isClickInsideNav = mobileNav.contains(event.target) || menuToggle.contains(event.target);
+                    if (!isClickInsideNav && mobileNav.classList.contains('show')) {
+                        mobileNav.classList.remove("show");
+                        menuIcon.classList.remove("hidden");
+                        closeIcon.classList.add("hidden");
+                        body.style.overflow = "auto";
+                        menuToggle.setAttribute("aria-expanded", "false");
                     }
                 });
-            }
-            
-            // Product search functionality
-            const searchInput = document.getElementById('marketplaceSearch');
-            const productsContainer = document.getElementById('productsContainer');
-            const productCards = Array.from(document.querySelectorAll('.product-card'));
-            
-            // Store original products HTML for resetting
-            const originalProductsHTML = productsContainer.innerHTML;
-            
-            searchInput.addEventListener('input', function() {
-                const searchTerm = this.value.trim().toLowerCase();
+
+                // Product search functionality
+                const searchInput = document.getElementById('marketplaceSearch');
+                const productsContainer = document.getElementById('productsContainer');
+                const productCards = Array.from(document.querySelectorAll('.product-card'));
                 
-                if (searchTerm === '') {
-                    productsContainer.innerHTML = originalProductsHTML;
-                    return;
-                }
+                // Store original products HTML for resetting
+                const originalProductsHTML = productsContainer.innerHTML;
                 
-                // Filter products
-                const filteredProducts = productCards.filter(card => {
-                    const name = card.dataset.name.toLowerCase();
-                    const description = card.dataset.description.toLowerCase();
-                    return name.includes(searchTerm) || description.includes(searchTerm);
-                });
-                
-                // Update the products grid
-                if (filteredProducts.length > 0) {
-                    productsContainer.innerHTML = '';
-                    filteredProducts.forEach(product => {
-                        productsContainer.appendChild(product);
-                    });
-                } else {
-                    // Show no results message
-                    productsContainer.innerHTML = `
-                        <div class="no-results">
-                            <i class="fas fa-search"></i>
-                            <h3>No products found</h3>
-                            <p>We couldn't find any products matching "${searchTerm}"</p>
-                            <button class="btn-outline" id="resetSearch">Clear search</button>
-                        </div>
-                    `;
+                searchInput.addEventListener('input', function() {
+                    const searchTerm = this.value.trim().toLowerCase();
                     
-                    // Add event listener to reset button
-                    document.getElementById('resetSearch').addEventListener('click', function() {
-                        searchInput.value = '';
+                    if (searchTerm === '') {
                         productsContainer.innerHTML = originalProductsHTML;
+                        return;
+                    }
+                    
+                    // Filter products
+                    const filteredProducts = productCards.filter(card => {
+                        const name = card.dataset.name.toLowerCase();
+                        const description = card.dataset.description.toLowerCase();
+                        return name.includes(searchTerm) || description.includes(searchTerm);
                     });
-                }
+                    
+                    // Update the products grid
+                    if (filteredProducts.length > 0) {
+                        productsContainer.innerHTML = '';
+                        filteredProducts.forEach(product => {
+                            productsContainer.appendChild(product);
+                        });
+                    } else {
+                        // Show no results message
+                        productsContainer.innerHTML = `
+                            <div class="no-results">
+                                <i class="fas fa-search"></i>
+                                <h3>No products found</h3>
+                                <p>We couldn't find any products matching "${searchTerm}"</p>
+                                <button class="btn-outline" id="resetSearch">Clear search</button>
+                            </div>
+                        `;
+                        
+                        // Add event listener to reset button
+                        document.getElementById('resetSearch').addEventListener('click', function() {
+                            searchInput.value = '';
+                            productsContainer.innerHTML = originalProductsHTML;
+                        });
+                    }
+                });
             });
-        });
+
+            // Countdown Timer
+            function updateTimer() {
+                const endDate = new Date();
+                endDate.setDate(endDate.getDate() + 5);
+                endDate.setHours(23, 59, 59, 999);
+
+                function update() {
+                    const now = new Date().getTime();
+                    const distance = endDate - now;
+
+                    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                    document.getElementById('days').textContent = String(days).padStart(2, '0');
+                    document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+                    document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+                    document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+
+                    if (distance < 0) {
+                        clearInterval(timer);
+                        document.querySelector('.timer-label').textContent = '🎉 Offer Extended!';
+                    }
+                }
+
+                update();
+                const timer = setInterval(update, 1000);
+            }
+
+            updateTimer();
     </script>
 
     <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
